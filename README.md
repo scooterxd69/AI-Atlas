@@ -3,7 +3,6 @@
 **Free AI-powered learning ecosystem for JEE, NEET and school students.**
 
 [![GitHub Stars](https://img.shields.io/github/stars/scooterxd69/AI-Atlas?style=flat-square)](https://github.com/scooterxd69/AI-Atlas/stargazers)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](LICENSE)
 [![Website](https://img.shields.io/badge/Website-Live-green?style=flat-square)](https://scooterxd69.github.io/AI-Atlas)
 
 ---
