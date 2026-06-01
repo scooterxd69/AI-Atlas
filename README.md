@@ -48,7 +48,7 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md) to get started. Every contribution helps
 
 ## License
 
-MIT — free to use, adapt, redistribute. See [LICENSE](LICENSE).
+free to use, adapt, redistribute. See [LICENSE](LICENSE).
 
 ---
 
