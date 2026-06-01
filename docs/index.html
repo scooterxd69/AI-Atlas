@@ -1,1228 +1,821 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="AI Atlas — Free AI-powered learning platform for JEE, NEET and school students. Study systems, prompt libraries, workflows, and 100+ AI tool guides.">
-  <meta name="keywords" content="JEE AI study, NEET AI preparation, free AI tools students India, JEE prompts Claude, NEET prompts, CBSE AI study, AI Atlas">
-  <meta name="author" content="Naitik Singh">
-  <meta property="og:title" content="AI Atlas — Learn Faster With AI">
-  <meta property="og:description" content="Free AI-powered study systems for JEE, NEET and school students. Prompts, workflows, tool guides.">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="https://scooterxd69.github.io/AI-Atlas/_assets/og-image.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="AI Atlas — Learn Faster With AI">
-  <meta name="twitter:description" content="Free AI-powered learning for JEE, NEET & school students.">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AI Atlas — Learn Faster With AI</title>
+  <meta name="author" content="Naitik Singh" />
+  <meta name="description" content="AI Atlas — Free AI-powered learning platform for JEE, NEET and school students. Study systems, prompt libraries, workflows, and 100+ AI tool guides." />
+  <meta name="keywords" content="JEE AI study, NEET AI preparation, free AI tools students India, JEE prompts Claude, NEET prompts, CBSE AI study, AI Atlas" />
+  <meta property="og:title" content="AI Atlas — Learn Faster With AI" />
+  <meta property="og:description" content="Free AI-powered study systems for JEE, NEET and school students. Prompts, workflows, tool guides." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://scooterxd69.github.io/AI-Atlas/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="AI Atlas — Learn Faster With AI" />
+  <meta name="twitter:description" content="Free AI-powered learning for JEE, NEET &amp; school students." />
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <!-- Docsify theme base (we override 100%) -->
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet" />
 
   <style>
-    /* ================================================
-       AI ATLAS — DESIGN SYSTEM v2
-       Brand: Linear/Stripe-inspired · SaaS premium
-       Logo: Blue-purple gradient AI mark + star
-       ================================================ */
-
     :root {
-      /* Brand Colors — from logo */
-      --brand-blue:    #5B8CFF;
-      --brand-purple:  #7B61FF;
-      --brand-teal:    #4FD1C5;
-      --brand-grad:    linear-gradient(135deg, #5B8CFF 0%, #7B61FF 100%);
-      --brand-grad-r:  linear-gradient(135deg, #7B61FF 0%, #5B8CFF 100%);
-
-      /* Backgrounds */
-      --bg-0:   #0B1020;
-      --bg-1:   #12192E;
-      --bg-2:   #18223B;
-      --bg-3:   #1E2C4A;
-      --bg-hover: #1f2d4d;
-
-      /* Borders */
-      --border:      #2A365A;
-      --border-hi:   #3D4F7A;
-
-      /* Text */
-      --text-1:  #FFFFFF;
-      --text-2:  #B8C2D9;
-      --text-3:  #6B7A9E;
-
-      /* Semantic */
-      --success: #22C55E;
-      --amber:   #F59E0B;
-      --rose:    #F43F5E;
-
-      /* Glow effects */
-      --glow-blue:   rgba(91, 140, 255, 0.15);
-      --glow-purple: rgba(123, 97, 255, 0.15);
-      --glow-teal:   rgba(79, 209, 197, 0.12);
-
-      /* Typography */
-      --font:      'Inter', 'Manrope', -apple-system, sans-serif;
-      --font-head: 'Manrope', 'Inter', -apple-system, sans-serif;
-
-      /* Spacing */
-      --r-sm: 8px;
-      --r-md: 12px;
-      --r-lg: 16px;
-      --r-xl: 24px;
-
-      /* Shadows */
-      --shadow-card: 0 4px 24px rgba(0,0,0,0.3), 0 1px 4px rgba(0,0,0,0.2);
-      --shadow-blue: 0 8px 40px rgba(91,140,255,0.18);
+      --bg: #0b0e13;
+      --surface: #131720;
+      --surface2: #1a2030;
+      --border: #252e42;
+      --accent: #3ecf8e;
+      --accent2: #4a9eff;
+      --accent3: #ff6b6b;
+      --text: #e2e8f0;
+      --muted: #7a8aa0;
+      --heading: #f0f6ff;
     }
 
-    /* ---- Reset ---- */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     html { scroll-behavior: smooth; }
+
     body {
-      background: var(--bg-0);
-      color: var(--text-1);
-      font-family: var(--font);
-      font-size: 15px;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
       line-height: 1.7;
-      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
-    /* ================================================
-       SIDEBAR
-       ================================================ */
-    .sidebar {
-      background: var(--bg-1) !important;
-      border-right: 1px solid var(--border) !important;
-      padding: 0 !important;
-    }
-
-    /* Sidebar logo */
-    .sidebar > h1 {
-      padding: 0 !important;
-      margin: 0 !important;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .sidebar > h1 a {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 18px 20px;
-      text-decoration: none !important;
-      color: var(--text-1) !important;
-      font-family: var(--font-head);
-      font-size: 1.05rem;
-      font-weight: 800;
-      letter-spacing: 0.01em;
-    }
-
-    .sidebar > h1 a::before {
+    /* ── NOISE TEXTURE OVERLAY ── */
+    body::before {
       content: '';
-      display: inline-block;
-      width: 28px;
-      height: 28px;
-      background: var(--brand-grad);
-      border-radius: 8px;
-      flex-shrink: 0;
-      position: relative;
-    }
-
-    /* Search */
-    .search {
-      padding: 12px 16px !important;
-      border-bottom: 1px solid var(--border) !important;
-      background: var(--bg-1) !important;
-    }
-
-    .search input {
-      background: var(--bg-2) !important;
-      border: 1px solid var(--border) !important;
-      color: var(--text-1) !important;
-      border-radius: var(--r-md) !important;
-      font-family: var(--font) !important;
-      font-size: 0.825rem !important;
-      padding: 8px 12px !important;
-      width: 100%;
-      transition: border-color 0.15s, box-shadow 0.15s;
-    }
-
-    .search input:focus {
-      border-color: var(--brand-blue) !important;
-      box-shadow: 0 0 0 3px var(--glow-blue) !important;
-      outline: none;
-    }
-
-    .search input::placeholder { color: var(--text-3) !important; }
-
-    /* Sidebar nav */
-    .sidebar-nav {
-      padding: 8px 0 80px;
-      overflow-y: auto;
-    }
-
-    .sidebar-nav > ul { margin: 0; padding: 0; list-style: none; }
-
-    .sidebar-nav li { margin: 0; }
-
-    /* Section headers (bold items with no href) */
-    .sidebar-nav > ul > li > p,
-    .sidebar-nav > ul > li > strong {
-      display: block;
-      font-family: var(--font-head);
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--text-3);
-      padding: 16px 20px 4px;
-    }
-
-    .sidebar-nav li a {
-      display: block;
-      font-size: 0.845rem;
-      color: var(--text-2) !important;
-      padding: 5px 20px;
-      text-decoration: none !important;
-      border-radius: 0;
-      transition: all 0.12s;
-      border-left: 2px solid transparent;
-    }
-
-    .sidebar-nav li a:hover {
-      color: var(--text-1) !important;
-      background: var(--bg-2);
-      border-left-color: var(--border-hi);
-      padding-left: 24px;
-    }
-
-    .sidebar-nav li a.active {
-      color: var(--brand-blue) !important;
-      background: var(--glow-blue);
-      border-left-color: var(--brand-blue);
-      font-weight: 600;
-      padding-left: 24px;
-    }
-
-    .sidebar-nav li ul {
-      padding-left: 12px;
-    }
-
-    .sidebar-nav li ul li a {
-      font-size: 0.8rem;
-      color: var(--text-3) !important;
-      padding: 3px 20px 3px 16px;
-    }
-
-    .sidebar-nav li ul li a:hover,
-    .sidebar-nav li ul li a.active {
-      color: var(--brand-blue) !important;
-    }
-
-    /* Search results */
-    .search-keyword { color: var(--brand-teal) !important; }
-    .matching-post { border-bottom: 1px solid var(--border) !important; }
-    .matching-post a { color: var(--text-1) !important; font-size: 0.875rem; }
-    .matching-post p { color: var(--text-2) !important; font-size: 0.8rem; }
-
-    /* ================================================
-       NAVBAR
-       ================================================ */
-    nav.app-nav {
-      background: rgba(11, 16, 32, 0.85) !important;
-      backdrop-filter: blur(16px) saturate(180%);
-      -webkit-backdrop-filter: blur(16px) saturate(180%);
-      border-bottom: 1px solid var(--border) !important;
-      padding: 0 24px !important;
-    }
-
-    nav.app-nav a {
-      color: var(--text-2) !important;
-      font-family: var(--font);
-      font-size: 0.825rem;
-      font-weight: 500;
-      padding: 0 12px !important;
-      transition: color 0.15s;
-      text-decoration: none !important;
-    }
-
-    nav.app-nav a:hover { color: var(--text-1) !important; }
-
-    nav.app-nav li:last-child a {
-      background: var(--brand-grad);
-      color: #fff !important;
-      padding: 6px 16px !important;
-      border-radius: var(--r-md);
-      font-weight: 600;
-    }
-
-    /* ================================================
-       MAIN CONTENT
-       ================================================ */
-    .content { background: var(--bg-0) !important; }
-
-    #main {
-      padding: 2.5rem 3.5rem 5rem !important;
-      max-width: 960px !important;
-    }
-
-    @media (max-width: 900px) {
-      #main { padding: 1.5rem 1.5rem 4rem !important; }
-    }
-
-    @media (max-width: 600px) {
-      #main { padding: 1rem 1rem 3rem !important; }
-    }
-
-    /* ================================================
-       TYPOGRAPHY
-       ================================================ */
-    #main h1 {
-      font-family: var(--font-head);
-      font-size: clamp(2rem, 5vw, 3.2rem);
-      font-weight: 800;
-      letter-spacing: -0.025em;
-      line-height: 1.15;
-      color: var(--text-1);
-      margin: 0 0 1.25rem;
-      border: none !important;
-      padding: 0 !important;
-    }
-
-    #main h2 {
-      font-family: var(--font-head);
-      font-size: 1.5rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      color: var(--text-1);
-      margin: 2.75rem 0 1rem;
-      padding-bottom: 0.625rem;
-      border-bottom: 1px solid var(--border) !important;
-    }
-
-    #main h3 {
-      font-family: var(--font-head);
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: var(--text-1);
-      margin: 2rem 0 0.75rem;
-    }
-
-    #main h4 {
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: var(--text-2);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin: 1.5rem 0 0.5rem;
-    }
-
-    #main p {
-      color: var(--text-2);
-      margin-bottom: 1rem;
-      font-size: 0.925rem;
-      line-height: 1.75;
-    }
-
-    #main a {
-      color: var(--brand-blue) !important;
-      text-decoration: none;
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.15s;
-    }
-
-    #main a:hover { border-bottom-color: var(--brand-blue); }
-
-    #main ul, #main ol {
-      padding-left: 1.4rem;
-      color: var(--text-2);
-      font-size: 0.92rem;
-    }
-
-    #main li { margin-bottom: 0.35rem; line-height: 1.7; }
-
-    #main strong { color: var(--text-1); font-weight: 600; }
-
-    #main em { color: var(--brand-teal); font-style: normal; }
-
-    #main hr {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 2.5rem 0;
-    }
-
-    /* Blockquotes */
-    #main blockquote {
-      border-left: 3px solid var(--brand-blue);
-      background: var(--glow-blue);
-      padding: 1rem 1.5rem;
-      margin: 1.5rem 0;
-      border-radius: 0 var(--r-lg) var(--r-lg) 0;
-    }
-
-    #main blockquote p {
-      color: var(--text-1);
-      margin: 0;
-      font-size: 0.9rem;
-    }
-
-    /* Tables */
-    #main table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 1.5rem 0;
-      font-size: 0.875rem;
-      border-radius: var(--r-lg);
-      overflow: hidden;
-      border: 1px solid var(--border);
-    }
-
-    #main th {
-      background: var(--bg-2);
-      color: var(--text-1);
-      font-family: var(--font-head);
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      padding: 10px 14px;
-      text-align: left;
-      border-bottom: 1px solid var(--border-hi);
-    }
-
-    #main td {
-      padding: 9px 14px;
-      border-bottom: 1px solid var(--border);
-      color: var(--text-2);
-      font-size: 0.875rem;
-    }
-
-    #main tr:last-child td { border-bottom: none; }
-    #main tr:hover td { background: var(--bg-hover); }
-
-    /* Code */
-    #main pre {
-      background: var(--bg-2) !important;
-      border: 1px solid var(--border);
-      border-radius: var(--r-lg);
-      padding: 1.25rem 1.5rem;
-      overflow-x: auto;
-    }
-
-    #main code {
-      font-family: 'JetBrains Mono', 'Fira Code', monospace !important;
-      font-size: 0.825rem;
-      background: var(--bg-2);
-      border: 1px solid var(--border);
-      padding: 0.15em 0.45em;
-      border-radius: 5px;
-      color: var(--brand-teal);
-    }
-
-    #main pre code {
-      background: none;
-      border: none;
-      padding: 0;
-      color: var(--text-1);
-      line-height: 1.65;
-    }
-
-    /* ================================================
-       HOMEPAGE COMPONENTS
-       ================================================ */
-
-    /* ---- Hero Section ---- */
-    .aa-hero {
-      padding: 4rem 0 3rem;
-      position: relative;
-    }
-
-    .aa-hero::before {
-      content: '';
-      position: absolute;
-      top: -80px; right: -120px;
-      width: 600px; height: 600px;
-      background: radial-gradient(ellipse at center, rgba(91,140,255,0.07) 0%, rgba(123,97,255,0.04) 40%, transparent 70%);
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
       pointer-events: none;
       z-index: 0;
+      opacity: 0.4;
     }
 
-    .aa-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(91,140,255,0.08);
-      border: 1px solid rgba(91,140,255,0.25);
-      color: var(--brand-blue);
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      padding: 5px 14px;
-      border-radius: 100px;
-      margin-bottom: 1.5rem;
-    }
-
-    .aa-badge-dot {
-      width: 6px; height: 6px;
-      background: var(--success);
-      border-radius: 50%;
-      box-shadow: 0 0 8px var(--success);
-      animation: aa-pulse 2s ease-in-out infinite;
-    }
-
-    @keyframes aa-pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(0.85); }
-    }
-
-    .aa-hero-title {
-      font-family: var(--font-head) !important;
-      font-size: clamp(2.8rem, 6vw, 4.5rem) !important;
-      font-weight: 800 !important;
-      letter-spacing: -0.035em !important;
-      line-height: 1.08 !important;
-      color: var(--text-1) !important;
-      margin: 0 0 1.5rem !important;
-      border: none !important;
-      padding: 0 !important;
-    }
-
-    .aa-gradient-text {
-      background: var(--brand-grad);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .aa-teal-text {
-      background: linear-gradient(135deg, #4FD1C5, #5B8CFF);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .aa-hero-sub {
-      font-size: 1.1rem !important;
-      color: var(--text-2) !important;
-      max-width: 560px;
-      line-height: 1.7 !important;
-      margin-bottom: 2.5rem !important;
-    }
-
-    /* ---- Buttons ---- */
-    .aa-btn-row {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-bottom: 3.5rem;
-    }
-
-    .aa-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-family: var(--font);
-      font-size: 0.9rem;
-      font-weight: 600;
-      padding: 11px 24px;
-      border-radius: var(--r-lg);
-      text-decoration: none !important;
-      border-bottom: none !important;
-      transition: all 0.2s cubic-bezier(0.4,0,0.2,1);
-      cursor: pointer;
-    }
-
-    .aa-btn-primary {
-      background: var(--brand-grad);
-      color: #fff !important;
-      box-shadow: 0 4px 20px rgba(91,140,255,0.35), 0 1px 4px rgba(0,0,0,0.2);
-    }
-
-    .aa-btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(91,140,255,0.45), 0 2px 8px rgba(0,0,0,0.2);
-    }
-
-    .aa-btn-secondary {
-      background: transparent;
-      color: var(--text-1) !important;
-      border: 1px solid var(--border-hi) !important;
-    }
-
-    .aa-btn-secondary:hover {
-      border-color: var(--brand-blue) !important;
-      color: var(--brand-blue) !important;
-      background: var(--glow-blue);
-    }
-
-    /* ---- Stats ---- */
-    .aa-stats {
-      display: flex;
-      gap: 0;
-      border: 1px solid var(--border);
-      border-radius: var(--r-xl);
-      background: var(--bg-1);
-      overflow: hidden;
-      margin-bottom: 4rem;
-    }
-
-    .aa-stat {
-      flex: 1;
-      padding: 1.5rem 1.25rem;
-      text-align: center;
-      border-right: 1px solid var(--border);
-      transition: background 0.15s;
-    }
-
-    .aa-stat:last-child { border-right: none; }
-    .aa-stat:hover { background: var(--bg-2); }
-
-    .aa-stat-n {
-      font-family: var(--font-head);
-      font-size: 2rem;
-      font-weight: 800;
-      background: var(--brand-grad);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      display: block;
-      line-height: 1;
-      margin-bottom: 4px;
-    }
-
-    .aa-stat-l {
-      font-size: 0.75rem;
-      font-weight: 500;
-      color: var(--text-3);
-      text-transform: uppercase;
-      letter-spacing: 0.07em;
-    }
-
-    @media (max-width: 600px) {
-      .aa-stats { flex-direction: column; }
-      .aa-stat { border-right: none; border-bottom: 1px solid var(--border); }
-      .aa-stat:last-child { border-bottom: none; }
-    }
-
-    /* ---- Section Labels ---- */
-    .aa-section-eyebrow {
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--brand-blue);
-      margin-bottom: 6px;
-    }
-
-    .aa-section-title {
-      font-family: var(--font-head) !important;
-      font-size: 1.9rem !important;
-      font-weight: 800 !important;
-      letter-spacing: -0.025em !important;
-      color: var(--text-1) !important;
-      margin: 0 0 8px !important;
-      border: none !important;
-      padding: 0 !important;
-    }
-
-    .aa-section-desc {
-      color: var(--text-2);
-      font-size: 0.92rem;
-      max-width: 520px;
-      margin-bottom: 1.75rem;
-      line-height: 1.7;
-    }
-
-    /* ---- Exam Track Cards ---- */
-    .aa-tracks {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-bottom: 3rem;
-    }
-
-    @media (max-width: 700px) {
-      .aa-tracks { grid-template-columns: 1fr; }
-    }
-
-    .aa-track {
-      position: relative;
-      background: var(--bg-1);
-      border: 1px solid var(--border);
-      border-radius: var(--r-xl);
-      padding: 2rem 1.5rem 1.5rem;
-      text-decoration: none !important;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      transition: all 0.2s cubic-bezier(0.4,0,0.2,1);
-    }
-
-    .aa-track::before {
-      content: '';
-      position: absolute;
+    /* ── NAV ── */
+    nav {
+      position: fixed;
       top: 0; left: 0; right: 0;
-      height: 3px;
-      opacity: 0;
-      transition: opacity 0.2s;
-    }
-
-    .aa-track:hover {
-      border-color: var(--border-hi);
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-card);
-    }
-
-    .aa-track:hover::before { opacity: 1; }
-
-    .aa-track.jee::before   { background: linear-gradient(90deg, #5B8CFF, #7B61FF); }
-    .aa-track.neet::before  { background: linear-gradient(90deg, #4FD1C5, #22C55E); }
-    .aa-track.school::before { background: linear-gradient(90deg, #F59E0B, #F43F5E); }
-
-    .aa-track-icon {
-      font-size: 2.25rem;
-      margin-bottom: 1rem;
-      display: block;
-    }
-
-    .aa-track-name {
-      font-family: var(--font-head);
-      font-size: 1.3rem;
-      font-weight: 800;
-      margin-bottom: 6px;
-    }
-
-    .aa-track.jee   .aa-track-name { color: var(--brand-blue); }
-    .aa-track.neet  .aa-track-name { color: var(--brand-teal); }
-    .aa-track.school .aa-track-name { color: var(--amber); }
-
-    .aa-track-desc {
-      font-size: 0.83rem;
-      color: var(--text-3);
-      line-height: 1.55;
-      flex: 1;
-      margin-bottom: 1.25rem;
-    }
-
-    .aa-track-link {
-      font-size: 0.8rem;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .aa-track.jee   .aa-track-link { color: var(--brand-blue); }
-    .aa-track.neet  .aa-track-link { color: var(--brand-teal); }
-    .aa-track.school .aa-track-link { color: var(--amber); }
-
-    /* ---- Feature Grid ---- */
-    .aa-features {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-bottom: 3rem;
-    }
-
-    @media (max-width: 768px) {
-      .aa-features { grid-template-columns: 1fr 1fr; }
-    }
-
-    @media (max-width: 480px) {
-      .aa-features { grid-template-columns: 1fr; }
-    }
-
-    .aa-feature {
-      background: var(--bg-1);
-      border: 1px solid var(--border);
-      border-radius: var(--r-xl);
-      padding: 1.5rem;
-      transition: all 0.2s;
-    }
-
-    .aa-feature:hover {
-      border-color: var(--border-hi);
-      background: var(--bg-2);
-    }
-
-    .aa-feature-icon {
-      width: 40px; height: 40px;
-      border-radius: var(--r-md);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
-    }
-
-    .aa-feature-icon.blue   { background: rgba(91,140,255,0.12); }
-    .aa-feature-icon.purple { background: rgba(123,97,255,0.12); }
-    .aa-feature-icon.teal   { background: rgba(79,209,197,0.12); }
-    .aa-feature-icon.green  { background: rgba(34,197,94,0.12); }
-    .aa-feature-icon.amber  { background: rgba(245,158,11,0.12); }
-    .aa-feature-icon.rose   { background: rgba(244,63,94,0.12); }
-
-    .aa-feature-title {
-      font-family: var(--font-head);
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: var(--text-1);
-      margin-bottom: 6px;
-    }
-
-    .aa-feature-desc {
-      font-size: 0.82rem;
-      color: var(--text-3);
-      line-height: 1.55;
-    }
-
-    /* ---- Cards (generic) ---- */
-    .aa-cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 12px;
-      margin-bottom: 2.5rem;
-    }
-
-    .aa-cards-2 {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-      gap: 12px;
-      margin-bottom: 2.5rem;
-    }
-
-    .aa-card {
-      background: var(--bg-1);
-      border: 1px solid var(--border);
-      border-radius: var(--r-xl);
-      padding: 1.5rem;
-      text-decoration: none !important;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      transition: all 0.2s cubic-bezier(0.4,0,0.2,1);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .aa-card:hover {
-      border-color: var(--border-hi);
-      transform: translateY(-3px);
-      box-shadow: var(--shadow-card);
-    }
-
-    .aa-card-badge {
-      display: inline-flex;
-      align-items: center;
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      padding: 3px 8px;
-      border-radius: 6px;
-      width: fit-content;
-    }
-
-    .badge-jee    { background: rgba(91,140,255,0.12); color: var(--brand-blue); }
-    .badge-neet   { background: rgba(79,209,197,0.12); color: var(--brand-teal); }
-    .badge-school { background: rgba(245,158,11,0.12); color: var(--amber); }
-    .badge-all    { background: rgba(123,97,255,0.12); color: var(--brand-purple); }
-    .badge-tools  { background: rgba(34,197,94,0.12);  color: var(--success); }
-    .badge-live   { background: rgba(34,197,94,0.12);  color: var(--success); }
-    .badge-soon   { background: rgba(245,158,11,0.12); color: var(--amber); }
-
-    .aa-card-title {
-      font-family: var(--font-head);
-      font-size: 0.975rem;
-      font-weight: 700;
-      color: var(--text-1);
-    }
-
-    .aa-card-desc {
-      font-size: 0.82rem;
-      color: var(--text-3);
-      line-height: 1.55;
-      flex: 1;
-    }
-
-    .aa-card-arrow {
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--brand-blue);
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      margin-top: 4px;
-    }
-
-    /* ---- Tools row ---- */
-    .aa-tools-row {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-bottom: 2.5rem;
-    }
-
-    .aa-tool-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: var(--bg-2);
-      border: 1px solid var(--border);
-      color: var(--text-2);
-      font-size: 0.82rem;
-      font-weight: 500;
-      padding: 7px 14px;
-      border-radius: 100px;
-      text-decoration: none !important;
-      transition: all 0.15s;
-    }
-
-    .aa-tool-chip:hover {
-      border-color: var(--brand-blue);
-      color: var(--brand-blue) !important;
-      background: var(--glow-blue);
-    }
-
-    /* ---- Terminal / code block ---- */
-    .aa-terminal {
-      background: #080d1a;
-      border: 1px solid var(--border);
-      border-radius: var(--r-xl);
-      padding: 1.5rem;
-      margin: 1.5rem 0 2.5rem;
-      font-family: 'JetBrains Mono', 'Fira Code', monospace;
-      font-size: 0.825rem;
-      position: relative;
-    }
-
-    .aa-terminal-dots {
-      display: flex;
-      gap: 6px;
-      margin-bottom: 1rem;
-    }
-
-    .aa-terminal-dots span {
-      width: 10px; height: 10px;
-      border-radius: 50%;
-    }
-
-    .aa-terminal-dots span:nth-child(1) { background: #FF5F57; }
-    .aa-terminal-dots span:nth-child(2) { background: #FFBD2E; }
-    .aa-terminal-dots span:nth-child(3) { background: #28C840; }
-
-    .aa-terminal .prompt { color: var(--brand-teal); }
-    .aa-terminal .cmd    { color: var(--text-1); }
-    .aa-terminal .out    { color: var(--text-2); }
-    .aa-terminal .hi     { color: var(--brand-blue); }
-
-    /* ---- Roadmap ---- */
-    .aa-roadmap {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-bottom: 3rem;
-    }
-
-    @media (max-width: 700px) {
-      .aa-roadmap { grid-template-columns: 1fr; }
-    }
-
-    .aa-rm-card {
-      background: var(--bg-1);
-      border: 1px solid var(--border);
-      border-radius: var(--r-xl);
-      padding: 1.5rem;
-    }
-
-    .aa-rm-version {
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-bottom: 6px;
-    }
-
-    .aa-rm-card.v1 .aa-rm-version { color: var(--success); }
-    .aa-rm-card.v2 .aa-rm-version { color: var(--brand-blue); }
-    .aa-rm-card.v3 .aa-rm-version { color: var(--brand-purple); }
-
-    .aa-rm-title {
-      font-family: var(--font-head);
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--text-1);
-      margin-bottom: 12px;
-    }
-
-    .aa-rm-list { list-style: none; padding: 0; }
-    .aa-rm-list li {
-      font-size: 0.82rem;
-      color: var(--text-3);
-      padding: 3px 0 3px 14px;
-      position: relative;
-    }
-
-    .aa-rm-list li::before {
-      content: '›';
-      position: absolute;
-      left: 0;
-      color: var(--text-3);
-    }
-
-    .aa-rm-card.v1 .aa-rm-list li::before { color: var(--success); }
-    .aa-rm-card.v2 .aa-rm-list li::before { color: var(--brand-blue); }
-    .aa-rm-card.v3 .aa-rm-list li::before { color: var(--brand-purple); }
-
-    /* ---- CTA Banner ---- */
-    .aa-cta {
-      background: linear-gradient(135deg, rgba(91,140,255,0.08) 0%, rgba(123,97,255,0.08) 100%);
-      border: 1px solid rgba(91,140,255,0.2);
-      border-radius: var(--r-xl);
-      padding: 3rem 2.5rem;
-      text-align: center;
-      margin: 2.5rem 0;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .aa-cta::before {
-      content: '';
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 400px; height: 200px;
-      background: radial-gradient(ellipse, rgba(91,140,255,0.06) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .aa-cta h3 {
-      font-family: var(--font-head);
-      font-size: 1.6rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      color: var(--text-1);
-      margin-bottom: 10px;
-    }
-
-    .aa-cta p {
-      color: var(--text-2);
-      font-size: 0.92rem;
-      max-width: 480px;
-      margin: 0 auto 1.75rem;
-    }
-
-    /* ---- Footer ---- */
-    .aa-footer {
-      border-top: 1px solid var(--border);
-      padding: 2rem 0 1rem;
-      margin-top: 3rem;
+      z-index: 100;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 1rem;
+      padding: 1rem 2rem;
+      background: rgba(11, 14, 19, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
     }
 
-    .aa-footer-left {
-      font-size: 0.8rem;
-      color: var(--text-3);
-    }
-
-    .aa-footer-left a {
-      color: var(--text-3) !important;
-      border-bottom: none !important;
-      transition: color 0.15s;
-    }
-
-    .aa-footer-left a:hover { color: var(--brand-blue) !important; }
-
-    .aa-footer-right {
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: var(--heading);
+      text-decoration: none;
       display: flex;
-      gap: 16px;
+      align-items: center;
+      gap: 0.5rem;
     }
 
-    .aa-footer-right a {
-      font-size: 0.8rem;
-      color: var(--text-3) !important;
-      border-bottom: none !important;
-      transition: color 0.15s;
+    .nav-logo span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
     }
 
-    .aa-footer-right a:hover { color: var(--brand-blue) !important; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
 
-    /* ================================================
-       SCROLLBAR
-       ================================================ */
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: var(--bg-1); }
-    ::-webkit-scrollbar-thumb { background: var(--border-hi); border-radius: 3px; }
-    ::-webkit-scrollbar-thumb:hover { background: var(--brand-blue); }
+    .nav-links a:hover { color: var(--text); }
 
-    /* ================================================
-       SCROLL PROGRESS
-       ================================================ */
-    #aa-progress {
-      position: fixed;
-      top: 0; left: 0;
-      height: 2px;
-      background: var(--brand-grad);
-      z-index: 9999;
-      transition: width 0.08s linear;
+    .nav-cta {
+      background: var(--accent);
+      color: #0b1a12 !important;
+      padding: 0.4rem 1rem;
+      border-radius: 6px;
+      font-weight: 600 !important;
+      transition: opacity 0.2s !important;
+    }
+
+    .nav-cta:hover { opacity: 0.85; color: #0b1a12 !important; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8rem 1.5rem 4rem;
+      overflow: hidden;
+    }
+
+    .hero-glow {
+      position: absolute;
+      width: 700px;
+      height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(62, 207, 142, 0.08) 0%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -55%);
       pointer-events: none;
     }
 
-    /* ================================================
-       BACK TO TOP
-       ================================================ */
-    #aa-top {
-      position: fixed;
-      bottom: 1.5rem; right: 1.5rem;
-      width: 38px; height: 38px;
-      background: var(--bg-2);
-      border: 1px solid var(--border-hi);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      color: var(--text-2);
-      font-size: 0.9rem;
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(62, 207, 142, 0.1);
+      border: 1px solid rgba(62, 207, 142, 0.25);
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.35rem 0.9rem;
+      border-radius: 100px;
+      margin-bottom: 1.5rem;
+      font-family: 'DM Mono', monospace;
+      letter-spacing: 0.05em;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      line-height: 1.05;
+      color: var(--heading);
+      letter-spacing: -0.02em;
+      max-width: 800px;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+
+    h1 .accent { color: var(--accent); }
+    h1 .accent2 { color: var(--accent2); }
+
+    .hero-sub {
+      margin-top: 1.5rem;
+      font-size: 1.125rem;
+      color: var(--muted);
+      max-width: 540px;
+      line-height: 1.65;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.75rem 1.6rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: all 0.2s;
       cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #0b1a12;
+    }
+
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-ghost:hover { border-color: var(--muted); background: var(--surface); }
+
+    .hero-stats {
+      display: flex;
+      gap: 3rem;
+      margin-top: 3.5rem;
+      animation: fadeUp 0.6s 0.4s ease both;
+    }
+
+    .hero-stat { text-align: center; }
+    .hero-stat .num {
+      font-family: 'Syne', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--heading);
+    }
+    .hero-stat .label { font-size: 0.8rem; color: var(--muted); margin-top: 0.2rem; }
+
+    /* ── SECTION SHARED ── */
+    section { position: relative; z-index: 1; }
+
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 1.5rem;
+    }
+
+    .section-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.75rem);
+      font-weight: 800;
+      color: var(--heading);
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+    }
+
+    .section-desc {
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin-top: 0.75rem;
+      max-width: 560px;
+    }
+
+    /* ── QUICK START CARDS ── */
+    .quick-start { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+    .qs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1px;
+      margin-top: 3rem;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .qs-card {
+      background: var(--surface);
+      padding: 1.75rem;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: background 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .qs-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transition: transform 0.25s;
+      transform-origin: left;
+    }
+
+    .qs-card:hover { background: var(--surface2); }
+    .qs-card:hover::after { transform: scaleX(1); }
+
+    .qs-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .qs-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--heading);
+      margin-bottom: 0.4rem;
+    }
+
+    .qs-desc {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .qs-arrow {
+      margin-top: 1.25rem;
+      font-size: 0.8rem;
+      color: var(--accent);
+      font-weight: 600;
+      font-family: 'DM Mono', monospace;
+    }
+
+    /* ── WHAT'S INSIDE TABLE ── */
+    .contents-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 2.5rem;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .contents-table th {
+      background: var(--surface2);
+      padding: 0.9rem 1.25rem;
+      text-align: left;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .contents-table td {
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+      vertical-align: middle;
+    }
+
+    .contents-table tr:last-child td { border-bottom: none; }
+    .contents-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+    .contents-table .path {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--accent2);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      font-family: 'DM Mono', monospace;
+    }
+
+    .badge-green { background: rgba(62,207,142,0.12); color: var(--accent); }
+    .badge-yellow { background: rgba(251,191,36,0.12); color: #fbbf24; }
+
+    /* ── PROMPT SHOWCASE ── */
+    .prompts-bg { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+    .prompt-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.25rem;
+      margin-top: 2.5rem;
+    }
+
+    .prompt-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .prompt-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+
+    .prompt-subject {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-family: 'DM Mono', monospace;
+      margin-bottom: 0.75rem;
+    }
+
+    .prompt-text {
+      font-size: 0.9rem;
+      color: var(--text);
+      line-height: 1.6;
+      background: var(--surface2);
+      border-left: 3px solid var(--accent);
+      padding: 0.75rem 1rem;
+      border-radius: 0 6px 6px 0;
+      font-style: italic;
+    }
+
+    .prompt-tag {
+      margin-top: 0.75rem;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    /* ── ROADMAP ── */
+    .roadmap-list {
+      display: grid;
+      gap: 1rem;
+      margin-top: 2.5rem;
+    }
+
+    .roadmap-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.25rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+    }
+
+    .roadmap-item.active { border-color: rgba(62,207,142,0.3); background: rgba(62,207,142,0.04); }
+    .roadmap-item.progress { border-color: rgba(251,191,36,0.2); background: rgba(251,191,36,0.03); }
+
+    .roadmap-v {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 800;
+      padding: 0.3rem 0.7rem;
+      border-radius: 6px;
+      white-space: nowrap;
+      min-width: 60px;
+      text-align: center;
+    }
+
+    .roadmap-item.active .roadmap-v { background: var(--accent); color: #0b1a12; }
+    .roadmap-item.progress .roadmap-v { background: #fbbf24; color: #1a1000; }
+    .roadmap-item:not(.active):not(.progress) .roadmap-v { background: var(--surface2); color: var(--muted); }
+
+    .roadmap-body strong { font-weight: 600; color: var(--heading); display: block; margin-bottom: 0.25rem; }
+    .roadmap-body span { font-size: 0.875rem; color: var(--muted); }
+
+    /* ── CONTRIBUTE ── */
+    .contribute { text-align: center; }
+    .contribute-inner { max-width: 560px; margin: 0 auto; }
+    .contribute-inner .section-desc { margin-left: auto; margin-right: auto; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+    }
+
+    .footer-inner {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .footer-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: var(--heading);
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-logo span { color: var(--accent); }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 1rem 0;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--text); }
+
+    .footer-copy {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 0.5rem;
+    }
+
+    /* ── SCROLL-TO-TOP ── */
+    #top-btn {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #0b1a12;
+      border: none;
+      cursor: pointer;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       opacity: 0;
       transform: translateY(10px);
-      transition: all 0.25s;
-      z-index: 100;
+      transition: opacity 0.3s, transform 0.3s;
+      z-index: 99;
+      box-shadow: 0 4px 20px rgba(62,207,142,0.3);
     }
 
-    #aa-top.show {
-      opacity: 1;
-      transform: translateY(0);
+    #top-btn.visible { opacity: 1; transform: translateY(0); }
+    #top-btn:hover { opacity: 0.85; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
-    #aa-top:hover {
-      background: var(--brand-blue);
-      border-color: var(--brand-blue);
-      color: #fff;
-    }
-
-    /* ================================================
-       DOCSIFY PAGINATION
-       ================================================ */
-    .pagination-container {
-      border-top: 1px solid var(--border);
-      padding-top: 1.5rem;
-      margin-top: 3rem;
-    }
-
-    .pagination-item--previous a,
-    .pagination-item--next a {
-      color: var(--text-2) !important;
-      font-size: 0.875rem;
-      transition: color 0.15s;
-    }
-
-    .pagination-item--previous a:hover,
-    .pagination-item--next a:hover {
-      color: var(--brand-blue) !important;
-    }
-
-    /* ================================================
-       COPY CODE
-       ================================================ */
-    .docsify-copy-code-button {
-      background: var(--bg-3) !important;
-      color: var(--text-2) !important;
-      border: 1px solid var(--border) !important;
-      font-size: 0.72rem !important;
-      border-radius: var(--r-sm) !important;
-    }
-
-    /* ================================================
-       UTILITY
-       ================================================ */
-    .text-center { text-align: center; }
-    .mt-sm { margin-top: 1rem; }
-    .mt-md { margin-top: 1.5rem; }
-    .mt-lg { margin-top: 2.5rem; }
-    .mb-sm { margin-bottom: 1rem; }
-    .mb-md { margin-bottom: 1.5rem; }
-    .mb-lg { margin-bottom: 2.5rem; }
-
-    @media (max-width: 480px) {
-      .aa-btn-row { flex-direction: column; align-items: flex-start; }
-      .aa-cards, .aa-cards-2 { grid-template-columns: 1fr; }
-      .aa-features { grid-template-columns: 1fr; }
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      nav { padding: 1rem; }
+      .nav-links { display: none; }
+      .hero-stats { gap: 1.5rem; }
+      .contents-table { display: block; overflow-x: auto; }
     }
   </style>
 </head>
 <body>
-  <div id="aa-progress"></div>
-  <div id="aa-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
-  <div id="app">Loading AI Atlas…</div>
 
-  <!-- Docsify -->
-  <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/zoom-image.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/docsify-copy-code@2/dist/docsify-copy-code.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/docsify-pagination/dist/docsify-pagination.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-python.min.js"></script>
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#"><span>AI</span> Atlas</a>
+  <ul class="nav-links">
+    <li><a href="#quick-start">Start Here</a></li>
+    <li><a href="#contents">Contents</a></li>
+    <li><a href="#prompts">Prompts</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="https://github.com/scooterxd69/AI-Atlas" target="_blank" rel="noopener" class="nav-cta">GitHub ↗</a></li>
+  </ul>
+</nav>
 
-  <script>
-    window.$docsify = {
-      name: 'AI Atlas',
-      repo: 'https://github.com/scooterxd69/AI-Atlas',
-      loadSidebar: true,
-      loadNavbar: true,
-      mergeNavbar: false,
-      subMaxLevel: 3,
-      auto2top: true,
-      homepage: 'README.md',
-      routerMode: 'hash',
-      coverpage: false,
-      themeColor: '#5B8CFF',
-      notFoundPage: true,
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <span class="hero-badge">🗺️ &nbsp;Free · Open-Source · India</span>
+  <h1>Learn <span class="accent">JEE &amp; NEET</span><br/>with <span class="accent2">AI</span></h1>
+  <p class="hero-sub">Not a coaching platform. A system that makes your existing study dramatically more effective through AI — built for Indian students, 100% free.</p>
+  <div class="hero-actions">
+    <a href="#quick-start" class="btn btn-primary">→ Start Learning</a>
+    <a href="https://github.com/scooterxd69/AI-Atlas" target="_blank" rel="noopener" class="btn btn-ghost">⭐ Star on GitHub</a>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="num">9</div><div class="label">Study Systems</div></div>
+    <div class="hero-stat"><div class="num">125+</div><div class="label">AI Prompts</div></div>
+    <div class="hero-stat"><div class="num">100+</div><div class="label">AI Tools</div></div>
+    <div class="hero-stat"><div class="num">25</div><div class="label">Workflows</div></div>
+  </div>
+</section>
 
-      search: {
-        maxAge: 86400000,
-        paths: 'auto',
-        placeholder: 'Search AI Atlas…',
-        noData: 'No results found.',
-        depth: 4,
-        namespace: 'ai-atlas-v2',
-      },
+<!-- QUICK START -->
+<section class="quick-start" id="quick-start">
+  <div class="section-inner">
+    <div class="section-tag">// Quick Start</div>
+    <h2>What are you preparing for?</h2>
+    <p class="section-desc">Pick your path and get a complete AI-powered study system tailored to your exam.</p>
 
-      pagination: {
-        previousText: '← Previous',
-        nextText: 'Next →',
-        crossChapter: true,
-        crossChapterText: true,
-      },
+    <div class="qs-grid">
+      <a class="qs-card" href="https://github.com/scooterxd69/AI-Atlas/blob/main/study-systems/jee/jee-main-complete-study-system.md" target="_blank" rel="noopener">
+        <div class="qs-icon">⚛️</div>
+        <div class="qs-title">JEE Main / Advanced</div>
+        <div class="qs-desc">Complete AI study system for Physics, Chemistry, and Maths — with prompts and daily workflows.</div>
+        <div class="qs-arrow">Open guide →</div>
+      </a>
+      <a class="qs-card" href="https://github.com/scooterxd69/AI-Atlas/blob/main/study-systems/neet/neet-complete-study-system.md" target="_blank" rel="noopener">
+        <div class="qs-icon">🧬</div>
+        <div class="qs-title">NEET UG</div>
+        <div class="qs-desc">Biology-focused AI study system covering NCERT, previous year patterns, and revision techniques.</div>
+        <div class="qs-arrow">Open guide →</div>
+      </a>
+      <a class="qs-card" href="https://github.com/scooterxd69/AI-Atlas/blob/main/study-systems/school/class10-cbse-study-system.md" target="_blank" rel="noopener">
+        <div class="qs-icon">📚</div>
+        <div class="qs-title">Class 9–12 Boards</div>
+        <div class="qs-desc">CBSE board exam preparation with AI prompts for all subjects, plus concept clarity workflows.</div>
+        <div class="qs-arrow">Open guide →</div>
+      </a>
+      <a class="qs-card" href="https://github.com/scooterxd69/AI-Atlas/blob/main/AI-Tools-Database.md" target="_blank" rel="noopener">
+        <div class="qs-icon">🤖</div>
+        <div class="qs-title">New to AI?</div>
+        <div class="qs-desc">100+ AI tools database with ratings, free tiers, and a guide on which ones to actually use for studying.</div>
+        <div class="qs-arrow">Explore tools →</div>
+      </a>
+    </div>
+  </div>
+</section>
 
-      copyCode: {
-        buttonText: 'Copy',
-        errorText: 'Error',
-        successText: '✓ Copied',
-      },
+<!-- CONTENTS -->
+<section id="contents">
+  <div class="section-inner">
+    <div class="section-tag">// Repository</div>
+    <h2>What's Inside</h2>
+    <p class="section-desc">Every resource, organised by type. All free, all open source.</p>
 
-      plugins: [
-        function(hook) {
-          hook.doneEach(function() {
-            var bar = document.getElementById('aa-progress');
-            var btn = document.getElementById('aa-top');
+    <table class="contents-table">
+      <thead>
+        <tr>
+          <th>Section</th>
+          <th>What You Get</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="path">study-systems/</span></td>
+          <td>9 complete AI study systems for JEE, NEET, CBSE and more</td>
+          <td><span class="badge badge-green">✓ V1 Live</span></td>
+        </tr>
+        <tr>
+          <td><span class="path">prompts/</span></td>
+          <td>125+ ready-to-use AI prompts organised by subject and exam</td>
+          <td><span class="badge badge-green">✓ V1 Live</span></td>
+        </tr>
+        <tr>
+          <td><span class="path">workflows/</span></td>
+          <td>25 step-by-step study workflows (daily, weekly, revision sprints)</td>
+          <td><span class="badge badge-green">✓ V1 Live</span></td>
+        </tr>
+        <tr>
+          <td><span class="path">tools/</span></td>
+          <td>100 AI tools database + 5 deep-dive guides on best-in-class tools</td>
+          <td><span class="badge badge-green">✓ V1 Live</span></td>
+        </tr>
+        <tr>
+          <td><span class="path">resources/</span></td>
+          <td>Free books, YouTube channels, practice sites — curated and ranked</td>
+          <td><span class="badge badge-green">✓ V1 Live</span></td>
+        </tr>
+        <tr>
+          <td><span class="path">career-guides/</span></td>
+          <td>Post-JEE / NEET career pathways with AI-powered planning guides</td>
+          <td><span class="badge badge-green">✓ V1 Live</span></td>
+        </tr>
+        <tr>
+          <td><span class="path">chapters/</span></td>
+          <td>Deep-dive chapter breakdowns (30 chapters planned, AI explanations + PYQs)</td>
+          <td><span class="badge badge-yellow">⟳ V2 WIP</span></td>
+        </tr>
+        <tr>
+          <td><span class="path">translations/</span></td>
+          <td>Hindi translations of core guides for regional accessibility</td>
+          <td><span class="badge badge-yellow">⟳ V3 Planned</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
 
-            function onScroll() {
-              var h = document.body.scrollHeight - window.innerHeight;
-              bar.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + '%';
-              btn.classList.toggle('show', window.scrollY > 400);
-            }
+<!-- PROMPTS -->
+<section class="prompts-bg" id="prompts">
+  <div class="section-inner">
+    <div class="section-tag">// Prompt Library</div>
+    <h2>Sample AI Prompts</h2>
+    <p class="section-desc">Copy these directly into ChatGPT, Claude, or any AI. 125+ more in the <a href="https://github.com/scooterxd69/AI-Atlas/blob/main/JEE-AI-Prompt-Library.md" style="color:var(--accent);text-decoration:none">full library</a>.</p>
 
-            window.removeEventListener('scroll', onScroll);
-            window.addEventListener('scroll', onScroll, { passive: true });
-          });
-        }
-      ]
-    };
-  </script>
+    <div class="prompt-grid">
+      <div class="prompt-card">
+        <div class="prompt-subject" style="color:#4a9eff">Physics · JEE</div>
+        <div class="prompt-text">"Explain the concept of [topic] as if I'm a JEE aspirant who just saw it for the first time. Start with the physical intuition, then the formula, then show me a PYQ-style question with full solution."</div>
+        <div class="prompt-tag">→ Concept clarity + application</div>
+      </div>
+      <div class="prompt-card">
+        <div class="prompt-subject" style="color:#3ecf8e">Biology · NEET</div>
+        <div class="prompt-text">"Create a high-yield summary table for [NCERT chapter] with the most tested facts, common confusions, and 5 predicted MCQs with explanations."</div>
+        <div class="prompt-tag">→ Revision + MCQ practice</div>
+      </div>
+      <div class="prompt-card">
+        <div class="prompt-subject" style="color:#ff6b6b">Maths · JEE</div>
+        <div class="prompt-text">"I attempted this problem and got stuck at step 3: [problem]. Walk me through the correct approach step-by-step, explain where my thinking went wrong, and give me a similar problem to practice."</div>
+        <div class="prompt-tag">→ Error analysis + follow-up</div>
+      </div>
+      <div class="prompt-card">
+        <div class="prompt-subject" style="color:#a78bfa">Chemistry · JEE/NEET</div>
+        <div class="prompt-text">"Generate a mnemonics sheet for [topic] — reactions, exceptions, and any hard-to-remember sequences. Make it visual and memorable."</div>
+        <div class="prompt-tag">→ Memory aids + retention</div>
+      </div>
+      <div class="prompt-card">
+        <div class="prompt-subject" style="color:#fbbf24">Study Planning</div>
+        <div class="prompt-text">"I have [X weeks] before my exam. My strong topics are [list], weak topics are [list]. Create a day-wise revision plan that maximises score improvement."</div>
+        <div class="prompt-tag">→ Personalised scheduling</div>
+      </div>
+      <div class="prompt-card">
+        <div class="prompt-subject" style="color:#fb7185">CBSE Boards</div>
+        <div class="prompt-text">"Convert this NCERT paragraph into a 5-point answer format suitable for a 5-mark board exam question. Keep the language clear and examinable."</div>
+        <div class="prompt-tag">→ Answer writing practice</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section id="roadmap">
+  <div class="section-inner">
+    <div class="section-tag">// Roadmap</div>
+    <h2>What's Coming</h2>
+    <p class="section-desc">AI Atlas is actively built and improved. Here's the plan.</p>
+
+    <div class="roadmap-list">
+      <div class="roadmap-item active">
+        <div class="roadmap-v">V1</div>
+        <div class="roadmap-body">
+          <strong>Live Now</strong>
+          <span>Website, 9 study systems, 125+ prompts, 25 workflows, 100+ tools database, career guides, free resources</span>
+        </div>
+      </div>
+      <div class="roadmap-item progress">
+        <div class="roadmap-v">V2</div>
+        <div class="roadmap-body">
+          <strong>In Progress</strong>
+          <span>30 chapter deep-dives (Physics + Chemistry + Biology), NEET-specific prompt library, tool-specific guides (Claude, Gemini, Perplexity)</span>
+        </div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-v">V3</div>
+        <div class="roadmap-body">
+          <strong>Planned</strong>
+          <span>Full syllabus coverage, Hindi translations of all core guides, community Q&amp;A section, AI study partner templates</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTRIBUTE -->
+<section class="contribute" style="border-top: 1px solid var(--border);">
+  <div class="section-inner">
+    <div class="contribute-inner">
+      <div class="section-tag">// Open Source</div>
+      <h2>Help Us Help More Students</h2>
+      <p class="section-desc">AI Atlas is built by students, for students. Every prompt you add, every guide you improve, helps thousands of JEE and NEET aspirants across India.</p>
+      <div class="hero-actions" style="justify-content:center; margin-top:2rem">
+        <a href="https://github.com/scooterxd69/AI-Atlas/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener" class="btn btn-primary">Read Contributing Guide</a>
+        <a href="https://github.com/scooterxd69/AI-Atlas" target="_blank" rel="noopener" class="btn btn-ghost">Browse the Repo ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo"><span>AI</span> Atlas</div>
+    <div class="footer-links">
+      <a href="https://github.com/scooterxd69/AI-Atlas/blob/main/README.md" target="_blank" rel="noopener">README</a>
+      <a href="https://github.com/scooterxd69/AI-Atlas/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Contributing</a>
+      <a href="https://github.com/scooterxd69/AI-Atlas/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a>
+      <a href="https://github.com/scooterxd69/AI-Atlas/blob/main/SECURITY.md" target="_blank" rel="noopener">Security</a>
+      <a href="https://github.com/scooterxd69/AI-Atlas" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <div class="footer-copy">Built by <a href="https://github.com/scooterxd69" style="color:var(--accent);text-decoration:none">Naitik Singh</a> · AI Atlas — Learn · Explore · Achieve</div>
+  </div>
+</footer>
+
+<!-- SCROLL TO TOP -->
+<button id="top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
+
+<script>
+  // Show/hide scroll-to-top button
+  const topBtn = document.getElementById('top-btn');
+  window.addEventListener('scroll', () => {
+    topBtn.classList.toggle('visible', window.scrollY > 400);
+  });
+
+  // Fade-in on scroll for non-hero sections
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.qs-card, .prompt-card, .roadmap-item, .contents-table tr').forEach((el, i) => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(16px)';
+    el.style.transition = `opacity 0.45s ${i * 0.05}s ease, transform 0.45s ${i * 0.05}s ease`;
+    observer.observe(el);
+  });
+</script>
 </body>
 </html>
