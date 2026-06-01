@@ -4,514 +4,818 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AI Atlas — Learn Faster With AI</title>
-  <meta name="description" content="Free AI-powered learning ecosystem for JEE, NEET and school students. Study systems, prompt libraries, workflows, and 100+ AI tool guides." />
-  <meta name="keywords" content="JEE AI study, NEET AI preparation, free AI tools students India, JEE prompts Claude, NEET prompts, CBSE AI study, AI Atlas" />
   <meta name="author" content="Naitik Singh" />
+  <meta name="description" content="AI Atlas — Free AI-powered learning platform for JEE, NEET and school students. Study systems, prompt libraries, workflows, and 100+ AI tool guides." />
+  <meta name="keywords" content="JEE AI study, NEET AI preparation, free AI tools students India, JEE prompts Claude, NEET prompts, CBSE AI study, AI Atlas" />
   <meta property="og:title" content="AI Atlas — Learn Faster With AI" />
-  <meta property="og:description" content="Free AI-powered study systems for JEE, NEET and school students." />
+  <meta property="og:description" content="Free AI-powered study systems for JEE, NEET and school students. Prompts, workflows, tool guides." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://scooterxd69.github.io/AI-Atlas/" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="AI Atlas — Learn Faster With AI" />
+  <meta name="twitter:description" content="Free AI-powered learning for JEE, NEET &amp; school students." />
 
-  <!-- Docsify theme + custom overrides -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet" />
 
   <style>
-    /* ============================================
-       AI ATLAS — DESIGN SYSTEM
-       Author: Naitik Singh
-    ============================================ */
     :root {
-      --theme-color: #00C896;
-      --accent: #FF6B35;
-      --accent2: #7B61FF;
-      --bg: #0A0F1E;
-      --bg2: #111827;
-      --bg3: #1a2236;
-      --text: #E8EDF5;
-      --text-muted: #8899BB;
-      --border: rgba(255,255,255,0.08);
-      --sidebar-width: 280px;
-      --font-heading: 'Syne', sans-serif;
-      --font-body: 'DM Sans', sans-serif;
-      --radius: 12px;
-      --glow: 0 0 40px rgba(0,200,150,0.15);
+      --bg: #0b0e13;
+      --surface: #131720;
+      --surface2: #1a2030;
+      --border: #252e42;
+      --accent: #3ecf8e;
+      --accent2: #4a9eff;
+      --accent3: #ff6b6b;
+      --text: #e2e8f0;
+      --muted: #7a8aa0;
+      --heading: #f0f6ff;
     }
 
-    * { box-sizing: border-box; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
 
     body {
-      font-family: var(--font-body);
       background: var(--bg);
       color: var(--text);
-      margin: 0;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
     }
 
-    /* ── SIDEBAR ── */
-    .sidebar {
-      background: var(--bg2) !important;
-      border-right: 1px solid var(--border) !important;
-      padding: 0 !important;
+    /* ── NOISE TEXTURE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
     }
 
-    .sidebar-logo {
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
       display: flex;
       align-items: center;
-      gap: 10px;
-      padding: 24px 20px 16px;
-      border-bottom: 1px solid var(--border);
-      text-decoration: none !important;
-    }
-
-    .sidebar-logo .logo-mark {
-      width: 36px; height: 36px;
-      background: linear-gradient(135deg, var(--theme-color), var(--accent2));
-      border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 18px; flex-shrink: 0;
-    }
-
-    .sidebar-logo span {
-      font-family: var(--font-heading);
-      font-weight: 700;
-      font-size: 18px;
-      color: var(--text) !important;
-    }
-
-    .sidebar ul { padding: 8px 0 !important; }
-
-    .sidebar ul li a {
-      font-family: var(--font-body);
-      color: var(--text-muted) !important;
-      padding: 6px 20px !important;
-      font-size: 14px;
-      border-left: 2px solid transparent;
-      transition: all 0.2s;
-      display: block;
-    }
-
-    .sidebar ul li a:hover,
-    .sidebar ul li.active > a {
-      color: var(--theme-color) !important;
-      border-left-color: var(--theme-color) !important;
-      background: rgba(0,200,150,0.06) !important;
-    }
-
-    .sidebar ul li p {
-      font-family: var(--font-heading);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--text-muted) !important;
-      padding: 16px 20px 4px !important;
-      margin: 0 !important;
-    }
-
-    /* ── CONTENT ── */
-    .content { background: var(--bg) !important; }
-    .markdown-section { max-width: 820px; padding: 48px 40px; }
-
-    .markdown-section h1,
-    .markdown-section h2,
-    .markdown-section h3 {
-      font-family: var(--font-heading);
-      color: var(--text);
-    }
-
-    .markdown-section h1 { font-size: 2.4rem; font-weight: 800; margin-bottom: 16px; }
-    .markdown-section h2 {
-      font-size: 1.5rem; font-weight: 700;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 10px; margin-top: 40px;
-    }
-
-    .markdown-section a { color: var(--theme-color); text-decoration: none; }
-    .markdown-section a:hover { text-decoration: underline; }
-
-    .markdown-section code {
-      background: var(--bg3);
-      color: var(--theme-color);
-      padding: 2px 8px;
-      border-radius: 4px;
-      font-size: 0.88em;
-    }
-
-    .markdown-section pre {
-      background: var(--bg3) !important;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-    }
-
-    .markdown-section blockquote {
-      border-left: 3px solid var(--theme-color);
-      background: rgba(0,200,150,0.06);
-      padding: 12px 20px;
-      border-radius: 0 var(--radius) var(--radius) 0;
-      color: var(--text-muted);
-    }
-
-    .markdown-section table {
-      border-collapse: collapse;
-      width: 100%;
-      font-size: 0.92rem;
-    }
-    .markdown-section th {
-      background: var(--bg3);
-      font-family: var(--font-heading);
-      font-size: 0.8rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      padding: 10px 14px;
-      text-align: left;
-      color: var(--text-muted);
-    }
-    .markdown-section td {
-      padding: 10px 14px;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      background: rgba(11, 14, 19, 0.85);
+      backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
     }
-    .markdown-section tr:hover td { background: var(--bg3); }
 
-    /* ── NAVBAR ── */
-    .app-nav { background: var(--bg2) !important; border-bottom: 1px solid var(--border) !important; }
-    .app-nav a { color: var(--text-muted) !important; font-size: 13px; }
-    .app-nav a:hover { color: var(--theme-color) !important; }
-
-    /* ── SEARCH ── */
-    .search input {
-      background: var(--bg3) !important;
-      border: 1px solid var(--border) !important;
-      color: var(--text) !important;
-      border-radius: 8px;
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: var(--heading);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
 
-    /* ── HOMEPAGE STYLES (README) ── */
-    .hero-section {
+    .nav-logo span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-cta {
+      background: var(--accent);
+      color: #0b1a12 !important;
+      padding: 0.4rem 1rem;
+      border-radius: 6px;
+      font-weight: 600 !important;
+      transition: opacity 0.2s !important;
+    }
+
+    .nav-cta:hover { opacity: 0.85; color: #0b1a12 !important; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       text-align: center;
-      padding: 64px 0 48px;
+      padding: 8rem 1.5rem 4rem;
+      overflow: hidden;
+    }
+
+    .hero-glow {
+      position: absolute;
+      width: 700px;
+      height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(62, 207, 142, 0.08) 0%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -55%);
+      pointer-events: none;
     }
 
     .hero-badge {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: rgba(0,200,150,0.12);
-      border: 1px solid rgba(0,200,150,0.3);
-      color: var(--theme-color);
-      padding: 6px 14px;
-      border-radius: 100px;
-      font-size: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(62, 207, 142, 0.1);
+      border: 1px solid rgba(62, 207, 142, 0.25);
+      color: var(--accent);
+      font-size: 0.8rem;
       font-weight: 600;
+      padding: 0.35rem 0.9rem;
+      border-radius: 100px;
+      margin-bottom: 1.5rem;
+      font-family: 'DM Mono', monospace;
       letter-spacing: 0.05em;
-      text-transform: uppercase;
-      margin-bottom: 24px;
+      animation: fadeUp 0.6s ease both;
     }
 
-    .hero-title {
-      font-family: var(--font-heading);
-      font-size: 3.5rem;
+    h1 {
+      font-family: 'Syne', sans-serif;
       font-weight: 800;
-      line-height: 1.1;
-      margin: 0 0 20px;
-      background: linear-gradient(135deg, #fff 0%, var(--theme-color) 60%, var(--accent2) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      line-height: 1.05;
+      color: var(--heading);
+      letter-spacing: -0.02em;
+      max-width: 800px;
+      animation: fadeUp 0.6s 0.1s ease both;
     }
+
+    h1 .accent { color: var(--accent); }
+    h1 .accent2 { color: var(--accent2); }
 
     .hero-sub {
-      font-size: 1.15rem;
-      color: var(--text-muted);
-      max-width: 560px;
-      margin: 0 auto 36px;
-      line-height: 1.6;
+      margin-top: 1.5rem;
+      font-size: 1.125rem;
+      color: var(--muted);
+      max-width: 540px;
+      line-height: 1.65;
+      animation: fadeUp 0.6s 0.2s ease both;
     }
 
-    .cta-group {
+    .hero-actions {
       display: flex;
-      gap: 12px;
-      justify-content: center;
+      gap: 1rem;
+      margin-top: 2.5rem;
       flex-wrap: wrap;
+      justify-content: center;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.75rem 1.6rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
     }
 
     .btn-primary {
-      background: var(--theme-color);
-      color: #0A0F1E;
-      padding: 13px 28px;
-      border-radius: 8px;
-      font-weight: 700;
-      font-family: var(--font-heading);
-      font-size: 15px;
-      text-decoration: none !important;
-      transition: transform 0.2s, box-shadow 0.2s;
-      display: inline-block;
+      background: var(--accent);
+      color: #0b1a12;
     }
 
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0,200,150,0.3);
-      text-decoration: none !important;
-    }
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
 
-    .btn-outline {
+    .btn-ghost {
       background: transparent;
       color: var(--text);
-      padding: 13px 28px;
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 15px;
-      text-decoration: none !important;
       border: 1px solid var(--border);
-      transition: border-color 0.2s, color 0.2s;
-      display: inline-block;
     }
 
-    .btn-outline:hover {
-      border-color: var(--theme-color);
-      color: var(--theme-color);
-      text-decoration: none !important;
+    .btn-ghost:hover { border-color: var(--muted); background: var(--surface); }
+
+    .hero-stats {
+      display: flex;
+      gap: 3rem;
+      margin-top: 3.5rem;
+      animation: fadeUp 0.6s 0.4s ease both;
     }
 
-    .stats-row {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-      margin: 48px 0;
-    }
-
-    .stat-cell {
-      background: var(--bg2);
-      padding: 28px 20px;
-      text-align: center;
-    }
-
-    .stat-num {
-      font-family: var(--font-heading);
+    .hero-stat { text-align: center; }
+    .hero-stat .num {
+      font-family: 'Syne', sans-serif;
       font-size: 2rem;
       font-weight: 800;
-      color: var(--theme-color);
-      display: block;
+      color: var(--heading);
+    }
+    .hero-stat .label { font-size: 0.8rem; color: var(--muted); margin-top: 0.2rem; }
+
+    /* ── SECTION SHARED ── */
+    section { position: relative; z-index: 1; }
+
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 1.5rem;
     }
 
-    .stat-label {
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-top: 4px;
+    .section-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
     }
 
-    .hub-grid {
+    h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.75rem);
+      font-weight: 800;
+      color: var(--heading);
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+    }
+
+    .section-desc {
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin-top: 0.75rem;
+      max-width: 560px;
+    }
+
+    /* ── QUICK START CARDS ── */
+    .quick-start { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+    .qs-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 16px;
-      margin: 32px 0;
-    }
-
-    .hub-card {
-      background: var(--bg2);
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1px;
+      margin-top: 3rem;
+      background: var(--border);
       border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 24px;
-      text-decoration: none !important;
-      transition: border-color 0.2s, transform 0.2s;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .qs-card {
+      background: var(--surface);
+      padding: 1.75rem;
+      text-decoration: none;
+      color: inherit;
       display: block;
+      transition: background 0.2s;
+      position: relative;
+      overflow: hidden;
     }
 
-    .hub-card:hover {
-      border-color: var(--theme-color);
-      transform: translateY(-3px);
-      text-decoration: none !important;
+    .qs-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transition: transform 0.25s;
+      transform-origin: left;
     }
 
-    .hub-card .hub-icon {
-      font-size: 28px;
-      margin-bottom: 12px;
-      display: block;
+    .qs-card:hover { background: var(--surface2); }
+    .qs-card:hover::after { transform: scaleX(1); }
+
+    .qs-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
     }
 
-    .hub-card .hub-name {
-      font-family: var(--font-heading);
+    .qs-title {
+      font-family: 'Syne', sans-serif;
       font-weight: 700;
-      font-size: 1rem;
-      color: var(--text);
-      display: block;
-      margin-bottom: 6px;
+      font-size: 1.05rem;
+      color: var(--heading);
+      margin-bottom: 0.4rem;
     }
 
-    .hub-card .hub-desc {
-      font-size: 13px;
-      color: var(--text-muted);
+    .qs-desc {
+      font-size: 0.875rem;
+      color: var(--muted);
       line-height: 1.5;
     }
 
-    .section-label {
-      font-family: var(--font-heading);
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--theme-color);
-      font-weight: 700;
-      margin-bottom: 12px;
-    }
-
-    .section-title {
-      font-family: var(--font-heading);
-      font-size: 2rem;
-      font-weight: 800;
-      margin: 0 0 12px;
-    }
-
-    .section-sub {
-      color: var(--text-muted);
-      font-size: 1rem;
-      margin-bottom: 32px;
-      line-height: 1.6;
-    }
-
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin: 32px 0;
-    }
-
-    .feature-card {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 24px;
-    }
-
-    .feature-icon {
-      width: 40px; height: 40px;
-      border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 20px;
-      margin-bottom: 14px;
-    }
-
-    .feature-icon.green { background: rgba(0,200,150,0.15); }
-    .feature-icon.orange { background: rgba(255,107,53,0.15); }
-    .feature-icon.purple { background: rgba(123,97,255,0.15); }
-
-    .feature-name {
-      font-family: var(--font-heading);
-      font-weight: 700;
-      font-size: 0.95rem;
-      margin-bottom: 8px;
-    }
-
-    .feature-desc {
-      font-size: 13px;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-
-    .divider {
-      height: 1px;
-      background: var(--border);
-      margin: 48px 0;
-    }
-
-    .footer-note {
-      text-align: center;
-      color: var(--text-muted);
-      font-size: 13px;
-      padding: 32px 0 48px;
-    }
-
-    .footer-note a { color: var(--theme-color); }
-
-    .tag {
-      display: inline-block;
-      background: rgba(0,200,150,0.1);
-      color: var(--theme-color);
-      border: 1px solid rgba(0,200,150,0.2);
-      padding: 3px 10px;
-      border-radius: 100px;
-      font-size: 11px;
-      font-weight: 600;
-      margin: 0 2px 4px;
-      letter-spacing: 0.03em;
-    }
-
-    .tag.orange {
-      background: rgba(255,107,53,0.1);
+    .qs-arrow {
+      margin-top: 1.25rem;
+      font-size: 0.8rem;
       color: var(--accent);
-      border-color: rgba(255,107,53,0.2);
+      font-weight: 600;
+      font-family: 'DM Mono', monospace;
     }
 
-    .tag.purple {
-      background: rgba(123,97,255,0.1);
+    /* ── WHAT'S INSIDE TABLE ── */
+    .contents-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 2.5rem;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .contents-table th {
+      background: var(--surface2);
+      padding: 0.9rem 1.25rem;
+      text-align: left;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .contents-table td {
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+      vertical-align: middle;
+    }
+
+    .contents-table tr:last-child td { border-bottom: none; }
+    .contents-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+    .contents-table .path {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.8rem;
       color: var(--accent2);
-      border-color: rgba(123,97,255,0.2);
     }
 
-    /* Scroll to top */
-    .progress-indicator { background: var(--theme-color) !important; }
-
-    /* Mobile */
-    @media (max-width: 768px) {
-      .hero-title { font-size: 2.2rem; }
-      .stats-row { grid-template-columns: repeat(2, 1fr); }
-      .feature-grid { grid-template-columns: 1fr; }
-      .hub-grid { grid-template-columns: 1fr 1fr; }
-      .markdown-section { padding: 32px 20px; }
+    .badge {
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      font-family: 'DM Mono', monospace;
     }
 
-    @media (max-width: 480px) {
-      .hub-grid { grid-template-columns: 1fr; }
-      .hero-title { font-size: 1.8rem; }
+    .badge-green { background: rgba(62,207,142,0.12); color: var(--accent); }
+    .badge-yellow { background: rgba(251,191,36,0.12); color: #fbbf24; }
+
+    /* ── PROMPT SHOWCASE ── */
+    .prompts-bg { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+    .prompt-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.25rem;
+      margin-top: 2.5rem;
+    }
+
+    .prompt-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .prompt-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+
+    .prompt-subject {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-family: 'DM Mono', monospace;
+      margin-bottom: 0.75rem;
+    }
+
+    .prompt-text {
+      font-size: 0.9rem;
+      color: var(--text);
+      line-height: 1.6;
+      background: var(--surface2);
+      border-left: 3px solid var(--accent);
+      padding: 0.75rem 1rem;
+      border-radius: 0 6px 6px 0;
+      font-style: italic;
+    }
+
+    .prompt-tag {
+      margin-top: 0.75rem;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    /* ── ROADMAP ── */
+    .roadmap-list {
+      display: grid;
+      gap: 1rem;
+      margin-top: 2.5rem;
+    }
+
+    .roadmap-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.25rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+    }
+
+    .roadmap-item.active { border-color: rgba(62,207,142,0.3); background: rgba(62,207,142,0.04); }
+    .roadmap-item.progress { border-color: rgba(251,191,36,0.2); background: rgba(251,191,36,0.03); }
+
+    .roadmap-v {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 800;
+      padding: 0.3rem 0.7rem;
+      border-radius: 6px;
+      white-space: nowrap;
+      min-width: 60px;
+      text-align: center;
+    }
+
+    .roadmap-item.active .roadmap-v { background: var(--accent); color: #0b1a12; }
+    .roadmap-item.progress .roadmap-v { background: #fbbf24; color: #1a1000; }
+    .roadmap-item:not(.active):not(.progress) .roadmap-v { background: var(--surface2); color: var(--muted); }
+
+    .roadmap-body strong { font-weight: 600; color: var(--heading); display: block; margin-bottom: 0.25rem; }
+    .roadmap-body span { font-size: 0.875rem; color: var(--muted); }
+
+    /* ── CONTRIBUTE ── */
+    .contribute { text-align: center; }
+    .contribute-inner { max-width: 560px; margin: 0 auto; }
+    .contribute-inner .section-desc { margin-left: auto; margin-right: auto; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+    }
+
+    .footer-inner {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .footer-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: var(--heading);
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-logo span { color: var(--accent); }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 1rem 0;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--text); }
+
+    .footer-copy {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 0.5rem;
+    }
+
+    /* ── SCROLL-TO-TOP ── */
+    #top-btn {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #0b1a12;
+      border: none;
+      cursor: pointer;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.3s, transform 0.3s;
+      z-index: 99;
+      box-shadow: 0 4px 20px rgba(62,207,142,0.3);
+    }
+
+    #top-btn.visible { opacity: 1; transform: translateY(0); }
+    #top-btn:hover { opacity: 0.85; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      nav { padding: 1rem; }
+      .nav-links { display: none; }
+      .hero-stats { gap: 1.5rem; }
+      .contents-table { display: block; overflow-x: auto; }
     }
   </style>
 </head>
 <body>
-  <div id="app">Loading AI Atlas…</div>
 
-  <script>
-    window.$docsify = {
-      name: '',
-      repo: 'https://github.com/scooterxd69/AI-Atlas',
-      loadSidebar: true,
-      loadNavbar: true,
-      coverpage: false,
-      auto2top: true,
-      subMaxLevel: 3,
-      search: {
-        placeholder: 'Search AI Atlas...',
-        noData: 'No results found.',
-        depth: 4,
-      },
-      plugins: [
-        function(hook) {
-          // Inject sidebar logo
-          hook.doneEach(function() {
-            const sidebar = document.querySelector('.sidebar-nav');
-            if (sidebar && !document.querySelector('.sidebar-logo')) {
-              const logo = document.createElement('a');
-              logo.className = 'sidebar-logo';
-              logo.href = '#/';
-              logo.innerHTML = '<div class="logo-mark">🗺️</div><span>AI Atlas</span>';
-              sidebar.parentElement.insertBefore(logo, sidebar);
-            }
-          });
-        }
-      ]
-    };
-  </script>
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#"><span>AI</span> Atlas</a>
+  <ul class="nav-links">
+    <li><a href="#quick-start">Start Here</a></li>
+    <li><a href="#contents">Contents</a></li>
+    <li><a href="#prompts">Prompts</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="https://github.com/scooterxd69/AI-Atlas" target="_blank" rel="noopener" class="nav-cta">GitHub ↗</a></li>
+  </ul>
+</nav>
 
-  <!-- Docsify core -->
-  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
-  <!-- Plugins -->
-  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/zoom-image.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/docsify-copy-code@2/dist/docsify-copy-code.min.js"></script>
-  <!-- Code highlighting -->
-  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-python.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-javascript.min.js"></script>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <span class="hero-badge">🗺️ &nbsp;Free · Open-Source · India</span>
+  <h1>Learn <span class="accent">JEE &amp; NEET</span><br/>with <span class="accent2">AI</span></h1>
+  <p class="hero-sub">Not a coaching platform. A system that makes your existing study dramatically more effective through AI — built for Indian students, 100% free.</p>
+  <div class="hero-actions">
+    <a href="#quick-start" class="btn btn-primary">→ Start Learning</a>
+    <a href="https://github.com/scooterxd69/AI-Atlas" target="_blank" rel="noopener" class="btn btn-ghost">⭐ Star on GitHub</a>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="num">9</div><div class="label">Study Systems</div></div>
+    <div class="hero-stat"><div class="num">125+</div><div class="label">AI Prompts</div></div>
+    <div class="hero-stat"><div class="num">100+</div><div class="label">AI Tools</div></div>
+    <div class="hero-stat"><div class="num">25</div><div class="label">Workflows</div></div>
+  </div>
+</section>
+
+<!-- QUICK START -->
+<section class="quick-start" id="quick-start">
+  <div class="section-inner">
+    <div class="section-tag">// Quick Start</div>
+    <h2>What are you preparing for?</h2>
+    <p class="section-desc">Pick your path and get a complete AI-powered study system tailored to your exam.</p>
+
+    <div class="qs-grid">
+      <a class="qs-card" href="https://github.com/scooterxd69/AI-Atlas/blob/main/study-systems/jee/jee-main-complete-study-system.md" target="_blank" rel="noopener">
+        <div class="qs-icon">⚛️</div>
+        <div class="qs-title">JEE Main / Advanced</div>
+        <div class="qs-desc">Complete AI study system for Physics, Chemistry, and Maths — with prompts and daily workflows.</div>
+        <div class="qs-arrow">Open guide →</div>
+      </a>
+      <a class="qs-card" href="https://github.com/scooterxd69/AI-Atlas/blob/main/study-systems/neet/neet-complete-study-system.md" target="_blank" rel="noopener">
+        <div class="qs-icon">🧬</div>
+        <div class="qs-title">NEET UG</div>
+        <div class="qs-desc">Biology-focused AI study system covering NCERT, previous year patterns, and revision techniques.</div>
+        <div class="qs-arrow">Open guide →</div>
+      </a>
+      <a class="qs-card" href="https://github.com/scooterxd69/AI-Atlas/blob/main/study-systems/school/class10-cbse-study-system.md" target="_blank" rel="noopener">
+        <div class="qs-icon">📚</div>
+        <div class="qs-title">Class 9–12 Boards</div>
+        <div class="qs-desc">CBSE board exam preparation with AI prompts for all subjects, plus concept clarity workflows.</div>
+        <div class="qs-arrow">Open guide →</div>
+      </a>
+      <a class="qs-card" href="https://github.com/scooterxd69/AI-Atlas/blob/main/AI-Tools-Database.md" target="_blank" rel="noopener">
+        <div class="qs-icon">🤖</div>
+        <div class="qs-title">New to AI?</div>
+        <div class="qs-desc">100+ AI tools database with ratings, free tiers, and a guide on which ones to actually use for studying.</div>
+        <div class="qs-arrow">Explore tools →</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTENTS -->
+<section id="contents">
+  <div class="section-inner">
+    <div class="section-tag">// Repository</div>
+    <h2>What's Inside</h2>
+    <p class="section-desc">Every resource, organised by type. All free, all open source.</p>
+
+    <table class="contents-table">
+      <thead>
+        <tr>
+          <th>Section</th>
+          <th>What You Get</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="path">study-systems/</span></td>
+          <td>9 complete AI study systems for JEE, NEET, CBSE and more</td>
+          <td><span class="badge badge-green">✓ V1 Live</span></td>
+        </tr>
+        <tr>
+          <td><span class="path">prompts/</span></td>
+          <td>125+ ready-to-use AI prompts organised by subject and exam</td>
+          <td><span class="badge badge-green">✓ V1 Live</span></td>
+        </tr>
+        <tr>
+          <td><span class="path">workflows/</span></td>
+          <td>25 step-by-step study workflows (daily, weekly, revision sprints)</td>
+          <td><span class="badge badge-green">✓ V1 Live</span></td>
+        </tr>
+        <tr>
+          <td><span class="path">tools/</span></td>
+          <td>100 AI tools database + 5 deep-dive guides on best-in-class tools</td>
+          <td><span class="badge badge-green">✓ V1 Live</span></td>
+        </tr>
+        <tr>
+          <td><span class="path">resources/</span></td>
+          <td>Free books, YouTube channels, practice sites — curated and ranked</td>
+          <td><span class="badge badge-green">✓ V1 Live</span></td>
+        </tr>
+        <tr>
+          <td><span class="path">career-guides/</span></td>
+          <td>Post-JEE / NEET career pathways with AI-powered planning guides</td>
+          <td><span class="badge badge-green">✓ V1 Live</span></td>
+        </tr>
+        <tr>
+          <td><span class="path">chapters/</span></td>
+          <td>Deep-dive chapter breakdowns (30 chapters planned, AI explanations + PYQs)</td>
+          <td><span class="badge badge-yellow">⟳ V2 WIP</span></td>
+        </tr>
+        <tr>
+          <td><span class="path">translations/</span></td>
+          <td>Hindi translations of core guides for regional accessibility</td>
+          <td><span class="badge badge-yellow">⟳ V3 Planned</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- PROMPTS -->
+<section class="prompts-bg" id="prompts">
+  <div class="section-inner">
+    <div class="section-tag">// Prompt Library</div>
+    <h2>Sample AI Prompts</h2>
+    <p class="section-desc">Copy these directly into ChatGPT, Claude, or any AI. 125+ more in the <a href="https://github.com/scooterxd69/AI-Atlas/blob/main/JEE-AI-Prompt-Library.md" style="color:var(--accent);text-decoration:none">full library</a>.</p>
+
+    <div class="prompt-grid">
+      <div class="prompt-card">
+        <div class="prompt-subject" style="color:#4a9eff">Physics · JEE</div>
+        <div class="prompt-text">"Explain the concept of [topic] as if I'm a JEE aspirant who just saw it for the first time. Start with the physical intuition, then the formula, then show me a PYQ-style question with full solution."</div>
+        <div class="prompt-tag">→ Concept clarity + application</div>
+      </div>
+      <div class="prompt-card">
+        <div class="prompt-subject" style="color:#3ecf8e">Biology · NEET</div>
+        <div class="prompt-text">"Create a high-yield summary table for [NCERT chapter] with the most tested facts, common confusions, and 5 predicted MCQs with explanations."</div>
+        <div class="prompt-tag">→ Revision + MCQ practice</div>
+      </div>
+      <div class="prompt-card">
+        <div class="prompt-subject" style="color:#ff6b6b">Maths · JEE</div>
+        <div class="prompt-text">"I attempted this problem and got stuck at step 3: [problem]. Walk me through the correct approach step-by-step, explain where my thinking went wrong, and give me a similar problem to practice."</div>
+        <div class="prompt-tag">→ Error analysis + follow-up</div>
+      </div>
+      <div class="prompt-card">
+        <div class="prompt-subject" style="color:#a78bfa">Chemistry · JEE/NEET</div>
+        <div class="prompt-text">"Generate a mnemonics sheet for [topic] — reactions, exceptions, and any hard-to-remember sequences. Make it visual and memorable."</div>
+        <div class="prompt-tag">→ Memory aids + retention</div>
+      </div>
+      <div class="prompt-card">
+        <div class="prompt-subject" style="color:#fbbf24">Study Planning</div>
+        <div class="prompt-text">"I have [X weeks] before my exam. My strong topics are [list], weak topics are [list]. Create a day-wise revision plan that maximises score improvement."</div>
+        <div class="prompt-tag">→ Personalised scheduling</div>
+      </div>
+      <div class="prompt-card">
+        <div class="prompt-subject" style="color:#fb7185">CBSE Boards</div>
+        <div class="prompt-text">"Convert this NCERT paragraph into a 5-point answer format suitable for a 5-mark board exam question. Keep the language clear and examinable."</div>
+        <div class="prompt-tag">→ Answer writing practice</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section id="roadmap">
+  <div class="section-inner">
+    <div class="section-tag">// Roadmap</div>
+    <h2>What's Coming</h2>
+    <p class="section-desc">AI Atlas is actively built and improved. Here's the plan.</p>
+
+    <div class="roadmap-list">
+      <div class="roadmap-item active">
+        <div class="roadmap-v">V1</div>
+        <div class="roadmap-body">
+          <strong>Live Now</strong>
+          <span>Website, 9 study systems, 125+ prompts, 25 workflows, 100+ tools database, career guides, free resources</span>
+        </div>
+      </div>
+      <div class="roadmap-item progress">
+        <div class="roadmap-v">V2</div>
+        <div class="roadmap-body">
+          <strong>In Progress</strong>
+          <span>30 chapter deep-dives (Physics + Chemistry + Biology), NEET-specific prompt library, tool-specific guides (Claude, Gemini, Perplexity)</span>
+        </div>
+      </div>
+      <div class="roadmap-item">
+        <div class="roadmap-v">V3</div>
+        <div class="roadmap-body">
+          <strong>Planned</strong>
+          <span>Full syllabus coverage, Hindi translations of all core guides, community Q&amp;A section, AI study partner templates</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTRIBUTE -->
+<section class="contribute" style="border-top: 1px solid var(--border);">
+  <div class="section-inner">
+    <div class="contribute-inner">
+      <div class="section-tag">// Open Source</div>
+      <h2>Help Us Help More Students</h2>
+      <p class="section-desc">AI Atlas is built by students, for students. Every prompt you add, every guide you improve, helps thousands of JEE and NEET aspirants across India.</p>
+      <div class="hero-actions" style="justify-content:center; margin-top:2rem">
+        <a href="https://github.com/scooterxd69/AI-Atlas/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener" class="btn btn-primary">Read Contributing Guide</a>
+        <a href="https://github.com/scooterxd69/AI-Atlas" target="_blank" rel="noopener" class="btn btn-ghost">Browse the Repo ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo"><span>AI</span> Atlas</div>
+    <div class="footer-links">
+      <a href="https://github.com/scooterxd69/AI-Atlas/blob/main/README.md" target="_blank" rel="noopener">README</a>
+      <a href="https://github.com/scooterxd69/AI-Atlas/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Contributing</a>
+      <a href="https://github.com/scooterxd69/AI-Atlas/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a>
+      <a href="https://github.com/scooterxd69/AI-Atlas/blob/main/SECURITY.md" target="_blank" rel="noopener">Security</a>
+      <a href="https://github.com/scooterxd69/AI-Atlas" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <div class="footer-copy">Built by <a href="https://github.com/scooterxd69" style="color:var(--accent);text-decoration:none">Naitik Singh</a> · AI Atlas — Learn · Explore · Achieve</div>
+  </div>
+</footer>
+
+<!-- SCROLL TO TOP -->
+<button id="top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
+
+<script>
+  // Show/hide scroll-to-top button
+  const topBtn = document.getElementById('top-btn');
+  window.addEventListener('scroll', () => {
+    topBtn.classList.toggle('visible', window.scrollY > 400);
+  });
+
+  // Fade-in on scroll for non-hero sections
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.qs-card, .prompt-card, .roadmap-item, .contents-table tr').forEach((el, i) => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(16px)';
+    el.style.transition = `opacity 0.45s ${i * 0.05}s ease, transform 0.45s ${i * 0.05}s ease`;
+    observer.observe(el);
+  });
+</script>
 </body>
 </html>
