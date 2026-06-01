@@ -1,0 +1,670 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+body{font-family:var(--font-sans)}
+
+.phase-nav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px}
+.pnav{padding:6px 14px;border-radius:20px;font-size:12px;font-weight:500;border:0.5px solid var(--color-border-secondary);background:transparent;cursor:pointer;color:var(--color-text-secondary);transition:all .15s}
+.pnav.active{color:var(--color-text-primary);border-color:var(--color-border-primary);background:var(--color-background-secondary)}
+
+.phase{display:none}
+.phase.active{display:block}
+
+.phase-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;padding-bottom:12px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.phase-icon{width:36px;height:36px;border-radius:var(--border-radius-md);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.phase-meta{flex:1}
+.phase-title{font-size:16px;font-weight:500;color:var(--color-text-primary)}
+.phase-sub{font-size:12px;color:var(--color-text-tertiary);margin-top:2px}
+.phase-badge{font-size:11px;padding:3px 9px;border-radius:12px;font-weight:500;white-space:nowrap}
+
+.step-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:10px;margin-bottom:14px}
+
+.step-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:14px;cursor:pointer;transition:border-color .15s}
+.step-card:hover{border-color:var(--color-border-secondary)}
+
+.step-top{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px}
+.step-num{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;flex-shrink:0;margin-top:1px}
+.step-info{flex:1}
+.step-title{font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:2px}
+.step-desc{font-size:12px;color:var(--color-text-secondary);line-height:1.5}
+
+.tool-row{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px}
+.tool-pill{display:flex;align-items:center;gap:4px;font-size:11px;padding:3px 8px;border-radius:12px;border:0.5px solid var(--color-border-tertiary);color:var(--color-text-secondary);background:var(--color-background-secondary)}
+.tool-pill i{font-size:12px}
+
+.prompt-box{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:10px 12px;margin-top:4px}
+.prompt-label{font-size:10px;font-weight:500;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px}
+.prompt-text{font-size:12px;color:var(--color-text-secondary);line-height:1.55;font-family:var(--font-mono)}
+
+.tip-strip{display:flex;align-items:flex-start;gap:8px;padding:10px 12px;border-radius:var(--border-radius-md);margin-top:12px;font-size:12px;line-height:1.5}
+.tip-strip i{font-size:15px;flex-shrink:0;margin-top:1px}
+
+.flow-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.flow-chip{display:flex;align-items:center;gap:5px;font-size:12px;padding:5px 10px;border-radius:var(--border-radius-md);font-weight:500;white-space:nowrap}
+.flow-arrow{color:var(--color-text-tertiary);font-size:14px}
+
+.prompt-btn{display:inline-flex;align-items:center;gap:5px;font-size:12px;padding:6px 12px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:transparent;color:var(--color-text-secondary);cursor:pointer;margin-top:8px;transition:background .15s}
+.prompt-btn:hover{background:var(--color-background-secondary)}
+.prompt-btn i{font-size:13px}
+
+.section-label{font-size:11px;font-weight:500;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.06em;margin:14px 0 6px}
+
+.analytics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
+.stat-card{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:10px 12px}
+.stat-val{font-size:20px;font-weight:500;color:var(--color-text-primary)}
+.stat-lbl{font-size:11px;color:var(--color-text-tertiary);margin-top:2px}
+
+.progress-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.progress-label{font-size:12px;color:var(--color-text-secondary);width:90px;flex-shrink:0}
+.progress-bar-wrap{flex:1;height:6px;background:var(--color-background-tertiary);border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;border-radius:3px}
+.progress-pct{font-size:12px;color:var(--color-text-tertiary);width:32px;text-align:right;flex-shrink:0}
+
+.checklist{display:flex;flex-direction:column;gap:6px}
+.check-item{display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--color-text-secondary);line-height:1.45}
+.check-item i{font-size:14px;flex-shrink:0;margin-top:1px}
+
+.p1-icon-bg{background:#EEEDFE} .p1-num{background:#EEEDFE;color:#3C3489} .p1-badge{background:#EEEDFE;color:#3C3489} .p1-flow{background:#EEEDFE;color:#3C3489}
+.p2-icon-bg{background:#E1F5EE} .p2-num{background:#E1F5EE;color:#085041} .p2-badge{background:#E1F5EE;color:#085041} .p2-flow{background:#E1F5EE;color:#085041}
+.p3-icon-bg{background:#E6F1FB} .p3-num{background:#E6F1FB;color:#0C447C} .p3-badge{background:#E6F1FB;color:#0C447C} .p3-flow{background:#E6F1FB;color:#0C447C}
+.p4-icon-bg{background:#FAEEDA} .p4-num{background:#FAEEDA;color:#633806} .p4-badge{background:#FAEEDA;color:#633806} .p4-flow{background:#FAEEDA;color:#633806}
+.p5-icon-bg{background:#FAECE7} .p5-num{background:#FAECE7;color:#712B13} .p5-badge{background:#FAECE7;color:#712B13} .p5-flow{background:#FAECE7;color:#712B13}
+
+.p1-tip{background:#EEEDFE;color:#3C3489} .p1-tip i{color:#534AB7}
+.p2-tip{background:#E1F5EE;color:#085041} .p2-tip i{color:#0F6E56}
+.p3-tip{background:#E6F1FB;color:#0C447C} .p3-tip i{color:#185FA5}
+.p4-tip{background:#FAEEDA;color:#633806} .p4-tip i{color:#854F0B}
+.p5-tip{background:#FAECE7;color:#712B13} .p5-tip i{color:#993C1D}
+
+@media(prefers-color-scheme:dark){
+  .p1-icon-bg{background:#26215C} .p1-num{background:#26215C;color:#CECBF6} .p1-badge{background:#26215C;color:#CECBF6} .p1-flow{background:#26215C;color:#CECBF6}
+  .p2-icon-bg{background:#04342C} .p2-num{background:#04342C;color:#9FE1CB} .p2-badge{background:#04342C;color:#9FE1CB} .p2-flow{background:#04342C;color:#9FE1CB}
+  .p3-icon-bg{background:#042C53} .p3-num{background:#042C53;color:#B5D4F4} .p3-badge{background:#042C53;color:#B5D4F4} .p3-flow{background:#042C53;color:#B5D4F4}
+  .p4-icon-bg{background:#412402} .p4-num{background:#412402;color:#FAC775} .p4-badge{background:#412402;color:#FAC775} .p4-flow{background:#412402;color:#FAC775}
+  .p5-icon-bg{background:#4A1B0C} .p5-num{background:#4A1B0C;color:#F5C4B3} .p5-badge{background:#4A1B0C;color:#F5C4B3} .p5-flow{background:#4A1B0C;color:#F5C4B3}
+  .p1-tip{background:#26215C;color:#CECBF6} .p1-tip i{color:#AFA9EC}
+  .p2-tip{background:#04342C;color:#9FE1CB} .p2-tip i{color:#5DCAA5}
+  .p3-tip{background:#042C53;color:#B5D4F4} .p3-tip i{color:#85B7EB}
+  .p4-tip{background:#412402;color:#FAC775} .p4-tip i{color:#EF9F27}
+  .p5-tip{background:#4A1B0C;color:#F5C4B3} .p5-tip i{color:#F0997B}
+}
+</style>
+
+<h2 class="sr-only">AI-powered JEE Physics study workflow covering learning, notes, revision, question solving, and mock analysis — all with free tools.</h2>
+
+<div style="padding:16px 0">
+
+<div class="phase-nav" id="pnav">
+  <button class="pnav active" data-p="p1" onclick="switchPhase('p1',this)"><i class="ti ti-brain" aria-hidden="true"></i> Learning</button>
+  <button class="pnav" data-p="p2" onclick="switchPhase('p2',this)"><i class="ti ti-notes" aria-hidden="true"></i> Notes</button>
+  <button class="pnav" data-p="p3" onclick="switchPhase('p3',this)"><i class="ti ti-refresh" aria-hidden="true"></i> Revision</button>
+  <button class="pnav" data-p="p4" onclick="switchPhase('p4',this)"><i class="ti ti-pencil" aria-hidden="true"></i> Question solving</button>
+  <button class="pnav" data-p="p5" onclick="switchPhase('p5',this)"><i class="ti ti-chart-bar" aria-hidden="true"></i> Mock analysis</button>
+</div>
+
+<!-- PHASE 1: LEARNING -->
+<div class="phase active" id="p1">
+  <div class="phase-header">
+    <div class="phase-icon p1-icon-bg"><i class="ti ti-brain" aria-hidden="true" style="color:#534AB7"></i></div>
+    <div class="phase-meta">
+      <div class="phase-title">Phase 1 — Learning a new topic</div>
+      <div class="phase-sub">Build deep conceptual understanding before touching problems</div>
+    </div>
+    <span class="phase-badge p1-badge">Day 1–2 per chapter</span>
+  </div>
+
+  <div class="section-label">Daily flow</div>
+  <div class="flow-row">
+    <div class="flow-chip p1-flow"><i class="ti ti-book" aria-hidden="true"></i> NCERT read</div>
+    <span class="flow-arrow">›</span>
+    <div class="flow-chip p1-flow"><i class="ti ti-message-chatbot" aria-hidden="true"></i> Claude deep-dive</div>
+    <span class="flow-arrow">›</span>
+    <div class="flow-chip p1-flow"><i class="ti ti-video" aria-hidden="true"></i> YouTube visual</div>
+    <span class="flow-arrow">›</span>
+    <div class="flow-chip p1-flow"><i class="ti ti-writing" aria-hidden="true"></i> Explain back to AI</div>
+  </div>
+
+  <div class="step-grid">
+    <div class="step-card">
+      <div class="step-top">
+        <div class="step-num p1-num">1</div>
+        <div class="step-info">
+          <div class="step-title">Concept primer with Claude</div>
+          <div class="step-desc">Ask Claude to teach the topic from first principles, tailored to JEE level. Request diagrams described in text and analogies.</div>
+        </div>
+      </div>
+      <div class="tool-row">
+        <span class="tool-pill"><i class="ti ti-brand-claude" aria-hidden="true"></i> Claude (free)</span>
+        <span class="tool-pill"><i class="ti ti-message-chatbot" aria-hidden="true"></i> ChatGPT (free)</span>
+      </div>
+      <div class="prompt-box">
+        <div class="prompt-label">Try this prompt</div>
+        <div class="prompt-text">"Teach me Rotational Motion for JEE. Start from intuition, then derive the key equations. Use everyday analogies. Highlight what JEE Advanced loves to test."</div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-top">
+        <div class="step-num p1-num">2</div>
+        <div class="step-info">
+          <div class="step-title">Visual learning via YouTube + AI summary</div>
+          <div class="step-desc">Watch a focused video (Physics Wallah / Khan Academy). Then paste the transcript into Claude and ask for a concept map.</div>
+        </div>
+      </div>
+      <div class="tool-row">
+        <span class="tool-pill"><i class="ti ti-brand-youtube" aria-hidden="true"></i> YouTube (free)</span>
+        <span class="tool-pill"><i class="ti ti-message-chatbot" aria-hidden="true"></i> Claude</span>
+      </div>
+      <div class="prompt-box">
+        <div class="prompt-label">Try this prompt</div>
+        <div class="prompt-text">"Here's a transcript on SHM [paste]. Extract: 1) Core concepts 2) All formulas with conditions 3) Common mistakes 4) JEE question patterns."</div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-top">
+        <div class="step-num p1-num">3</div>
+        <div class="step-info">
+          <div class="step-title">Feynman check — explain it back</div>
+          <div class="step-desc">Tell Claude you'll explain the concept as if teaching a class 9 student. Ask it to find gaps in your explanation.</div>
+        </div>
+      </div>
+      <div class="tool-row">
+        <span class="tool-pill"><i class="ti ti-message-chatbot" aria-hidden="true"></i> Claude</span>
+      </div>
+      <div class="prompt-box">
+        <div class="prompt-label">Try this prompt</div>
+        <div class="prompt-text">"I'll explain Gauss's Law to you. Find logical gaps, incorrect statements, and missing edge cases in my explanation: [your explanation]"</div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-top">
+        <div class="step-num p1-num">4</div>
+        <div class="step-info">
+          <div class="step-title">Build your own formula sheet</div>
+          <div class="step-desc">Ask Claude to list every formula in the chapter with derivation hints and the physical meaning of each variable.</div>
+        </div>
+      </div>
+      <div class="tool-row">
+        <span class="tool-pill"><i class="ti ti-message-chatbot" aria-hidden="true"></i> Claude</span>
+        <span class="tool-pill"><i class="ti ti-notebook" aria-hidden="true"></i> Notion (free)</span>
+      </div>
+      <div class="prompt-box">
+        <div class="prompt-label">Try this prompt</div>
+        <div class="prompt-text">"Give me every formula in Electrostatics needed for JEE. Format: Formula | What it means physically | When NOT to use it | Common JEE traps."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip-strip p1-tip">
+    <i class="ti ti-bulb" aria-hidden="true"></i>
+    <span>Keep a single Claude chat per chapter. Reference it throughout the week so the AI has full context of what you've learned and where you're confused.</span>
+  </div>
+
+  <button class="prompt-btn" onclick="sendPrompt('Create a day-by-day learning plan for JEE Physics: Rotational Mechanics using only free AI tools')"><i class="ti ti-external-link" aria-hidden="true"></i> Generate a day-by-day learning plan for Rotational Mechanics ↗</button>
+</div>
+
+<!-- PHASE 2: NOTES -->
+<div class="phase" id="p2">
+  <div class="phase-header">
+    <div class="phase-icon p2-icon-bg"><i class="ti ti-notes" aria-hidden="true" style="color:#0F6E56"></i></div>
+    <div class="phase-meta">
+      <div class="phase-title">Phase 2 — AI-powered notes system</div>
+      <div class="phase-sub">Notes that evolve with your understanding, not static transcripts</div>
+    </div>
+    <span class="phase-badge p2-badge">Ongoing</span>
+  </div>
+
+  <div class="section-label">Notes structure</div>
+  <div class="flow-row">
+    <div class="flow-chip p2-flow"><i class="ti ti-pencil" aria-hidden="true"></i> Handwrite first</div>
+    <span class="flow-arrow">›</span>
+    <div class="flow-chip p2-flow"><i class="ti ti-camera" aria-hidden="true"></i> Scan to Claude</div>
+    <span class="flow-arrow">›</span>
+    <div class="flow-chip p2-flow"><i class="ti ti-list-check" aria-hidden="true"></i> AI enriches</div>
+    <span class="flow-arrow">›</span>
+    <div class="flow-chip p2-flow"><i class="ti ti-database" aria-hidden="true"></i> Save to Notion</div>
+  </div>
+
+  <div class="step-grid">
+    <div class="step-card">
+      <div class="step-top">
+        <div class="step-num p2-num">1</div>
+        <div class="step-info">
+          <div class="step-title">Cornell-style AI notes</div>
+          <div class="step-desc">Ask Claude to generate Cornell notes for any chapter — main notes, cues column, and a summary paragraph formatted for quick revision.</div>
+        </div>
+      </div>
+      <div class="tool-row">
+        <span class="tool-pill"><i class="ti ti-message-chatbot" aria-hidden="true"></i> Claude</span>
+        <span class="tool-pill"><i class="ti ti-notebook" aria-hidden="true"></i> Notion (free)</span>
+      </div>
+      <div class="prompt-box">
+        <div class="prompt-label">Try this prompt</div>
+        <div class="prompt-text">"Create Cornell notes for JEE Physics — Waves & Sound. Main notes column: derivations + key ideas. Cues column: trigger questions. Summary: 5-line recap for revision."</div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-top">
+        <div class="step-num p2-num">2</div>
+        <div class="step-info">
+          <div class="step-title">Scan handwritten notes for gaps</div>
+          <div class="step-desc">Take a photo of your handwritten notes and upload to Claude. Ask it to identify what's missing and add exam-relevant additions.</div>
+        </div>
+      </div>
+      <div class="tool-row">
+        <span class="tool-pill"><i class="ti ti-message-chatbot" aria-hidden="true"></i> Claude (image upload)</span>
+        <span class="tool-pill"><i class="ti ti-camera" aria-hidden="true"></i> Phone camera</span>
+      </div>
+      <div class="prompt-box">
+        <div class="prompt-label">Try this prompt</div>
+        <div class="prompt-text">"These are my notes on Thermodynamics [image]. What important JEE concepts am I missing? What's incorrect? Add missing formulas with derivation shortcuts."</div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-top">
+        <div class="step-num p2-num">3</div>
+        <div class="step-info">
+          <div class="step-title">Error log — your mistake journal</div>
+          <div class="step-desc">After every wrong answer, paste the question into Claude. Ask it to write a journal entry explaining why your logic failed and the correct mental model.</div>
+        </div>
+      </div>
+      <div class="tool-row">
+        <span class="tool-pill"><i class="ti ti-message-chatbot" aria-hidden="true"></i> Claude</span>
+        <span class="tool-pill"><i class="ti ti-notebook" aria-hidden="true"></i> Notion / Google Docs</span>
+      </div>
+      <div class="prompt-box">
+        <div class="prompt-label">Try this prompt</div>
+        <div class="prompt-text">"I got this problem wrong [paste question + my attempt]. Write a 3-line error journal entry: what I thought, why it's wrong, and the correct instinct to build."</div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-top">
+        <div class="step-num p2-num">4</div>
+        <div class="step-info">
+          <div class="step-title">One-page chapter summary cards</div>
+          <div class="step-desc">After completing a chapter, ask Claude to generate a single-page summary you can print or pin — formulas, concepts, traps, and question types.</div>
+        </div>
+      </div>
+      <div class="tool-row">
+        <span class="tool-pill"><i class="ti ti-message-chatbot" aria-hidden="true"></i> Claude</span>
+        <span class="tool-pill"><i class="ti ti-file-text" aria-hidden="true"></i> Google Docs (free)</span>
+      </div>
+      <div class="prompt-box">
+        <div class="prompt-label">Try this prompt</div>
+        <div class="prompt-text">"Make a one-page cheat sheet for JEE Physics — Modern Physics. Sections: formulas, conceptual facts, common JEE traps, and one-line mnemonics for each formula."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip-strip p2-tip">
+    <i class="ti ti-bulb" aria-hidden="true"></i>
+    <span>Use Notion's free tier as your second brain. Create a template: chapter name → summary card → error log → pending doubts. Link each Notion page to its Claude chat.</span>
+  </div>
+</div>
+
+<!-- PHASE 3: REVISION -->
+<div class="phase" id="p3">
+  <div class="phase-header">
+    <div class="phase-icon p3-icon-bg"><i class="ti ti-refresh" aria-hidden="true" style="color:#185FA5"></i></div>
+    <div class="phase-meta">
+      <div class="phase-title">Phase 3 — Spaced revision system</div>
+      <div class="phase-sub">Revise smarter, not harder — AI generates what you actually need to revisit</div>
+    </div>
+    <span class="phase-badge p3-badge">Day 3, 7, 14, 30</span>
+  </div>
+
+  <div class="section-label">Spaced repetition schedule</div>
+  <div class="flow-row">
+    <div class="flow-chip p3-flow">Day 3 — quick recall</div>
+    <span class="flow-arrow">›</span>
+    <div class="flow-chip p3-flow">Day 7 — formula drill</div>
+    <span class="flow-arrow">›</span>
+    <div class="flow-chip p3-flow">Day 14 — concept MCQs</div>
+    <span class="flow-arrow">›</span>
+    <div class="flow-chip p3-flow">Day 30 — full chapter test</div>
+  </div>
+
+  <div class="step-grid">
+    <div class="step-card">
+      <div class="step-top">
+        <div class="step-num p3-num">1</div>
+        <div class="step-info">
+          <div class="step-title">AI flashcard generation</div>
+          <div class="step-desc">Ask Claude to generate 20 flashcard-style Q&A pairs for any chapter. Import into Anki (free) for spaced repetition.</div>
+        </div>
+      </div>
+      <div class="tool-row">
+        <span class="tool-pill"><i class="ti ti-message-chatbot" aria-hidden="true"></i> Claude</span>
+        <span class="tool-pill"><i class="ti ti-cards" aria-hidden="true"></i> Anki (free)</span>
+      </div>
+      <div class="prompt-box">
+        <div class="prompt-label">Try this prompt</div>
+        <div class="prompt-text">"Generate 20 Anki-style flashcards for JEE Physics — Current Electricity. Format: Q: [question] | A: [concise answer]. Include formula cards and conceptual traps."</div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-top">
+        <div class="step-num p3-num">2</div>
+        <div class="step-info">
+          <div class="step-title">Rapid-fire oral quiz</div>
+          <div class="step-desc">Ask Claude to quiz you with 10 fast questions — answer verbally or type answers. It then grades and explains each one.</div>
+        </div>
+      </div>
+      <div class="tool-row">
+        <span class="tool-pill"><i class="ti ti-message-chatbot" aria-hidden="true"></i> Claude</span>
+      </div>
+      <div class="prompt-box">
+        <div class="prompt-label">Try this prompt</div>
+        <div class="prompt-text">"Quiz me on Optics for JEE. Ask 10 questions one by one. Wait for my answer before proceeding. At the end, score me and explain every mistake in detail."</div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-top">
+        <div class="step-num p3-num">3</div>
+        <div class="step-info">
+          <div class="step-title">Revision priority ranker</div>
+          <div class="step-desc">Paste your error log or weak topics. Ask Claude to rank chapters by urgency and suggest a 3-day sprint revision plan.</div>
+        </div>
+      </div>
+      <div class="tool-row">
+        <span class="tool-pill"><i class="ti ti-message-chatbot" aria-hidden="true"></i> Claude</span>
+        <span class="tool-pill"><i class="ti ti-calendar" aria-hidden="true"></i> Google Calendar (free)</span>
+      </div>
+      <div class="prompt-box">
+        <div class="prompt-label">Try this prompt</div>
+        <div class="prompt-text">"My weak topics: [list]. My exam is in 3 weeks. Rank these by JEE weightage and my weakness. Give a daily revision plan with time allocation per topic."</div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-top">
+        <div class="step-num p3-num">4</div>
+        <div class="step-info">
+          <div class="step-title">Concept connection map</div>
+          <div class="step-desc">Ask Claude to show how 3–4 related chapters connect — shared formulas, cross-chapter JEE problems, unified mental models.</div>
+        </div>
+      </div>
+      <div class="tool-row">
+        <span class="tool-pill"><i class="ti ti-message-chatbot" aria-hidden="true"></i> Claude</span>
+        <span class="tool-pill"><i class="ti ti-topology-star" aria-hidden="true"></i> Miro (free tier)</span>
+      </div>
+      <div class="prompt-box">
+        <div class="prompt-label">Try this prompt</div>
+        <div class="prompt-text">"Show how Work-Energy, Momentum, and Rotational Mechanics connect for JEE. Where do their formulas overlap? What multi-chapter problems should I practice?"</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip-strip p3-tip">
+    <i class="ti ti-bulb" aria-hidden="true"></i>
+    <span>Paste your error journal into Claude before every revision session. Ask: "Given these past mistakes, what should I focus on today?" — this personalises your revision every single time.</span>
+  </div>
+</div>
+
+<!-- PHASE 4: QUESTION SOLVING -->
+<div class="phase" id="p4">
+  <div class="phase-header">
+    <div class="phase-icon p4-icon-bg"><i class="ti ti-pencil" aria-hidden="true" style="color:#854F0B"></i></div>
+    <div class="phase-meta">
+      <div class="phase-title">Phase 4 — Question solving workflow</div>
+      <div class="phase-sub">Build problem-solving instincts, not just solution memorisation</div>
+    </div>
+    <span class="phase-badge p4-badge">Daily practice</span>
+  </div>
+
+  <div class="section-label">Solving hierarchy — attempt before asking AI</div>
+  <div class="flow-row">
+    <div class="flow-chip p4-flow">Attempt 5 min solo</div>
+    <span class="flow-arrow">›</span>
+    <div class="flow-chip p4-flow">Stuck? Ask for a hint only</div>
+    <span class="flow-arrow">›</span>
+    <div class="flow-chip p4-flow">Still stuck? Ask for approach</div>
+    <span class="flow-arrow">›</span>
+    <div class="flow-chip p4-flow">Full solution + error log</div>
+  </div>
+
+  <div class="step-grid">
+    <div class="step-card">
+      <div class="step-top">
+        <div class="step-num p4-num">1</div>
+        <div class="step-info">
+          <div class="step-title">Hint-first doubt solving</div>
+          <div class="step-desc">Always ask for the first hint, not the full answer. This forces your brain to do the remaining work — which is where learning actually happens.</div>
+        </div>
+      </div>
+      <div class="tool-row">
+        <span class="tool-pill"><i class="ti ti-message-chatbot" aria-hidden="true"></i> Claude</span>
+        <span class="tool-pill"><i class="ti ti-message-chatbot" aria-hidden="true"></i> Gemini (free)</span>
+      </div>
+      <div class="prompt-box">
+        <div class="prompt-label">Try this prompt</div>
+        <div class="prompt-text">"Don't solve this. Give me only the first physical insight I need to approach it: [paste question]. My attempt: [paste]. Where am I going wrong conceptually?"</div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-top">
+        <div class="step-num p4-num">2</div>
+        <div class="step-info">
+          <div class="step-title">Solution breakdown & generalisation</div>
+          <div class="step-desc">After solving, ask Claude to generalise — what's the template for this problem type? What variations does JEE ask?</div>
+        </div>
+      </div>
+      <div class="tool-row">
+        <span class="tool-pill"><i class="ti ti-message-chatbot" aria-hidden="true"></i> Claude</span>
+      </div>
+      <div class="prompt-box">
+        <div class="prompt-label">Try this prompt</div>
+        <div class="prompt-text">"I solved this problem [paste solution]. Now generalise it: what's the underlying template? Give me 3 JEE-level variants of this problem with increasing difficulty."</div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-top">
+        <div class="step-num p4-num">3</div>
+        <div class="step-info">
+          <div class="step-title">Photo-based doubt solver</div>
+          <div class="step-desc">Photograph a problem from HC Verma, DC Pandey, or your test paper. Upload directly to Claude for step-by-step breakdown.</div>
+        </div>
+      </div>
+      <div class="tool-row">
+        <span class="tool-pill"><i class="ti ti-message-chatbot" aria-hidden="true"></i> Claude (image)</span>
+        <span class="tool-pill"><i class="ti ti-message-chatbot" aria-hidden="true"></i> Gemini (image)</span>
+      </div>
+      <div class="prompt-box">
+        <div class="prompt-label">Try this prompt</div>
+        <div class="prompt-text">"[Upload photo of problem] Solve this step by step. After the solution, tell me: what concept is this really testing, and what's the 30-second mental shortcut for this type?"</div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-top">
+        <div class="step-num p4-num">4</div>
+        <div class="step-info">
+          <div class="step-title">Generate practice sets on demand</div>
+          <div class="step-desc">Ask Claude to generate 5 problems of a specific type, difficulty, or question format (integer, MCQ single/multiple, assertion-reason).</div>
+        </div>
+      </div>
+      <div class="tool-row">
+        <span class="tool-pill"><i class="ti ti-message-chatbot" aria-hidden="true"></i> Claude</span>
+        <span class="tool-pill"><i class="ti ti-message-chatbot" aria-hidden="true"></i> ChatGPT (free)</span>
+      </div>
+      <div class="prompt-box">
+        <div class="prompt-label">Try this prompt</div>
+        <div class="prompt-text">"Generate 5 JEE Advanced-level integer-type problems on Magnetic Effects of Current. Vary the scenario each time. Include answer keys and 2-line solution sketches."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">Free tool by question type</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;margin-bottom:12px">
+    <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:10px 12px">
+      <div style="font-size:12px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px">Numerical / derivation</div>
+      <div style="font-size:11px;color:var(--color-text-secondary)">Claude, ChatGPT free, Gemini — all handle step-by-step maths</div>
+    </div>
+    <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:10px 12px">
+      <div style="font-size:12px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px">Graph-based / diagram MCQ</div>
+      <div style="font-size:11px;color:var(--color-text-secondary)">Upload image to Claude or Gemini — both read diagrams well</div>
+    </div>
+    <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:10px 12px">
+      <div style="font-size:12px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px">Assertion–Reason</div>
+      <div style="font-size:11px;color:var(--color-text-secondary)">Claude excels at explaining logical distinctions between assertions</div>
+    </div>
+    <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:10px 12px">
+      <div style="font-size:12px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px">Concept MCQ</div>
+      <div style="font-size:11px;color:var(--color-text-secondary)">Ask Claude to explain why each wrong option is wrong — not just the right answer</div>
+    </div>
+  </div>
+
+  <div class="tip-strip p4-tip">
+    <i class="ti ti-bulb" aria-hidden="true"></i>
+    <span>Never ask "solve this" for a problem you haven't attempted. Set a rule: minimum 5 minutes of solo effort before asking AI. The struggle is where synapses form.</span>
+  </div>
+</div>
+
+<!-- PHASE 5: MOCK ANALYSIS -->
+<div class="phase" id="p5">
+  <div class="phase-header">
+    <div class="phase-icon p5-icon-bg"><i class="ti ti-chart-bar" aria-hidden="true" style="color:#993C1D"></i></div>
+    <div class="phase-meta">
+      <div class="phase-title">Phase 5 — Mock test analysis</div>
+      <div class="phase-sub">A mock without analysis is just a waste of 3 hours</div>
+    </div>
+    <span class="phase-badge p5-badge">After every mock</span>
+  </div>
+
+  <div class="section-label">Post-mock ritual (2–3 hrs analysis per mock)</div>
+  <div class="flow-row">
+    <div class="flow-chip p5-flow">Score the paper</div>
+    <span class="flow-arrow">›</span>
+    <div class="flow-chip p5-flow">Categorise errors</div>
+    <span class="flow-arrow">›</span>
+    <div class="flow-chip p5-flow">Paste wrong Qs to Claude</div>
+    <span class="flow-arrow">›</span>
+    <div class="flow-chip p5-flow">Update error log</div>
+    <span class="flow-arrow">›</span>
+    <div class="flow-chip p5-flow">Plan next week</div>
+  </div>
+
+  <div class="step-grid">
+    <div class="step-card">
+      <div class="step-top">
+        <div class="step-num p5-num">1</div>
+        <div class="step-info">
+          <div class="step-title">Error categorisation prompt</div>
+          <div class="step-desc">After scoring, paste all wrong questions into Claude. Ask it to categorise every error: concept gap, calculation slip, misread, or time pressure.</div>
+        </div>
+      </div>
+      <div class="tool-row">
+        <span class="tool-pill"><i class="ti ti-message-chatbot" aria-hidden="true"></i> Claude</span>
+        <span class="tool-pill"><i class="ti ti-file-spreadsheet" aria-hidden="true"></i> Google Sheets (free)</span>
+      </div>
+      <div class="prompt-box">
+        <div class="prompt-label">Try this prompt</div>
+        <div class="prompt-text">"Here are 8 questions I got wrong in my mock [paste all]. For each: 1) Categorise error type 2) Identify root concept 3) Suggest exactly what to revise tomorrow."</div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-top">
+        <div class="step-num p5-num">2</div>
+        <div class="step-info">
+          <div class="step-title">Pattern recognition across mocks</div>
+          <div class="step-desc">After 3+ mocks, paste your accumulated error log. Ask Claude to find the pattern — which topics are a persistent weak zone vs one-off misses.</div>
+        </div>
+      </div>
+      <div class="tool-row">
+        <span class="tool-pill"><i class="ti ti-message-chatbot" aria-hidden="true"></i> Claude</span>
+      </div>
+      <div class="prompt-box">
+        <div class="prompt-label">Try this prompt</div>
+        <div class="prompt-text">"Here are my error logs from 4 mocks [paste]. Find repeating patterns. What are my top 3 structural weaknesses? Suggest a targeted 1-week fix plan for each."</div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-top">
+        <div class="step-num p5-num">3</div>
+        <div class="step-info">
+          <div class="step-title">Time management analysis</div>
+          <div class="step-desc">Note time spent per question during the mock. Ask Claude to analyse your pacing and suggest an optimal question-attempt strategy for next time.</div>
+        </div>
+      </div>
+      <div class="tool-row">
+        <span class="tool-pill"><i class="ti ti-message-chatbot" aria-hidden="true"></i> Claude</span>
+        <span class="tool-pill"><i class="ti ti-file-spreadsheet" aria-hidden="true"></i> Google Sheets</span>
+      </div>
+      <div class="prompt-box">
+        <div class="prompt-label">Try this prompt</div>
+        <div class="prompt-text">"I spent these minutes per question [paste data]. Physics section: 60 mins. Analyse: where did I over-invest? What should I skip first-pass next mock? Give me an optimised attempt order strategy."</div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-top">
+        <div class="step-num p5-num">4</div>
+        <div class="step-info">
+          <div class="step-title">Personalized next-week plan</div>
+          <div class="step-desc">After analysis, ask Claude to generate a concrete 7-day plan that directly addresses the gaps this mock exposed.</div>
+        </div>
+      </div>
+      <div class="tool-row">
+        <span class="tool-pill"><i class="ti ti-message-chatbot" aria-hidden="true"></i> Claude</span>
+        <span class="tool-pill"><i class="ti ti-calendar" aria-hidden="true"></i> Google Calendar</span>
+      </div>
+      <div class="prompt-box">
+        <div class="prompt-label">Try this prompt</div>
+        <div class="prompt-text">"Based on this mock analysis [paste], give me a day-by-day 7-day plan. Mix: 30% concept repair, 40% targeted practice, 30% fresh mock. Specific chapter names and question counts daily."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">Track your trend (update after each mock)</div>
+  <div class="analytics-grid">
+    <div class="stat-card"><div class="stat-val" id="sv1">—</div><div class="stat-lbl">Last score /120</div></div>
+    <div class="stat-card"><div class="stat-val" id="sv2">—</div><div class="stat-lbl">Concept errors</div></div>
+    <div class="stat-card"><div class="stat-val" id="sv3">—</div><div class="stat-lbl">Silly mistakes</div></div>
+    <div class="stat-card"><div class="stat-val" id="sv4">—</div><div class="stat-lbl">Time wasted Qs</div></div>
+  </div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">
+    <input id="in1" type="number" placeholder="Score /120" style="width:120px" oninput="document.getElementById('sv1').textContent=this.value||'—'">
+    <input id="in2" type="number" placeholder="Concept errors" style="width:140px" oninput="document.getElementById('sv2').textContent=this.value||'—'">
+    <input id="in3" type="number" placeholder="Silly mistakes" style="width:130px" oninput="document.getElementById('sv3').textContent=this.value||'—'">
+    <input id="in4" type="number" placeholder="Time wasted" style="width:120px" oninput="document.getElementById('sv4').textContent=this.value||'—'">
+  </div>
+
+  <div class="section-label">Post-mock checklist</div>
+  <div class="checklist">
+    <div class="check-item"><i class="ti ti-square" aria-hidden="true" style="color:var(--color-text-tertiary)"></i>Every wrong answer pasted into Claude with error category noted</div>
+    <div class="check-item"><i class="ti ti-square" aria-hidden="true" style="color:var(--color-text-tertiary)"></i>Error log updated in Notion with chapter and error type</div>
+    <div class="check-item"><i class="ti ti-square" aria-hidden="true" style="color:var(--color-text-tertiary)"></i>Top 3 weak topics identified and added to next revision schedule</div>
+    <div class="check-item"><i class="ti ti-square" aria-hidden="true" style="color:var(--color-text-tertiary)"></i>7-day repair plan generated from Claude and added to Google Calendar</div>
+    <div class="check-item"><i class="ti ti-square" aria-hidden="true" style="color:var(--color-text-tertiary)"></i>Time-per-question data saved in Google Sheets for trend tracking</div>
+  </div>
+
+  <div class="tip-strip p5-tip">
+    <i class="ti ti-bulb" aria-hidden="true"></i>
+    <span>Treat mock analysis as the most important study session of your week — not a chore after it. Your score improves not in the mock, but in the 2 hours of analysis after it.</span>
+  </div>
+
+  <button class="prompt-btn" onclick="sendPrompt('Help me build a Google Sheets tracker to log JEE mock test errors by chapter, error type, and date for trend analysis')"><i class="ti ti-external-link" aria-hidden="true"></i> Build a mock error tracker in Google Sheets ↗</button>
+</div>
+
+</div>
+
+<script>
+function switchPhase(id, btn) {
+  document.querySelectorAll('.phase').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.pnav').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>

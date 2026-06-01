@@ -1,0 +1,522 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+
+.top-nav{display:flex;gap:0;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden;margin-bottom:20px}
+.snav{flex:1;padding:10px 4px;font-size:11px;font-weight:500;text-align:center;cursor:pointer;border:none;background:transparent;color:var(--color-text-tertiary);border-right:0.5px solid var(--color-border-tertiary);transition:all .15s;line-height:1.3}
+.snav:last-child{border-right:none}
+.snav i{display:block;font-size:17px;margin-bottom:3px}
+.snav.active{background:var(--color-background-secondary);color:var(--color-text-primary)}
+
+.subject-panel{display:none}
+.subject-panel.active{display:block}
+
+.phase-tabs{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:16px}
+.ptab{padding:5px 12px;border-radius:20px;font-size:11px;font-weight:500;border:0.5px solid var(--color-border-secondary);background:transparent;color:var(--color-text-secondary);cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:4px}
+.ptab i{font-size:12px}
+.ptab.active{background:var(--color-background-secondary);color:var(--color-text-primary);border-color:var(--color-border-primary)}
+
+.phase-view{display:none}
+.phase-view.active{display:block}
+
+.phase-banner{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:var(--border-radius-md);margin-bottom:14px}
+.phase-icon{font-size:18px;width:34px;height:34px;border-radius:var(--border-radius-md);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.phase-title{font-size:14px;font-weight:500}
+.phase-timing{font-size:11px;margin-top:2px}
+
+.flow-strip{display:flex;align-items:center;gap:4px;flex-wrap:wrap;margin-bottom:14px}
+.fc{font-size:11px;font-weight:500;padding:4px 9px;border-radius:var(--border-radius-md);white-space:nowrap}
+.fa{font-size:12px;color:var(--color-text-tertiary)}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:8px;margin-bottom:12px}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:13px}
+
+.card-head{display:flex;gap:9px;align-items:flex-start;margin-bottom:9px}
+.step-dot{width:20px;height:20px;border-radius:50%;font-size:10px;font-weight:500;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.card-title{font-size:12px;font-weight:500;color:var(--color-text-primary);margin-bottom:2px}
+.card-desc{font-size:11px;color:var(--color-text-secondary);line-height:1.5}
+
+.tools{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px}
+.tool{font-size:10px;padding:2px 7px;border-radius:10px;border:0.5px solid var(--color-border-tertiary);color:var(--color-text-tertiary);background:var(--color-background-secondary)}
+
+.pbox{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:8px 10px}
+.plabel{font-size:9px;font-weight:500;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px}
+.ptext{font-size:11px;color:var(--color-text-secondary);line-height:1.5;font-family:var(--font-mono)}
+
+.tip{display:flex;align-items:flex-start;gap:7px;padding:9px 11px;border-radius:var(--border-radius-md);margin-top:10px;font-size:11px;line-height:1.5}
+.tip i{font-size:14px;flex-shrink:0;margin-top:1px}
+
+.sp-btn{display:inline-flex;align-items:center;gap:5px;font-size:11px;padding:5px 11px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:transparent;color:var(--color-text-secondary);cursor:pointer;margin-top:10px}
+.sp-btn i{font-size:12px}
+
+.tool-ref{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:6px;margin-top:10px}
+.tr-card{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:8px 10px}
+.tr-name{font-size:11px;font-weight:500;color:var(--color-text-primary);margin-bottom:3px}
+.tr-desc{font-size:10px;color:var(--color-text-tertiary);line-height:1.4}
+
+.section-lbl{font-size:10px;font-weight:500;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.06em;margin:12px 0 6px}
+
+/* Subject color tokens */
+.s0{--sc:#534AB7;--sb:#EEEDFE;--sbt:#3C3489;--sbd:#26215C}
+.s1{--sc:#854F0B;--sb:#FAEEDA;--sbt:#633806;--sbd:#412402}
+.s2{--sc:#0F6E56;--sb:#E1F5EE;--sbt:#085041;--sbd:#04342C}
+.s3{--sc:#0C447C;--sb:#E6F1FB;--sbt:#185FA5;--sbd:#042C53}
+.s4{--sc:#993556;--sb:#FBEAF0;--sbt:#72243E;--sbd:#4B1528}
+
+@media(prefers-color-scheme:dark){
+  .s0{--sc:#AFA9EC;--sb:#26215C;--sbt:#CECBF6;--sbd:#3C3489}
+  .s1{--sc:#EF9F27;--sb:#412402;--sbt:#FAC775;--sbd:#633806}
+  .s2{--sc:#5DCAA5;--sb:#04342C;--sbt:#9FE1CB;--sbd:#085041}
+  .s3{--sc:#85B7EB;--sb:#042C53;--sbt:#B5D4F4;--sbd:#0C447C}
+  .s4{--sc:#ED93B1;--sb:#4B1528;--sbt:#F4C0D1;--sbd:#72243E}
+}
+</style>
+
+<h2 class="sr-only">Ultimate AI study workflow for JEE Physics, Chemistry, Mathematics, NEET Biology, and Class 10 Science — all using free tools.</h2>
+
+<div style="padding:14px 0">
+
+<div class="top-nav">
+  <button class="snav active s0" data-s="0" onclick="switchSub(0,this)"><i class="ti ti-bolt" aria-hidden="true"></i>JEE Physics</button>
+  <button class="snav s1" data-s="1" onclick="switchSub(1,this)"><i class="ti ti-flask" aria-hidden="true"></i>JEE Chemistry</button>
+  <button class="snav s2" data-s="2" onclick="switchSub(2,this)"><i class="ti ti-math" aria-hidden="true"></i>JEE Maths</button>
+  <button class="snav s3" data-s="3" onclick="switchSub(3,this)"><i class="ti ti-dna" aria-hidden="true"></i>NEET Biology</button>
+  <button class="snav s4" data-s="4" onclick="switchSub(4,this)"><i class="ti ti-school" aria-hidden="true"></i>Class 10 Sci</button>
+</div>
+
+<div id="panels"></div>
+</div>
+
+<script>
+const SUBJECTS = [
+  {
+    id:'s0', cls:'s0',
+    name:'JEE Physics',
+    phases:[
+      {
+        id:'learn', icon:'ti-brain', label:'Learning', timing:'Day 1–2 per chapter',
+        flow:['NCERT first read','AI concept deep-dive','YouTube visual','Feynman check'],
+        cards:[
+          {title:'First-principles primer',desc:'Ask Claude to build intuition from scratch — derive equations conceptually before showing them symbolically.',tools:['Claude (free)','ChatGPT free'],prompt:'"Teach me Rotational Motion for JEE. Start from physical intuition, derive key equations step by step. Highlight what JEE Advanced loves to trap students on."'},
+          {title:'YouTube + AI transcript analysis',desc:'Watch PW/Khan Academy. Paste the transcript to Claude for a structured concept map with JEE angle.',tools:['YouTube (free)','Claude'],prompt:'"Here\'s a transcript on SHM [paste]. Extract: core concepts, all formulas with conditions, common student mistakes, and JEE question patterns from this topic."'},
+          {title:'Feynman gap-finder',desc:'Explain the concept back to Claude as if teaching class 9. Ask it to find logical holes, wrong statements, missing edge cases.',tools:['Claude'],prompt:'"I\'ll explain Gauss\'s Law to you. Find every logical gap, incorrect statement, and missing boundary condition in my explanation: [your text]"'},
+          {title:'Formula sheet builder',desc:'Get every formula with physical meaning, derivation shortcut, and when NOT to apply it — formatted for your notes.',tools:['Claude','Notion (free)'],prompt:'"List every formula in Electrostatics for JEE. Format: Formula | Physical meaning | When NOT to use | Classic JEE trap associated with it."'}
+        ],
+        tip:'Keep a single Claude chat per chapter all week. The AI accumulates context of your confusion points and gives increasingly targeted help.'
+      },
+      {
+        id:'notes', icon:'ti-notes', label:'Notes', timing:'Ongoing',
+        flow:['Handwrite first','Scan to Claude','AI enriches gaps','Save to Notion'],
+        cards:[
+          {title:'Cornell notes on demand',desc:'Ask Claude to generate Cornell-format notes: main content, cue questions column, and a 5-line summary paragraph.',tools:['Claude','Notion (free)'],prompt:'"Create Cornell notes for JEE Physics — Waves & Sound. Main column: derivations + ideas. Cues column: trigger questions. Summary: 5-line revision recap."'},
+          {title:'Handwritten note gap scan',desc:'Photo your handwritten notes, upload to Claude. It finds what\'s missing and adds exam-relevant content.',tools:['Claude (image)','Phone camera'],prompt:'"These are my Thermodynamics notes [image]. What JEE concepts am I missing? What\'s incorrect? Add missing formulas with derivation shortcuts."'},
+          {title:'Error journal entries',desc:'After every wrong answer, paste the question + your attempt. Claude writes a 3-line journal entry on where your logic broke.',tools:['Claude','Notion / Google Docs'],prompt:'"I got this wrong [paste Q + attempt]. Write a 3-line error journal: what I thought, why it\'s wrong, and the correct physical instinct I need to build."'},
+          {title:'One-page chapter cheat sheet',desc:'After finishing a chapter, generate a printable single-page summary: formulas, concepts, traps, mnemonics.',tools:['Claude','Google Docs (free)'],prompt:'"Make a one-page cheat sheet for JEE Physics — Modern Physics. Sections: formulas, conceptual facts, JEE traps, one-line mnemonics per formula."'}
+        ],
+        tip:'Use Notion free tier as your second brain. Template: chapter → summary card → error log → pending doubts. Link every page to its Claude chat.'
+      },
+      {
+        id:'revise', icon:'ti-refresh', label:'Revision', timing:'Day 3, 7, 14, 30',
+        flow:['Day 3 — recall','Day 7 — formula drill','Day 14 — MCQs','Day 30 — full test'],
+        cards:[
+          {title:'Anki flashcard generation',desc:'Generate 20 flashcard-style Q&A pairs per chapter. Import CSV into Anki for spaced repetition scheduling.',tools:['Claude','Anki (free)'],prompt:'"Generate 20 Anki-style flashcards for JEE — Current Electricity. Format: Q: [question] | A: [answer]. Include formula cards and conceptual traps."'},
+          {title:'Rapid-fire oral quiz',desc:'Claude asks 10 questions one at a time, waits for your answer, then grades and fully explains each at the end.',tools:['Claude'],prompt:'"Quiz me on Optics for JEE. Ask 10 questions one by one. Wait for my answer before continuing. Final score + detailed explanation for every mistake."'},
+          {title:'Revision priority ranker',desc:'Paste your weak topics. Claude ranks by JEE weightage × your weakness and outputs a 3-day sprint plan.',tools:['Claude','Google Calendar (free)'],prompt:'"My weak topics: [list]. Exam in 3 weeks. Rank by JEE weightage and my weakness score. Give a daily revision plan with specific time allocation per topic."'},
+          {title:'Cross-chapter connection map',desc:'Ask Claude how 3–4 related chapters connect — shared formulas, unified mental models, cross-chapter JEE problems.',tools:['Claude','Miro (free tier)'],prompt:'"Show how Work-Energy, Momentum, and Rotational Mechanics connect for JEE. Where do formulas overlap? What multi-chapter problems should I practice?"'}
+        ],
+        tip:'Paste your error journal into Claude before every revision session. Ask: "Given these past mistakes, what should I focus on today?" — instant personalised revision.'
+      },
+      {
+        id:'solve', icon:'ti-pencil', label:'Question solving', timing:'Daily practice',
+        flow:['Attempt 5 min solo','Hint only first','Then approach','Full solution + log'],
+        cards:[
+          {title:'Hint-first doubt solving',desc:'Never ask for the full solution first. Ask for one physical insight. Your brain does the rest — that\'s where learning happens.',tools:['Claude','Gemini (free)'],prompt:'"Don\'t solve this. Give me only the first physical insight I need: [paste Q]. My attempt: [paste]. Where am I going wrong conceptually?"'},
+          {title:'Generalise after solving',desc:'After solving, ask Claude for the problem template and 3 harder JEE variants — this builds pattern recognition.',tools:['Claude'],prompt:'"I solved this [paste solution]. Now generalise: what\'s the underlying template? Give me 3 JEE Advanced variants of this with increasing difficulty."'},
+          {title:'Photo-based instant doubt',desc:'Photograph any problem from HC Verma / DC Pandey / your test. Upload to Claude for step-by-step breakdown.',tools:['Claude (image)','Gemini (image)'],prompt:'"[Upload photo] Solve step by step. After solution: what concept is this really testing, and what\'s the 30-second mental shortcut for this question type?"'},
+          {title:'Generate targeted practice sets',desc:'Ask Claude to generate 5 problems of a specific format: integer-type, assertion-reason, multi-correct MCQ.',tools:['Claude','ChatGPT free'],prompt:'"Generate 5 JEE Advanced integer-type problems on Magnetic Effects of Current. Different scenario each time. Include answer keys and 2-line solution sketches."'}
+        ],
+        tip:'Rule: minimum 5 minutes of solo effort before asking AI. The struggle is where synapses form — AI is the coach, not the player.'
+      },
+      {
+        id:'mock', icon:'ti-chart-bar', label:'Mock analysis', timing:'2–3 hrs after every mock',
+        flow:['Score the paper','Categorise errors','Paste wrong Qs','Update error log','Plan next week'],
+        cards:[
+          {title:'Error categorisation',desc:'Paste all wrong questions. Claude categorises each: concept gap, calculation slip, misread question, or time pressure.',tools:['Claude','Google Sheets (free)'],prompt:'"Here are 8 questions I got wrong in my mock [paste all]. For each: 1) Error type 2) Root concept missed 3) Exactly what to revise tomorrow."'},
+          {title:'Pattern analysis across mocks',desc:'After 3+ mocks, paste your full error log. Claude finds which topics are persistent weak zones vs one-off misses.',tools:['Claude'],prompt:'"Error logs from 4 mocks [paste]. Find repeating patterns. What are my top 3 structural weaknesses? Give a targeted 1-week fix plan for each."'},
+          {title:'Time management audit',desc:'Log time per question during the mock. Claude analyses pacing and gives an optimal attempt-order strategy.',tools:['Claude','Google Sheets'],prompt:'"I spent these minutes per Q [paste data]. Physics: 60 mins total. Where did I over-invest? What to skip first-pass? Give me an optimised attempt order strategy."'},
+          {title:'7-day repair plan',desc:'Claude converts the mock analysis directly into a concrete day-by-day repair plan with specific chapters and question counts.',tools:['Claude','Google Calendar'],prompt:'"Based on this mock analysis [paste]: give me a day-by-day 7-day plan. Mix: 30% concept repair, 40% targeted practice, 30% fresh mock. Specific chapters + daily Qs."'}
+        ],
+        tip:'A mock without 2 hours of analysis is just a waste of 3 hours. Your score improves in the analysis session, not during the test.',
+        spBtn:{label:'Build a mock error tracker in Google Sheets ↗',prompt:'Help me build a Google Sheets mock error tracker for JEE Physics with columns: date, chapter, error type, root concept, and revision status'}
+      }
+    ]
+  },
+  {
+    id:'s1', cls:'s1',
+    name:'JEE Chemistry',
+    phases:[
+      {
+        id:'learn', icon:'ti-brain', label:'Learning', timing:'Day 1–2 per topic',
+        flow:['NCERT base read','Split by branch (P/O/I)','AI concept build','Visual + memory hook'],
+        cards:[
+          {title:'Branch-specific learning mode',desc:'Chemistry is three different subjects. Set context upfront — Physical (maths-heavy), Organic (mechanism-heavy), Inorganic (pattern-heavy).',tools:['Claude','ChatGPT free'],prompt:'"Teach me Chemical Equilibrium (Physical Chemistry) for JEE. Emphasise: derive Kp and Kc, Le Chatelier\'s intuition, and common JEE numerical setups I should master."'},
+          {title:'Reaction mechanism walk-through',desc:'For Organic, ask Claude to narrate each reaction step as a story — electron pair movement, intermediates, and why each step happens.',tools:['Claude'],prompt:'"Walk me through the SN1 vs SN2 mechanism like a story. Explain: why carbocation stability matters, what substrate/solvent/nucleophile decides the path, JEE clues to spot which one."'},
+          {title:'Inorganic pattern extraction',desc:'Inorganic is about exceptions and patterns. Ask Claude to list all anomalies and their reason for any group/period.',tools:['Claude','Notion'],prompt:'"For p-block Group 15 JEE: list every anomalous property, its reason, and how JEE has tested each one historically. Group by: structure, oxidation states, acidic strength."'},
+          {title:'NCERT line-by-line analysis',desc:'For Inorganic, NCERT is the primary source. Ask Claude to extract every JEE-testable fact from a specific NCERT chapter.',tools:['Claude'],prompt:'"Analyse NCERT Class 12 Chapter — d and f Block Elements. Extract every single fact that JEE has ever tested or could test. Mark must-memorise vs understand-only."'}
+        ],
+        tip:'Chemistry needs three separate study modes. Don\'t mix them. Set a clear system prompt or context line at the start of each session: "We\'re doing Physical Chemistry today, JEE level."'
+      },
+      {
+        id:'notes', icon:'ti-notes', label:'Notes', timing:'Ongoing',
+        flow:['NCERT annotations','Reaction cards (Organic)','Exception lists (Inorganic)','Formula tables (Physical)'],
+        cards:[
+          {title:'Organic reaction master cards',desc:'Ask Claude to create a reaction card for every named reaction: reagents, conditions, mechanism outline, product, and JEE variations.',tools:['Claude','Notion / Anki'],prompt:'"Create a reaction card for Aldol Condensation. Include: reactants, conditions, mechanism in 3 steps, product, reverse reaction, and 2 JEE-level question variations."'},
+          {title:'Inorganic exception cheat sheets',desc:'The most JEE-tested content is exceptions. Ask Claude to compile an exception + reason sheet per group.',tools:['Claude','Google Docs'],prompt:'"Generate an exception sheet for Group 2 (Alkaline Earth Metals). Format: Property | Expected trend | Actual exception | Reason | JEE question type."'},
+          {title:'Physical Chemistry formula atlas',desc:'Physical Chem formulas need context — when to apply, assumptions, units, and common substitution errors.',tools:['Claude','Notion'],prompt:'"Build a formula atlas for Electrochemistry (JEE). Each formula: equation, variables defined, conditions/assumptions, unit check, and the most common calculation error JEE exploits."'},
+          {title:'Error log with mechanism tagging',desc:'Tag every Organic error by mechanism type: substitution, elimination, addition, rearrangement. Spot which mechanism you keep getting wrong.',tools:['Claude','Notion'],prompt:'"I got these Organic questions wrong [paste]. Tag each by mechanism category. Which category is my weakest? Explain the conceptual gap causing the pattern."'}
+        ],
+        tip:'For Organic, your notes should have zero words — only arrow-pushing diagrams and reagent boxes. Ask Claude to describe diagrams in words, then redraw them yourself.'
+      },
+      {
+        id:'revise', icon:'ti-refresh', label:'Revision', timing:'Day 3, 7, 14, 30',
+        flow:['Reaction recall test','Exception rapid quiz','Numericals drill','Cross-branch links'],
+        cards:[
+          {title:'Reaction chain quiz',desc:'Claude gives you a starting material and conditions. You predict the product. Then it gives the next step. Chain of 5–6 reactions.',tools:['Claude'],prompt:'"Start an Organic reaction chain quiz. Give me a starting material + reagents. I\'ll predict the product. After 6 steps, analyse my pattern of mistakes."'},
+          {title:'PYQ-style rapid MCQs',desc:'Ask Claude to generate 15 MCQs in the exact style of JEE Chemistry paper — 4 options, one correct, with detailed explanation for all wrong options.',tools:['Claude','ChatGPT free'],prompt:'"Generate 15 JEE-style MCQs on Coordination Compounds. After I answer, explain why each wrong option is wrong — not just why the right answer is right."'},
+          {title:'Inorganic speed round',desc:'For Inorganic revision, rapid-fire factual questions work best. Ask Claude to quiz you on 20 facts in under 10 minutes.',tools:['Claude'],prompt:'"Quiz me on d-block elements facts for JEE. 20 questions, rapid-fire. Score at the end. Categorise: memory gaps vs understanding gaps."'},
+          {title:'Physical Chem numerical speed set',desc:'5 back-to-back numericals on one topic, timed. Claude checks your approach at each step, not just the final answer.',tools:['Claude'],prompt:'"Give me 5 back-to-back JEE-level numericals on Chemical Kinetics. After each, check my approach step by step — tell me where I would lose marks in JEE."'}
+        ],
+        tip:'Inorganic revision needs daily 10-minute exposure, not weekly cramming. Ask Claude for 5 quick facts from a random Inorganic chapter every morning.'
+      },
+      {
+        id:'solve', icon:'ti-pencil', label:'Question solving', timing:'Daily practice',
+        flow:['Identify branch first','Mechanism vs memory vs maths','Attempt solo','AI breakdown'],
+        cards:[
+          {title:'Identify question type first',desc:'Before solving any Chem question, categorise it: conceptual recall, numerical, mechanism, or application. This sets your solving strategy.',tools:['Claude'],prompt:'"Before solving this question [paste], tell me: what type is it (recall/numerical/mechanism/application), what\'s the minimum knowledge needed, and what\'s the common wrong approach."'},
+          {title:'Stoichiometry and mole concept solver',desc:'Upload or paste numericals. Ask Claude to solve with explicit unit analysis at every step — the most common mark-loser in Physical Chem.',tools:['Claude','Gemini'],prompt:'"Solve this Physical Chem numerical [paste] with full unit analysis at every single step. Then identify where a JEE student typically makes the first mistake."'},
+          {title:'Organic structure prediction',desc:'Paste IUPAC names or smiles strings. Ask Claude to draw the structure in text, explain key functional groups, and predict reactivity.',tools:['Claude'],prompt:'"Given this compound [name/structure], predict: 1) Major product with LiAlH4 2) Product with HBr 3) Product with ozonolysis. Explain regioselectivity for each."'},
+          {title:'Why-is-wrong-option-wrong drill',desc:'For MCQs you got wrong, ask Claude to explain every incorrect option — this is how NCERT-level traps are decoded.',tools:['Claude'],prompt:'"I chose option B for this MCQ [paste full Q + all options]. I was wrong. Explain why A, C, and D are wrong AND why B seemed right but isn\'t."'}
+        ],
+        tip:'Chemistry MCQs are designed to exploit your most common misconception. After solving 10 wrong answers, ask Claude: "What one conceptual fix would eliminate most of my errors?"'
+      },
+      {
+        id:'mock', icon:'ti-chart-bar', label:'Mock analysis', timing:'After every mock',
+        flow:['Score by branch','Physical/Organic/Inorganic split','Identify weakest branch','Target repair'],
+        cards:[
+          {title:'Branch-wise score split',desc:'Break your Chemistry score into Physical / Organic / Inorganic. The branch with worst accuracy gets the most next-week time.',tools:['Claude','Google Sheets'],prompt:'"My Chemistry mock errors [paste all questions]. Categorise each into Physical/Organic/Inorganic. Which branch has highest error rate? What\'s the root cause per branch?"'},
+          {title:'Reaction memory vs understanding audit',desc:'Ask Claude to classify your Organic errors: was it a memory failure (forgot reagent) or understanding failure (wrong mechanism)?',tools:['Claude'],prompt:'"These are my Organic errors [paste]. For each, classify: memory failure (forgot fact) or understanding failure (wrong reasoning). Give separate repair strategies for each type."'},
+          {title:'NCERT vs beyond-NCERT audit',desc:'For each wrong answer, Claude flags if it was NCERT-level or beyond. NCERT misses are critical — they cost you more rank.',tools:['Claude'],prompt:'"For these wrong Chemistry answers [paste], flag each: NCERT level or beyond-NCERT. I should never miss NCERT-level questions. What NCERT sections do I need to re-read?"'},
+          {title:'Attempt-strategy analysis',desc:'Which questions did you skip? Which did you attempt without confidence? Claude helps you build a better attempt-order for Chemistry.',tools:['Claude'],prompt:'"In my Chemistry section I skipped [X Qs] and guessed on [Y Qs]. Given my strong topics are [list], build an optimal Chemistry attempt sequence for my next mock."'}
+        ],
+        tip:'Inorganic is the highest-return subject for mock improvement — pure memory. Every wrong Inorganic answer is a missed free mark. Prioritise these in your error log.'
+      }
+    ]
+  },
+  {
+    id:'s2', cls:'s2',
+    name:'JEE Mathematics',
+    phases:[
+      {
+        id:'learn', icon:'ti-brain', label:'Learning', timing:'Day 1–2 per chapter',
+        flow:['Understand theorem proof','Spot the technique','Do 3 examples','Build instinct'],
+        cards:[
+          {title:'Proof-first understanding',desc:'Ask Claude to prove theorems from scratch before showing any formula. Maths intuition comes from seeing why, not just what.',tools:['Claude','ChatGPT free'],prompt:'"Prove the fundamental theorem of Calculus from scratch for JEE. Show the geometric intuition first, then the formal proof. Explain exactly what goes wrong if any condition fails."'},
+          {title:'Technique identification training',desc:'JEE Maths is about recognising which technique to use. Ask Claude to teach you the "tells" — what in the question signals which method.',tools:['Claude'],prompt:'"For Integration by Parts vs Substitution vs Partial Fractions: give me the exact signals in a question that tell me which method to use. Give 2 examples per signal."'},
+          {title:'Visual / geometric intuition',desc:'Ask Claude to describe the geometric meaning of every algebraic result. Most JEE Maths problems have a hidden geometric picture.',tools:['Claude','Desmos (free)'],prompt:'"Give me the geometric interpretation of the Cauchy-Schwarz inequality. Then show how 3 different JEE problems become trivial once you see the geometry."'},
+          {title:'Worked example with variations',desc:'Ask Claude to solve a standard problem, then systematically change each element to show how the solution changes.',tools:['Claude'],prompt:'"Solve this standard P&C problem [paste]. Then modify it 4 times: change the constraint, the selection rule, add repetition, add identical objects. Show how the approach shifts each time."'}
+        ],
+        tip:'Maths is the highest-variance subject in JEE. The students who score 120/120 don\'t know more topics — they recognise problem types 10 seconds faster. Train that reflex.'
+      },
+      {
+        id:'notes', icon:'ti-notes', label:'Notes', timing:'Ongoing',
+        flow:['Proof skeletons','Technique triggers','Formula + when-to-use','Error pattern log'],
+        cards:[
+          {title:'Technique trigger sheet',desc:'For each major technique, document the exact question features that should trigger it. This is your pattern-recognition system.',tools:['Claude','Notion'],prompt:'"Create a technique trigger sheet for Coordinate Geometry JEE. Format: Technique | Trigger signals in the question | First step to write | Common calculation error."'},
+          {title:'Proof skeleton notes',desc:'Don\'t copy full proofs — just the skeleton: key insight, why it works, and what it enables. Use Claude to compress.',tools:['Claude','Notion'],prompt:'"Compress the proof of De Moivre\'s Theorem into a skeleton: 1) Core insight 2) The leap that makes it work 3) Why it can\'t be extended naively 4) JEE applications."'},
+          {title:'Common error pattern log',desc:'Log not just wrong answers but wrong approaches. Ask Claude to name the cognitive error — rushing, missing constraint, misreading, wrong formula family.',tools:['Claude','Google Sheets'],prompt:'"I made these errors [paste]. For each, name the cognitive error type: constraint-ignored, formula-wrong, approach-correct-but-calculation-wrong, pattern-misidentified. Build a habit fix for each."'},
+          {title:'Cross-topic formula connector',desc:'Many JEE Maths formulas appear in multiple chapters. Claude builds a cross-reference sheet so you see the structure.',tools:['Claude'],prompt:'"Build a cross-topic formula connector for JEE Maths. Find formulas that appear in both Calculus and Coordinate Geometry. Show how the same idea is expressed differently across chapters."'}
+        ],
+        tip:'Maintain a "solved 100 problems" log. After every 100 problems, ask Claude: "Given these 100 problems I solved, what single technique did I use least? That\'s my blind spot."'
+      },
+      {
+        id:'revise', icon:'ti-refresh', label:'Revision', timing:'Day 3, 7, 14, 30',
+        flow:['Technique recall test','Speed drills','Proof reconstruction','Full chapter mock'],
+        cards:[
+          {title:'Speed drill — 20 problems timed',desc:'Claude generates 20 problems across one chapter. You time yourself. It scores and flags which took too long — a sign of an unautomated technique.',tools:['Claude'],prompt:'"Generate 20 JEE-level problems on Probability. I\'ll time each one. After I paste answers + times, tell me: which problems took too long and what does that reveal about my blind spots?"'},
+          {title:'Proof reconstruction test',desc:'Ask Claude to give you just the theorem statement. You reconstruct the proof from memory. It then grades your logical flow.',tools:['Claude'],prompt:'"Give me only the statement of Bayes\' Theorem. I\'ll reconstruct the proof from memory. Evaluate: is my logic complete, are all conditions stated, are there gaps in reasoning?"'},
+          {title:'JEE Advanced pattern drill',desc:'JEE Advanced Maths has specific formats: passage-based, matrix-match, multi-correct. Practice each format specifically.',tools:['Claude'],prompt:'"Create a JEE Advanced-style passage-based question set on Differential Equations (3 sub-questions from one scenario). Include integer-type and multi-correct variants."'},
+          {title:'Weak chapter targeted practice',desc:'Tell Claude your accuracy percentage per chapter. It builds a ranked practice set targeting chapters with highest marks-per-hour potential.',tools:['Claude'],prompt:'"My chapter accuracies: [paste]. Given JEE marks distribution, rank which chapter I should practice next for maximum score gain. Generate a 20-Q targeted set."'}
+        ],
+        tip:'Maths revision is about rebuilding automaticity. If you can\'t solve a familiar problem type in under 3 minutes, it\'s not revised — it\'s just re-read.'
+      },
+      {
+        id:'solve', icon:'ti-pencil', label:'Question solving', timing:'Daily practice',
+        flow:['Read → identify technique','Attempt full solution','Verify → generalise','Build pattern bank'],
+        cards:[
+          {title:'Technique identification before solving',desc:'Before writing anything, tell Claude the technique you plan to use and why. It confirms or redirects — this trains metacognition.',tools:['Claude'],prompt:'"Before I solve this [paste Q], I think the technique is [your guess]. Confirm if correct. If wrong, give me one sentence that reorients my approach without solving it."'},
+          {title:'Step-by-step verification',desc:'Paste your full worked solution. Claude marks each step: correct logic, correct calculation, or wrong — and points to exactly where marks would be deducted.',tools:['Claude'],prompt:'"Here\'s my full solution [paste]. Mark every step: correct / minor error / fundamental error. Show exactly where I\'d lose marks in JEE and what the examiner expects."'},
+          {title:'Alternative approach finder',desc:'After solving, ask Claude for 2 other valid approaches. JEE Advanced often has a 30-second elegant method — training this is what separates AIR 100 from AIR 1000.',tools:['Claude'],prompt:'"I solved this using [method]. Give me 2 other valid approaches. Which is fastest under exam conditions? What mathematical insight makes the fast method work?"'},
+          {title:'Boundary condition stress test',desc:'For any formula you just applied, ask Claude to stress-test it — what breaks if conditions change? This prevents mechanical application.',tools:['Claude'],prompt:'"I used the formula [paste] in this problem. Stress-test it: what are the 3 most common conditions students assume that are actually not given? Build a problem where each wrong assumption leads to a wrong answer."'}
+        ],
+        tip:'The fastest way to improve JEE Maths score: after every problem, ask "what\'s the fastest possible solution?" Even if your method was correct, the elegant method is always worth knowing.'
+      },
+      {
+        id:'mock', icon:'ti-chart-bar', label:'Mock analysis', timing:'After every mock',
+        flow:['Time audit per Q','Technique accuracy split','Silly vs concept errors','Next-week plan'],
+        cards:[
+          {title:'Time vs accuracy matrix',desc:'The real Maths insight: did you spend too long on hard questions and rush easy ones? Claude builds a time-accuracy matrix.',tools:['Claude','Google Sheets'],prompt:'"My Maths mock: questions attempted [list], time per Q [list], correct/wrong [list]. Build a time-accuracy matrix. What was my opportunity cost from questions I spent too long on?"'},
+          {title:'Technique accuracy heatmap',desc:'Tag each question by technique. Claude shows which techniques you execute reliably vs which ones break under time pressure.',tools:['Claude'],prompt:'"Categorise these Maths questions by technique [paste Q list + correct/wrong]. Build a technique accuracy table. Which technique has worst accuracy? What\'s the likely root cause?"'},
+          {title:'Silly error forensics',desc:'Maths silly errors have patterns — signs, substitution, algebra slips. Claude finds your specific pattern across a mock.',tools:['Claude'],prompt:'"These are my Maths calculation errors [paste worked solutions]. Find the pattern: am I losing signs, making fraction errors, misexpanding brackets? Build a pre-solve checklist for my specific weakness."'},
+          {title:'Score ceiling analysis',desc:'Ask Claude: if you had made zero silly errors and used optimal time allocation, what was your actual score ceiling this mock?',tools:['Claude'],prompt:'"Given my mock: actual score [X], questions I knew but got wrong due to errors [list], questions I ran out of time on [list]. What\'s my true capability score? What\'s the gap strategy?"'}
+        ],
+        tip:'In JEE Maths, 40% of wrong answers are from correct approaches with arithmetic errors. A pre-solve checklist (sign check, denominator check, range check) can add 20+ marks.'
+      }
+    ]
+  },
+  {
+    id:'s3', cls:'s3',
+    name:'NEET Biology',
+    phases:[
+      {
+        id:'learn', icon:'ti-brain', label:'Learning', timing:'Day 1–2 per chapter',
+        flow:['NCERT word-by-word','Diagram mastery','AI concept deepening','Relate to body'],
+        cards:[
+          {title:'NCERT line-by-line extraction',desc:'NEET Biology is 95% NCERT. Ask Claude to extract every testable sentence from a chapter — NEET has pulled questions from seemingly throwaway lines.',tools:['Claude','ChatGPT free'],prompt:'"Analyse NCERT Class 12 Chapter — Reproduction in Organisms. Extract every sentence that NEET has tested or could test. Mark: high-priority / medium / diagram-dependent."'},
+          {title:'Diagram learning protocol',desc:'NEET has 15–20 diagram-based questions. Ask Claude to describe each diagram\'s labelling points and what each part represents functionally.',tools:['Claude'],prompt:'"Describe the diagram of a Nephron for NEET in full text. List: every label, what each part does, what happens at each segment during urine formation, and NEET question patterns from this diagram."'},
+          {title:'Process sequencing — step by step',desc:'Biology processes (photosynthesis, meiosis, translation) are tested as sequences. Ask Claude to teach them as numbered step narratives.',tools:['Claude'],prompt:'"Teach Protein Synthesis (Translation) as a numbered step narrative for NEET. After each step, tell me: what NEET question has come from this step? What\'s the one-line fact to memorise?"'},
+          {title:'Comparative tables for similar topics',desc:'NEET loves testing mitosis vs meiosis, C3 vs C4, innate vs adaptive. Ask Claude to build a structured comparison table.',tools:['Claude','Notion'],prompt:'"Build a detailed comparison table for Mitosis vs Meiosis for NEET. Rows: location, phases, chromosome number, crossing over, purpose, timing. Note every NEET-tested difference."'}
+        ],
+        tip:'NEET Biology is a memory sport, not a reasoning sport. Your goal is 100% NCERT recall. Every session should end with: "What did I read today that I can\'t recall right now?"'
+      },
+      {
+        id:'notes', icon:'ti-notes', label:'Notes', timing:'Ongoing',
+        flow:['NCERT highlights → AI','Diagram labels bank','Assertion-Reason prep','Chapter facts cards'],
+        cards:[
+          {title:'Chapter facts cards (NCERT-exact)',desc:'Ask Claude to convert a chapter into 30 NCERT-accurate fact cards. No paraphrasing — exact NCERT language, since NEET tests exact phrasing.',tools:['Claude','Anki (free)'],prompt:'"Convert NCERT Class 11 Chapter — Biological Classification into 30 fact cards. Use exact NCERT language. Format: Fact [NCERT-exact statement] | Category [taxonomy/structure/function/example]."'},
+          {title:'Assertion-Reason master bank',desc:'NEET uses Assertion-Reason questions heavily. Ask Claude to generate A-R pairs for any chapter with full explanations.',tools:['Claude','Notion'],prompt:'"Generate 15 Assertion-Reason questions for NEET — Human Physiology: Digestion. Include: both true (R explains A), both true (R doesn\'t explain A), A true R false, both false."'},
+          {title:'Exception and anomaly list',desc:'NEET specifically tests biological exceptions. Ask Claude to compile all exceptions in a chapter with reason and example.',tools:['Claude','Google Docs'],prompt:'"List every biological exception in NCERT Class 12 — Genetics & Evolution. Format: Rule | Exception | Organism/example | Why it\'s exceptional | NEET question probability."'},
+          {title:'Scientific name and term bank',desc:'NEET tests scientific names, discoverers, and technical terms precisely. Build a searchable bank per chapter.',tools:['Claude','Notion'],prompt:'"Build a scientific name + discoverer bank for NEET — Diversity in Living World. Format: Organism/Term | Scientific name | Discoverer | Key characteristic | NEET question history."'}
+        ],
+        tip:'For NEET Biology, your notes are secondary to NCERT. Annotate your NCERT book, don\'t replace it. Use Claude to enrich NCERT, not substitute it.'
+      },
+      {
+        id:'revise', icon:'ti-refresh', label:'Revision', timing:'Day 2, 5, 10, 21, 42',
+        flow:['Process recall','Diagram redraw','Fact flash cards','MCQ speed round'],
+        cards:[
+          {title:'Diagram redraw + label quiz',desc:'Ask Claude to name a diagram and list what you should be able to draw. You draw from memory, then Claude quizzes you on every label.',tools:['Claude'],prompt:'"I\'m going to redraw the LS of a Flower from memory. After I describe my drawing in text, quiz me on every label I missed. Then give me the 3 NEET questions that come most from this diagram."'},
+          {title:'Fill-in-the-blank NCERT recall',desc:'Claude takes NCERT paragraphs and creates fill-in-the-blank exercises. Trains exact-language recall.',tools:['Claude'],prompt:'"Take this NCERT paragraph [paste] and create 10 fill-in-the-blank questions by blanking key terms. Make the blanked words ones NEET has historically tested."'},
+          {title:'Rapid 50-MCQ speed session',desc:'50 NEET-style MCQs in one sitting. Claude generates them across a chapter, you answer rapid-fire, and it gives a full analysis.',tools:['Claude'],prompt:'"Generate 50 NEET-style MCQs on Plant Physiology. All 4-option single-correct. I\'ll answer all 50 first, then you analyse: which NCERT sections do my errors cluster in?"'},
+          {title:'Cross-chapter link finder',desc:'NEET increasingly tests cross-chapter connections. Ask Claude to find all links between two chapters for integrated revision.',tools:['Claude'],prompt:'"Find all cross-chapter links between Cell Biology and Genetics for NEET. What concepts from Cell Division are needed to fully understand Mendelian Genetics? List integrated question types."'}
+        ],
+        tip:'NEET revision frequency matters more than duration. 15 minutes daily beats 2 hours weekly for Biology memory retention. Use Claude for a daily 15-minute chapter micro-quiz.'
+      },
+      {
+        id:'solve', icon:'ti-pencil', label:'Question solving', timing:'Daily practice',
+        flow:['Read all 4 options','Eliminate NCERT-contradictions','Apply assertion logic','Check negatives carefully'],
+        cards:[
+          {title:'All-4-options analysis',desc:'Never solve NEET Biology by finding the right answer — find why 3 options are wrong. Ask Claude to explain every wrong option.',tools:['Claude'],prompt:'"For this NEET MCQ [paste with all 4 options]: explain why options A, B, C, D are each right or wrong with specific NCERT line reference for each judgment."'},
+          {title:'Tricky phrasing decoder',desc:'NEET uses "except", "incorrect", "not true" — ask Claude to rewrite tricky questions into plain language and identify the trap.',tools:['Claude'],prompt:'"Rewrite this NEET question [paste] in plain language. Identify: is there a negative/except trap? What\'s the minimum NCERT knowledge needed? What would a 50% scorer get wrong and why?"'},
+          {title:'PYQ chapter-wise practice',desc:'NEET repeats topics in predictable cycles. Ask Claude to generate questions modelled exactly on PYQ patterns from specific chapters.',tools:['Claude','ChatGPT free'],prompt:'"Generate 10 NEET MCQs on Human Reproduction modelled on PYQ patterns from 2019–2024. Use the exact NEET difficulty level and option-phrasing style."'},
+          {title:'Botany vs Zoology balance check',desc:'Track your Botany vs Zoology accuracy separately — most students have a clear bias. Claude helps you see the split and rebalance.',tools:['Claude','Google Sheets'],prompt:'"These are my wrong NEET Biology answers [paste]. Split by Botany vs Zoology. Which has worse accuracy? Within that, which NCERT class (11 or 12) is weaker? Build a rebalance plan."'}
+        ],
+        tip:'NEET Biology wrong answers almost always come from one of: misreading the question, not reading all 4 options, or a specific NCERT paragraph you skipped. Log which one it is each time.'
+      },
+      {
+        id:'mock', icon:'ti-chart-bar', label:'Mock analysis', timing:'After every mock',
+        flow:['Botany vs Zoology split','NCERT vs beyond analysis','Diagram Qs audit','Revision priority update'],
+        cards:[
+          {title:'NCERT coverage audit',desc:'For every wrong Biology answer, Claude flags whether it came from NCERT core, NCERT examples, or beyond-NCERT. Core NCERT misses are most critical.',tools:['Claude'],prompt:'"For these wrong NEET Biology answers [paste], classify each: NCERT core text / NCERT example or diagram / beyond-NCERT. Calculate what my score would be if I had 100% NCERT recall."'},
+          {title:'Chapter cluster analysis',desc:'Find which NCERT chapters cluster your errors. Three wrong answers from the same chapter signal a re-read is needed.',tools:['Claude','Google Sheets'],prompt:'"My wrong answers from 3 mocks [paste]. Group by NCERT chapter. Which chapters appear 3+ times? Rank by urgency: high-weightage chapters with 2+ errors get re-read this week."'},
+          {title:'Negative marking loss audit',desc:'NEET deducts marks for wrong answers. Ask Claude to analyse which question types caused negative marking — these need a skip-or-attempt strategy.',tools:['Claude'],prompt:'"Questions I got wrong after attempting [list]. Questions I was unsure about [list]. How much did negative marking cost me? Build a confidence threshold for when to attempt vs skip."'},
+          {title:'NEET score projection',desc:'Based on error patterns, Claude projects your likely NEET score range and what it corresponds to in terms of MBBS seat probability.',tools:['Claude'],prompt:'"My last 3 mock scores: [X, Y, Z]. Error patterns: [summary]. Project my likely NEET score range in 4 weeks if I fix my top 3 error categories. What rank range does that correspond to?"'}
+        ],
+        tip:'NEET Biology is 90 questions. A 2% improvement in accuracy (2 extra correct answers) is worth roughly 1000 rank places. Every single question matters enormously.',
+        spBtn:{label:'Create a NEET Biology NCERT chapter completion tracker ↗',prompt:'Help me build a Google Sheets NEET Biology tracker with NCERT chapters, completion status, mock accuracy per chapter, and revision due dates'}
+      }
+    ]
+  },
+  {
+    id:'s4', cls:'s4',
+    name:'Class 10 Science',
+    phases:[
+      {
+        id:'learn', icon:'ti-brain', label:'Learning', timing:'1 chapter per week',
+        flow:['NCERT + diagrams','AI concept simplification','Real-world connection','CBSE angle focus'],
+        cards:[
+          {title:'Simple concept explanations',desc:'Ask Claude to explain any Class 10 Science concept using real-world analogies — designed for understanding first, memorisation second.',tools:['Claude','ChatGPT free'],prompt:'"Explain Acid-Base reactions for Class 10 CBSE using real-life examples from my kitchen and home. Then link to the NCERT chapter and what the board exam tests."'},
+          {title:'Physics formula visualisation',desc:'For electricity and optics, ask Claude to explain every formula with a real scenario. Numbers should make physical sense before you memorise them.',tools:['Claude'],prompt:'"Explain Ohm\'s Law for Class 10. Use: what happens to current if voltage doubles, a water-pipe analogy, a real circuit example. Then list all formula variations the CBSE board has used."'},
+          {title:'Biology life process connections',desc:'Connect Biology processes to your own body. Ask Claude to narrate: "right now, while reading this, here\'s what\'s happening in your cells."',tools:['Claude'],prompt:'"Explain Respiration for Class 10 CBSE. Narrate what\'s happening in my body right now, step by step from breathing in to ATP production. Then list NCERT questions on this."'},
+          {title:'Chemistry equation balancing logic',desc:'Ask Claude to teach the logic of balancing equations — not the trick, but why atoms must be conserved and how to see the pattern.',tools:['Claude'],prompt:'"Teach me how to balance chemical equations for Class 10 — not just the steps, but why it must be done this way. Then give me 5 equations of increasing difficulty to practice."'}
+        ],
+        tip:'Class 10 Science is 60% understanding + 40% NCERT memorisation. Build the understanding first — memorisation becomes effortless when concepts make sense.'
+      },
+      {
+        id:'notes', icon:'ti-notes', label:'Notes', timing:'Ongoing',
+        flow:['NCERT chapter summary','Diagram labels','Formula table','CBSE question types'],
+        cards:[
+          {title:'Chapter summary in your own words',desc:'After reading, explain the chapter to Claude in your own words. It corrects misconceptions and fills gaps — better than re-reading.',tools:['Claude'],prompt:'"I\'ll explain NCERT Class 10 Chapter — Chemical Reactions and Equations in my own words. Correct what\'s wrong, fill what\'s missing, and tell me which parts are CBSE board-critical."'},
+          {title:'Diagram label bank',desc:'Class 10 has critical diagrams: human eye, heart, refraction, etc. Ask Claude to list every label + function for each diagram.',tools:['Claude','Google Docs'],prompt:'"List every label in the Class 10 Human Eye diagram. For each label: what it is, what it does, what happens if it fails, and how many marks it carries in CBSE board."'},
+          {title:'3-mark and 5-mark answer templates',desc:'CBSE board exams have structured marks allocation. Ask Claude to write model 3-mark and 5-mark answers for key questions.',tools:['Claude','Notion / Google Docs'],prompt:'"Write a model 5-mark answer for \'Explain the process of Photosynthesis\' at Class 10 CBSE level. Format exactly as a board examiner expects. Then write a 3-mark version."'},
+          {title:'Previous year question patterns',desc:'CBSE repeats question types. Ask Claude to show the pattern for a chapter across 5 years of board papers.',tools:['Claude'],prompt:'"For Class 10 CBSE — Electricity chapter: list all question types that appeared in board exams 2019–2024. What\'s repeated every year? What new formats have appeared? What\'s likely next year?"'}
+        ],
+        tip:'For Class 10, the NCERT back exercises are more important than notes. Make sure you can answer every NCERT question perfectly — boards pull directly from them.'
+      },
+      {
+        id:'revise', icon:'ti-refresh', label:'Revision', timing:'Week before exams',
+        flow:['Chapter mind maps','Formula rapid recall','Diagram redraw','Board-style mock Qs'],
+        cards:[
+          {title:'One-page chapter mind map',desc:'Ask Claude to create a text-based mind map of any chapter — central concept branching into sub-topics, with key facts at each node.',tools:['Claude'],prompt:'"Create a mind map for Class 10 CBSE — Life Processes. Central node: Life Processes. Branch into: Nutrition, Respiration, Transport, Excretion. Key facts at each node, CBSE marks allocation."'},
+          {title:'Formula flashcard set',desc:'Generate flashcards for all Physics and Chemistry formulas with SI units, variables, and one example calculation each.',tools:['Claude','Anki (free)'],prompt:'"Generate flashcards for all formulas in Class 10 CBSE Physics. Format: Formula | Variables | SI Units | One worked example | Common exam mistake."'},
+          {title:'Board exam answer writing practice',desc:'Ask Claude to give you a board-style question. You write the answer. Claude grades it exactly like a CBSE examiner would.',tools:['Claude'],prompt:'"Ask me a 5-mark board-level question on Class 10 Heredity and Evolution. I\'ll write my answer. Grade it as a CBSE examiner: award marks per marking scheme and tell me what I missed."'},
+          {title:'Weak chapter intensive revision',desc:'Tell Claude your weakest chapters and days remaining. It builds a prioritised revision schedule with daily targets.',tools:['Claude','Google Calendar'],prompt:'"My weak chapters: [list]. Board exam in 2 weeks. Prioritise by marks weightage and build a daily study plan. Each day: chapter + specific NCERT exercises + 5 revision questions."'}
+        ],
+        tip:'3 days before boards: stop learning new content. Only revise what you know. Use Claude to run rapid-fire tests on your strong topics — confidence and accuracy go up together.'
+      },
+      {
+        id:'solve', icon:'ti-pencil', label:'Question solving', timing:'Daily practice',
+        flow:['NCERT exercises first','Board PYQs next','Concept application','AI answer check'],
+        cards:[
+          {title:'NCERT exercise solutions with understanding',desc:'Don\'t just get the answer — ask Claude to explain why each NCERT answer is structured the way it is. Boards reward structure.',tools:['Claude'],prompt:'"Solve NCERT Class 10 Science Exercise Q [paste]. Explain: why is the answer structured this way? What mark scheme does CBSE use? What would a partial-credit answer look like?"'},
+          {title:'Board PYQ solving with marking scheme',desc:'Paste PYQs from old CBSE papers. Ask Claude to solve with explicit reference to the official marking scheme.',tools:['Claude'],prompt:'"Solve this CBSE Class 10 board question [paste]. Structure the answer exactly as the marking scheme expects. Show where each mark is allocated and what a student must write to earn it."'},
+          {title:'Numerical problem step-by-step',desc:'For Physics numericals (electricity, optics, light), ask Claude to show each step with unit analysis — the most common loss of marks.',tools:['Claude'],prompt:'"Solve this Class 10 Physics numerical [paste] step by step with full unit analysis. After each step, explain: what formula was used and why, what the intermediate result means physically."'},
+          {title:'Diagram question practice',desc:'Diagram questions carry 3–5 marks each. Ask Claude to describe what a perfect diagram answer looks like, including labelling conventions.',tools:['Claude'],prompt:'"For Class 10 CBSE: what does a perfect answer to \'Draw and label the structure of a Neuron\' look like? List every label required, what each part does, and how marks are distributed."'}
+        ],
+        tip:'In CBSE boards, how you write matters as much as what you write. Ask Claude to evaluate your answer\'s structure — headings, bullet points, diagrams — not just the content.'
+      },
+      {
+        id:'mock', icon:'ti-chart-bar', label:'Mock analysis', timing:'After every mock test',
+        flow:['Section-wise score','Physics/Chem/Bio split','NCERT gap check','Board format review'],
+        cards:[
+          {title:'Section accuracy analysis',desc:'Split your score by Physics, Chemistry, Biology. Most students have one weak section. Claude builds a targeted 1-week fix plan for it.',tools:['Claude','Google Sheets'],prompt:'"My Class 10 Science mock: Physics [X/33], Chemistry [Y/33], Biology [Z/34]. Analyse: which section has worst accuracy? What NCERT chapters caused most errors? Fix plan for weakest section."'},
+          {title:'Marks-per-question audit',desc:'Find out which question types (1-mark, 3-mark, 5-mark) you perform worst on. Claude identifies the format gap and fixes it.',tools:['Claude'],prompt:'"My mock errors by question type: 1-mark [X wrong], 2-mark [Y], 3-mark [Z], 5-mark [W]. Which format has worst accuracy? What\'s the answering strategy I\'m missing for that format?"'},
+          {title:'CBSE answer format check',desc:'Paste your written answers. Claude evaluates them exactly as a CBSE examiner — keyword matching, point structure, diagram mentions.',tools:['Claude'],prompt:'"Here\'s my written answer to this Class 10 board question [paste Q + your answer]. Evaluate as a CBSE examiner: mark me out of [X]. List every point I missed and every point worth marks that I wrote."'},
+          {title:'10-day pre-board plan',desc:'10 days before boards, ask Claude to build a chapter-by-chapter revision plan based on your mock performance data.',tools:['Claude','Google Calendar'],prompt:'"My mock scores by chapter [paste]. Board exam in 10 days. Build a day-by-day plan: which chapters to revise (only my weak ones), NCERT exercises to redo, and 3 board questions per chapter per day."'}
+        ],
+        tip:'CBSE Class 10 Science: 20 marks come from diagrams and practicals. If you\'re not practising diagram labelling every week, you\'re leaving easy marks on the table.',
+        spBtn:{label:'Generate a 30-day CBSE Class 10 Science study plan ↗',prompt:'Generate a detailed 30-day CBSE Class 10 Science study plan covering Physics, Chemistry, and Biology with daily targets, NCERT exercise schedule, and mock test days'}
+      }
+    ]
+  }
+];
+
+const PHASE_NAMES = ['learn','notes','revise','solve','mock'];
+const PHASE_META = {
+  learn:{label:'Learning',icon:'ti-brain'},
+  notes:{label:'Notes',icon:'ti-notes'},
+  revise:{label:'Revision',icon:'ti-refresh'},
+  solve:{label:'Question solving',icon:'ti-pencil'},
+  mock:{label:'Mock analysis',icon:'ti-chart-bar'}
+};
+
+let curSub = 0;
+let curPhase = {};
+SUBJECTS.forEach((_,i) => curPhase[i] = 'learn');
+
+function subColor(si,type){
+  const colors = [
+    {bg:'#EEEDFE',text:'#3C3489',dk_bg:'#26215C',dk_text:'#CECBF6'},
+    {bg:'#FAEEDA',text:'#633806',dk_bg:'#412402',dk_text:'#FAC775'},
+    {bg:'#E1F5EE',text:'#085041',dk_bg:'#04342C',dk_text:'#9FE1CB'},
+    {bg:'#E6F1FB',text:'#0C447C',dk_bg:'#042C53',dk_text:'#B5D4F4'},
+    {bg:'#FBEAF0',text:'#72243E',dk_bg:'#4B1528',dk_text:'#F4C0D1'}
+  ];
+  const dark = window.matchMedia && window.matchMedia('(prefers-color-scheme:dark)').matches;
+  const c = colors[si];
+  if(type==='bg') return dark ? c.dk_bg : c.bg;
+  return dark ? c.dk_text : c.text;
+}
+
+function renderAll(){
+  const container = document.getElementById('panels');
+  container.innerHTML = '';
+  SUBJECTS.forEach((sub,si) => {
+    const panel = document.createElement('div');
+    panel.className = 'subject-panel' + (si===0?' active':'');
+    panel.id = 'subj_'+si;
+
+    const phaseTabs = document.createElement('div');
+    phaseTabs.className = 'phase-tabs';
+    phaseTabs.id = 'ptabs_'+si;
+    PHASE_NAMES.forEach(pid => {
+      const ph = sub.phases.find(p=>p.id===pid);
+      if(!ph) return;
+      const btn = document.createElement('button');
+      btn.className = 'ptab' + (pid===curPhase[si]?' active':'');
+      btn.innerHTML = `<i class="ti ${PHASE_META[pid].icon}" aria-hidden="true"></i>${PHASE_META[pid].label}`;
+      btn.onclick = () => switchPhase(si, pid);
+      phaseTabs.appendChild(btn);
+    });
+    panel.appendChild(phaseTabs);
+
+    sub.phases.forEach(ph => {
+      const view = document.createElement('div');
+      view.className = 'phase-view' + (ph.id===curPhase[si]?' active':'');
+      view.id = 'phase_'+si+'_'+ph.id;
+
+      const bg = subColor(si,'bg');
+      const tc = subColor(si,'text');
+
+      let html = `<div class="phase-banner" style="background:${bg}">
+        <div class="phase-icon" style="background:${bg}"><i class="ti ${ph.icon}" style="font-size:18px;color:${tc}" aria-hidden="true"></i></div>
+        <div><div class="phase-title" style="color:${tc}">${ph.label}</div><div class="phase-timing" style="color:${tc};opacity:.75">${ph.timing}</div></div>
+      </div>`;
+
+      html += `<div class="section-lbl">Workflow</div><div class="flow-strip">`;
+      ph.flow.forEach((f,fi) => {
+        html += `<span class="fc" style="background:${bg};color:${tc}">${f}</span>`;
+        if(fi<ph.flow.length-1) html += `<span class="fa">›</span>`;
+      });
+      html += `</div>`;
+
+      html += `<div class="cards">`;
+      ph.cards.forEach((c,ci) => {
+        html += `<div class="card">
+          <div class="card-head">
+            <div class="step-dot" style="background:${bg};color:${tc}">${ci+1}</div>
+            <div><div class="card-title">${c.title}</div><div class="card-desc">${c.desc}</div></div>
+          </div>
+          <div class="tools">${c.tools.map(t=>`<span class="tool">${t}</span>`).join('')}</div>
+          <div class="pbox"><div class="plabel">Prompt</div><div class="ptext">${c.prompt}</div></div>
+        </div>`;
+      });
+      html += `</div>`;
+
+      html += `<div class="tip" style="background:${bg}"><i class="ti ti-bulb" style="color:${tc}" aria-hidden="true"></i><span style="color:${tc}">${ph.tip}</span></div>`;
+
+      if(ph.spBtn){
+        html += `<button class="sp-btn" onclick="sendPrompt('${ph.spBtn.prompt.replace(/'/g,"\\'")}')"><i class="ti ti-external-link" aria-hidden="true"></i>${ph.spBtn.label}</button>`;
+      }
+
+      view.innerHTML = html;
+      panel.appendChild(view);
+    });
+
+    container.appendChild(panel);
+  });
+}
+
+function switchSub(si, btn){
+  curSub = si;
+  document.querySelectorAll('.subject-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.snav').forEach(b=>b.classList.remove('active'));
+  document.getElementById('subj_'+si).classList.add('active');
+  btn.classList.add('active');
+}
+
+function switchPhase(si, pid){
+  curPhase[si] = pid;
+  document.querySelectorAll('#phase_'+si+'_ .phase-view, [id^="phase_'+si+'_"]').forEach(v=>v.classList.remove('active'));
+  document.querySelectorAll('#ptabs_'+si+' .ptab').forEach(b=>b.classList.remove('active'));
+  const target = document.getElementById('phase_'+si+'_'+pid);
+  if(target) target.classList.add('active');
+  const tabs = document.getElementById('ptabs_'+si);
+  if(tabs){
+    const allTabs = tabs.querySelectorAll('.ptab');
+    const phIdx = PHASE_NAMES.indexOf(pid);
+    if(allTabs[phIdx]) allTabs[phIdx].classList.add('active');
+  }
+}
+
+renderAll();
+</script>

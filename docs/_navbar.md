@@ -1,0 +1,7 @@
+* [Study Systems](/study-systems/README)
+* [Prompts](/prompts/README)
+* [Workflows](/workflows/README)
+* [AI Tools](/tools/README)
+* [Resources](/resources/README)
+* [Career](/career-guides/README)
+* [GitHub ↗](https://github.com/scooterxd69/AI-Atlas)
