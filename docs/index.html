@@ -21,16 +21,19 @@
 
   <style>
     :root {
-      --bg: #0b0e13;
-      --surface: #131720;
-      --surface2: #1a2030;
-      --border: #252e42;
-      --accent: #3ecf8e;
-      --accent2: #4a9eff;
-      --accent3: #ff6b6b;
-      --text: #e2e8f0;
-      --muted: #7a8aa0;
-      --heading: #f0f6ff;
+      --bg: #020617;
+      --surface: #050B1A;
+      --surface2: #0A1228;
+      --border: #1E3A8A;
+      --accent: #00D4FF;
+      --accent2: #3B82F6;
+      --accent3: #A855F7;
+      --text: #F8FAFC;
+      --muted: #94A3B8;
+      --heading: #F8FAFC;
+      --glow-blue: rgba(0,212,255,0.25);
+      --glow-purple: rgba(139,92,246,0.25);
+      --gradient: linear-gradient(90deg, #00D4FF 0%, #3B82F6 50%, #8B5CF6 100%);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -66,9 +69,9 @@
       align-items: center;
       justify-content: space-between;
       padding: 1rem 2rem;
-      background: rgba(11, 14, 19, 0.85);
+      background: rgba(2, 6, 23, 0.85);
       backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid rgba(30, 58, 138, 0.6);
     }
 
     .nav-logo {
@@ -82,7 +85,12 @@
       gap: 0.5rem;
     }
 
-    .nav-logo span { color: var(--accent); }
+    .nav-logo span {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
 
     .nav-links {
       display: flex;
@@ -101,15 +109,16 @@
     .nav-links a:hover { color: var(--text); }
 
     .nav-cta {
-      background: var(--accent);
-      color: #0b1a12 !important;
+      background: var(--gradient) !important;
+      color: #020617 !important;
       padding: 0.4rem 1rem;
       border-radius: 6px;
       font-weight: 600 !important;
-      transition: opacity 0.2s !important;
+      transition: opacity 0.2s, transform 0.2s !important;
+      -webkit-text-fill-color: #020617 !important;
     }
 
-    .nav-cta:hover { opacity: 0.85; color: #0b1a12 !important; }
+    .nav-cta:hover { opacity: 0.9; transform: translateY(-1px); color: #020617 !important; -webkit-text-fill-color: #020617 !important; }
 
     /* ── HERO ── */
     .hero {
@@ -122,6 +131,9 @@
       text-align: center;
       padding: 8rem 1.5rem 4rem;
       overflow: hidden;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0,212,255,0.07) 0%, transparent 70%),
+                  radial-gradient(ellipse 60% 40% at 80% 80%, rgba(139,92,246,0.06) 0%, transparent 60%),
+                  radial-gradient(ellipse 50% 30% at 10% 70%, rgba(59,130,246,0.05) 0%, transparent 60%);
     }
 
     .hero-glow {
@@ -129,19 +141,20 @@
       width: 700px;
       height: 700px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(62, 207, 142, 0.08) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(0,212,255,0.07) 0%, rgba(139,92,246,0.04) 40%, transparent 70%);
       top: 50%;
       left: 50%;
       transform: translate(-50%, -55%);
       pointer-events: none;
+      filter: blur(1px);
     }
 
     .hero-badge {
       display: inline-flex;
       align-items: center;
       gap: 0.4rem;
-      background: rgba(62, 207, 142, 0.1);
-      border: 1px solid rgba(62, 207, 142, 0.25);
+      background: rgba(0,212,255,0.08);
+      border: 1px solid rgba(0,212,255,0.2);
       color: var(--accent);
       font-size: 0.8rem;
       font-weight: 600;
@@ -164,7 +177,12 @@
       animation: fadeUp 0.6s 0.1s ease both;
     }
 
-    h1 .accent { color: var(--accent); }
+    h1 .accent {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
     h1 .accent2 { color: var(--accent2); }
 
     .hero-sub {
@@ -200,11 +218,17 @@
     }
 
     .btn-primary {
-      background: var(--accent);
-      color: #0b1a12;
+      background: var(--gradient);
+      color: #020617;
+      -webkit-text-fill-color: #020617;
+      box-shadow: 0 0 24px rgba(0,212,255,0.18), 0 0 48px rgba(139,92,246,0.1);
     }
 
-    .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+    .btn-primary:hover {
+      opacity: 0.92;
+      transform: translateY(-2px);
+      box-shadow: 0 0 32px rgba(0,212,255,0.28), 0 0 64px rgba(139,92,246,0.15);
+    }
 
     .btn-ghost {
       background: transparent;
@@ -212,7 +236,7 @@
       border: 1px solid var(--border);
     }
 
-    .btn-ghost:hover { border-color: var(--muted); background: var(--surface); }
+    .btn-ghost:hover { border-color: rgba(0,212,255,0.4); background: rgba(0,212,255,0.05); }
 
     .hero-stats {
       display: flex;
@@ -226,7 +250,10 @@
       font-family: 'Syne', sans-serif;
       font-size: 2rem;
       font-weight: 800;
-      color: var(--heading);
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
     .hero-stat .label { font-size: 0.8rem; color: var(--muted); margin-top: 0.2rem; }
 
@@ -265,15 +292,19 @@
     }
 
     /* ── QUICK START CARDS ── */
-    .quick-start { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .quick-start {
+      background: var(--surface);
+      border-top: 1px solid rgba(30,58,138,0.5);
+      border-bottom: 1px solid rgba(30,58,138,0.5);
+    }
 
     .qs-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 1px;
       margin-top: 3rem;
-      background: var(--border);
-      border: 1px solid var(--border);
+      background: rgba(30,58,138,0.4);
+      border: 1px solid rgba(30,58,138,0.5);
       border-radius: 12px;
       overflow: hidden;
     }
@@ -294,13 +325,13 @@
       position: absolute;
       bottom: 0; left: 0; right: 0;
       height: 2px;
-      background: var(--accent);
+      background: var(--gradient);
       transform: scaleX(0);
       transition: transform 0.25s;
       transform-origin: left;
     }
 
-    .qs-card:hover { background: var(--surface2); }
+    .qs-card:hover { background: #0A1228; }
     .qs-card:hover::after { transform: scaleX(1); }
 
     .qs-icon {
@@ -335,13 +366,13 @@
       width: 100%;
       border-collapse: collapse;
       margin-top: 2.5rem;
-      border: 1px solid var(--border);
+      border: 1px solid rgba(30,58,138,0.5);
       border-radius: 10px;
       overflow: hidden;
     }
 
     .contents-table th {
-      background: var(--surface2);
+      background: #0A1228;
       padding: 0.9rem 1.25rem;
       text-align: left;
       font-family: 'DM Mono', monospace;
@@ -349,18 +380,18 @@
       letter-spacing: 0.08em;
       color: var(--muted);
       text-transform: uppercase;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid rgba(30,58,138,0.5);
     }
 
     .contents-table td {
       padding: 1rem 1.25rem;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid rgba(30,58,138,0.4);
       font-size: 0.9rem;
       vertical-align: middle;
     }
 
     .contents-table tr:last-child td { border-bottom: none; }
-    .contents-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .contents-table tr:hover td { background: rgba(0,212,255,0.02); }
 
     .contents-table .path {
       font-family: 'DM Mono', monospace;
@@ -377,11 +408,15 @@
       font-family: 'DM Mono', monospace;
     }
 
-    .badge-green { background: rgba(62,207,142,0.12); color: var(--accent); }
+    .badge-green { background: rgba(0,212,255,0.1); color: var(--accent); border: 1px solid rgba(0,212,255,0.2); }
     .badge-yellow { background: rgba(251,191,36,0.12); color: #fbbf24; }
 
     /* ── PROMPT SHOWCASE ── */
-    .prompts-bg { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .prompts-bg {
+      background: var(--surface);
+      border-top: 1px solid rgba(30,58,138,0.5);
+      border-bottom: 1px solid rgba(30,58,138,0.5);
+    }
 
     .prompt-grid {
       display: grid;
@@ -392,13 +427,17 @@
 
     .prompt-card {
       background: var(--bg);
-      border: 1px solid var(--border);
+      border: 1px solid rgba(30,58,138,0.5);
       border-radius: 10px;
       padding: 1.5rem;
-      transition: border-color 0.2s, transform 0.2s;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
     }
 
-    .prompt-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .prompt-card:hover {
+      border-color: rgba(0,212,255,0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(0,212,255,0.08), 0 0 0 1px rgba(0,212,255,0.05);
+    }
 
     .prompt-subject {
       font-size: 0.75rem;
@@ -413,8 +452,9 @@
       font-size: 0.9rem;
       color: var(--text);
       line-height: 1.6;
-      background: var(--surface2);
-      border-left: 3px solid var(--accent);
+      background: #0A1228;
+      border-left: 3px solid;
+      border-image: var(--gradient) 1;
       padding: 0.75rem 1rem;
       border-radius: 0 6px 6px 0;
       font-style: italic;
@@ -438,12 +478,16 @@
       align-items: flex-start;
       gap: 1.25rem;
       background: var(--surface);
-      border: 1px solid var(--border);
+      border: 1px solid rgba(30,58,138,0.5);
       border-radius: 10px;
       padding: 1.5rem;
     }
 
-    .roadmap-item.active { border-color: rgba(62,207,142,0.3); background: rgba(62,207,142,0.04); }
+    .roadmap-item.active {
+      border-color: rgba(0,212,255,0.25);
+      background: rgba(0,212,255,0.03);
+      box-shadow: 0 0 24px rgba(0,212,255,0.05);
+    }
     .roadmap-item.progress { border-color: rgba(251,191,36,0.2); background: rgba(251,191,36,0.03); }
 
     .roadmap-v {
@@ -457,9 +501,13 @@
       text-align: center;
     }
 
-    .roadmap-item.active .roadmap-v { background: var(--accent); color: #0b1a12; }
-    .roadmap-item.progress .roadmap-v { background: #fbbf24; color: #1a1000; }
-    .roadmap-item:not(.active):not(.progress) .roadmap-v { background: var(--surface2); color: var(--muted); }
+    .roadmap-item.active .roadmap-v {
+      background: var(--gradient);
+      color: #020617;
+      -webkit-text-fill-color: #020617;
+    }
+    .roadmap-item.progress .roadmap-v { background: #fbbf24; color: #1a1000; -webkit-text-fill-color: #1a1000; }
+    .roadmap-item:not(.active):not(.progress) .roadmap-v { background: #0A1228; color: var(--muted); }
 
     .roadmap-body strong { font-weight: 600; color: var(--heading); display: block; margin-bottom: 0.25rem; }
     .roadmap-body span { font-size: 0.875rem; color: var(--muted); }
@@ -472,7 +520,7 @@
     /* ── FOOTER ── */
     footer {
       background: var(--surface);
-      border-top: 1px solid var(--border);
+      border-top: 1px solid rgba(30,58,138,0.5);
       padding: 2.5rem 1.5rem;
       text-align: center;
     }
@@ -490,7 +538,12 @@
       margin-bottom: 0.5rem;
     }
 
-    .footer-logo span { color: var(--accent); }
+    .footer-logo span {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
 
     .footer-links {
       display: flex;
@@ -523,8 +576,8 @@
       width: 42px;
       height: 42px;
       border-radius: 50%;
-      background: var(--accent);
-      color: #0b1a12;
+      background: var(--gradient);
+      color: #020617;
       border: none;
       cursor: pointer;
       font-size: 1.1rem;
@@ -535,11 +588,11 @@
       transform: translateY(10px);
       transition: opacity 0.3s, transform 0.3s;
       z-index: 99;
-      box-shadow: 0 4px 20px rgba(62,207,142,0.3);
+      box-shadow: 0 4px 20px rgba(0,212,255,0.25);
     }
 
     #top-btn.visible { opacity: 1; transform: translateY(0); }
-    #top-btn:hover { opacity: 0.85; }
+    #top-btn:hover { opacity: 0.85; box-shadow: 0 6px 28px rgba(0,212,255,0.35); }
 
     /* ── ANIMATIONS ── */
     @keyframes fadeUp {
@@ -694,12 +747,12 @@
 
     <div class="prompt-grid">
       <div class="prompt-card">
-        <div class="prompt-subject" style="color:#4a9eff">Physics · JEE</div>
+        <div class="prompt-subject" style="color:#3B82F6">Physics · JEE</div>
         <div class="prompt-text">"Explain the concept of [topic] as if I'm a JEE aspirant who just saw it for the first time. Start with the physical intuition, then the formula, then show me a PYQ-style question with full solution."</div>
         <div class="prompt-tag">→ Concept clarity + application</div>
       </div>
       <div class="prompt-card">
-        <div class="prompt-subject" style="color:#3ecf8e">Biology · NEET</div>
+        <div class="prompt-subject" style="color:#00D4FF">Biology · NEET</div>
         <div class="prompt-text">"Create a high-yield summary table for [NCERT chapter] with the most tested facts, common confusions, and 5 predicted MCQs with explanations."</div>
         <div class="prompt-tag">→ Revision + MCQ practice</div>
       </div>
@@ -761,7 +814,7 @@
 </section>
 
 <!-- CONTRIBUTE -->
-<section class="contribute" style="border-top: 1px solid var(--border);">
+<section class="contribute" style="border-top: 1px solid rgba(30,58,138,0.5);">
   <div class="section-inner">
     <div class="contribute-inner">
       <div class="section-tag">// Open Source</div>
@@ -786,7 +839,7 @@
       <a href="https://github.com/scooterxd69/AI-Atlas/blob/main/SECURITY.md" target="_blank" rel="noopener">Security</a>
       <a href="https://github.com/scooterxd69/AI-Atlas" target="_blank" rel="noopener">GitHub</a>
     </div>
-    <div class="footer-copy">Built by <a href="https://github.com/scooterxd69" style="color:var(--accent);text-decoration:none">Naitik Singh</a> · AI Atlas — Learn · Explore · Achieve</div>
+    <div class="footer-copy">Built by <a href="https://github.com/scooterxd69" style="background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-decoration:none">Naitik Singh</a> · AI Atlas — Learn · Explore · Achieve</div>
   </div>
 </footer>
 
