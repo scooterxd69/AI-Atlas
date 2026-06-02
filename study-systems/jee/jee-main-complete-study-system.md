@@ -119,7 +119,7 @@ Copy this into Claude right now:
 
 ## Related
 
-- 📝 [JEE Prompt Library](/prompts/jee/jee-ai-prompt-library)
+- 📝 [JEE Prompt Library](https://github.com/scooterxd69/AI-Atlas/blob/main/prompts/jee/jee-ai-prompt-library.md))
 - ⚙️ [All 25 Workflows](/workflows/ai-educational-workflows)
 - 🛠️ [Claude for Students](/tools/tool-profiles/claude-for-students)
 - 📖 [JEE Chapter Pages](/chapters/jee-physics/README)
