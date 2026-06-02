@@ -22,7 +22,7 @@ AI Atlas is a free, open-source platform that teaches Indian students how to use
 | **JEE Main / Advanced** | [JEE Complete System](docs/study-systems/jee/jee-main-complete-study-system.md) |
 | **NEET UG** | [NEET Complete System](docs/study-systems/neet/neet-complete-study-system.md) |
 | **Class 9–12 Boards** | [Class 10 CBSE System](docs/study-systems/school/class10-cbse-study-system.md) |
-| **New to AI** | [AI Tools Database](docs/tools/ai-tools-database.md) |
+| **New to AI** | [AI Tools Database](https://github.com/scooterxd69/AI-Atlas/blob/main/AI-Tools-Database.md) |
 
 ## What's Inside
 
