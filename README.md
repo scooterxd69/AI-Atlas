@@ -11,7 +11,6 @@
   <img src="https://github.com/scooterxd69/AI-Atlas/blob/main/assets/data/github-banner.png" alt="AI Atlas Banner" width="100%">
 
 </p>
----
 
 ## 🌐 [Visit the Website →](https://scooterxd69.github.io/AI-Atlas)
 
