@@ -109,6 +109,6 @@ Then draw each diagram from memory. Redraw until perfect.
 
 ## Related
 
-- [NEET Biology System](/study-systems/neet/neet-biology-study-system)
+- [NEET Biology System](https://github.com/scooterxd69/AI-Atlas/blob/main/study-systems/neet/neet-biology-study-system.md)
 - [NEET Prompt Library](https://github.com/scooterxd69/AI-Atlas/blob/main/prompts/neet/neet-ai-prompt-library.md)
 - [NEET Biology Workflows](/workflows/subject-specific/neet-biology-workflow)
