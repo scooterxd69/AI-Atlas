@@ -1,3 +1,9 @@
+<p align="center">
+
+  <img src="https://github.com/scooterxd69/AI-Atlas/blob/main/assets/data/github-banner.png" alt="AI Atlas Banner" width="100%">
+
+</p>
+
 # 🗺️ AI Atlas
 
 **Free AI-powered learning ecosystem for JEE, NEET and school students.**
@@ -6,11 +12,6 @@
 [![Website](https://img.shields.io/badge/Website-Live-green?style=flat-square)](https://scooterxd69.github.io/AI-Atlas)
 
 ---
-<p align="center">
-
-  <img src="https://github.com/scooterxd69/AI-Atlas/blob/main/assets/data/github-banner.png" alt="AI Atlas Banner" width="100%">
-
-</p>
 
 ## 🌐 [Visit the Website →](https://scooterxd69.github.io/AI-Atlas)
 
