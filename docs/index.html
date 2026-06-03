@@ -22,18 +22,18 @@
   <style>
     :root {
       --bg: #020617;
-      --surface: #050B1A;
+      --surface: #050816;
       --surface2: #0A1228;
       --border: #1E3A8A;
-      --accent: #00D4FF;
-      --accent2: #3B82F6;
+      --accent: #38BDF8;
+      --accent2: #2563EB;
       --accent3: #A855F7;
       --text: #F8FAFC;
       --muted: #94A3B8;
       --heading: #F8FAFC;
-      --glow-blue: rgba(0,212,255,0.25);
-      --glow-purple: rgba(139,92,246,0.25);
-      --gradient: linear-gradient(90deg, #00D4FF 0%, #3B82F6 50%, #8B5CF6 100%);
+      --glow-blue: rgba(56,189,248,0.28);
+      --glow-purple: rgba(168,85,247,0.28);
+      --gradient: linear-gradient(90deg, #38BDF8 0%, #2563EB 50%, #8B5CF6 100%);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -124,37 +124,135 @@
     .hero {
       position: relative;
       min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 0 5vw;
+      overflow: hidden;
+      background: #020617;
+    }
+
+    /* Three.js canvas sits behind everything */
+    #hero-canvas {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Left: text content */
+    .hero-left {
+      position: relative;
+      z-index: 10;
+      padding-top: 5rem;
       display: flex;
       flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    /* Right: logo visual */
+    .hero-right {
+      position: relative;
+      z-index: 10;
+      display: flex;
       align-items: center;
       justify-content: center;
-      text-align: center;
-      padding: 8rem 1.5rem 4rem;
-      overflow: hidden;
-      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0,212,255,0.07) 0%, transparent 70%),
-                  radial-gradient(ellipse 60% 40% at 80% 80%, rgba(139,92,246,0.06) 0%, transparent 60%),
-                  radial-gradient(ellipse 50% 30% at 10% 70%, rgba(59,130,246,0.05) 0%, transparent 60%);
+      padding-top: 4rem;
+    }
+
+    .hero-logo-wrap {
+      position: relative;
+      width: min(42vw, 500px);
+      transition: transform 0.12s ease-out;
+      filter:
+        drop-shadow(0 0 40px rgba(56,189,248,0.55))
+        drop-shadow(0 0 90px rgba(56,189,248,0.3))
+        drop-shadow(0 0 160px rgba(139,92,246,0.2));
+    }
+
+    .hero-logo-inner {
+      animation: logoFloat 7s ease-in-out infinite;
+    }
+
+    .hero-logo-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Earth horizon arc */
+    .hero-earth-arc {
+      position: absolute;
+      bottom: -15%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 160%;
+      aspect-ratio: 2/1;
+      border-radius: 50%;
+      background: radial-gradient(ellipse 80% 60% at 50% 100%,
+        rgba(37,99,235,0.22) 0%,
+        rgba(56,189,248,0.08) 40%,
+        transparent 70%
+      );
+      border-top: 1px solid rgba(56,189,248,0.15);
+      pointer-events: none;
+      z-index: 1;
+      animation: earthPulse 5s ease-in-out infinite;
+    }
+
+    @keyframes earthPulse {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 1; }
+    }
+
+    @keyframes logoFloat {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-18px); }
+    }
+
+    /* Light rays behind logo */
+    .hero-rays {
+      position: absolute;
+      inset: -40%;
+      z-index: 0;
+      pointer-events: none;
+      background: conic-gradient(
+        from 270deg at 50% 60%,
+        transparent 0deg,
+        rgba(56,189,248,0.04) 10deg,
+        transparent 20deg,
+        rgba(139,92,246,0.03) 35deg,
+        transparent 50deg,
+        rgba(56,189,248,0.04) 65deg,
+        transparent 80deg,
+        rgba(56,189,248,0.02) 95deg,
+        transparent 110deg
+      );
+      animation: raysRotate 20s linear infinite;
+    }
+
+    @keyframes raysRotate {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
     }
 
     .hero-glow {
       position: absolute;
-      width: 700px;
-      height: 700px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(0,212,255,0.07) 0%, rgba(139,92,246,0.04) 40%, transparent 70%);
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -55%);
+      inset: 0;
       pointer-events: none;
-      filter: blur(1px);
+      z-index: 0;
+      background:
+        radial-gradient(ellipse 55% 55% at 75% 50%, rgba(56,189,248,0.07) 0%, transparent 65%),
+        radial-gradient(ellipse 40% 40% at 75% 55%, rgba(139,92,246,0.06) 0%, transparent 60%);
     }
 
     .hero-badge {
       display: inline-flex;
       align-items: center;
       gap: 0.4rem;
-      background: rgba(0,212,255,0.08);
-      border: 1px solid rgba(0,212,255,0.2);
+      background: rgba(56,189,248,0.08);
+      border: 1px solid rgba(56,189,248,0.22);
       color: var(--accent);
       font-size: 0.8rem;
       font-weight: 600;
@@ -169,11 +267,11 @@
     h1 {
       font-family: 'Syne', sans-serif;
       font-weight: 800;
-      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-size: clamp(2.2rem, 4.5vw, 4.2rem);
       line-height: 1.05;
       color: var(--heading);
       letter-spacing: -0.02em;
-      max-width: 800px;
+      max-width: 560px;
       animation: fadeUp 0.6s 0.1s ease both;
     }
 
@@ -187,9 +285,9 @@
 
     .hero-sub {
       margin-top: 1.5rem;
-      font-size: 1.125rem;
+      font-size: 1.05rem;
       color: var(--muted);
-      max-width: 540px;
+      max-width: 460px;
       line-height: 1.65;
       animation: fadeUp 0.6s 0.2s ease both;
     }
@@ -199,7 +297,7 @@
       gap: 1rem;
       margin-top: 2.5rem;
       flex-wrap: wrap;
-      justify-content: center;
+      justify-content: flex-start;
       animation: fadeUp 0.6s 0.3s ease both;
     }
 
@@ -221,13 +319,13 @@
       background: var(--gradient);
       color: #020617;
       -webkit-text-fill-color: #020617;
-      box-shadow: 0 0 24px rgba(0,212,255,0.18), 0 0 48px rgba(139,92,246,0.1);
+      box-shadow: 0 0 24px rgba(56,189,248,0.22), 0 0 48px rgba(139,92,246,0.12);
     }
 
     .btn-primary:hover {
       opacity: 0.92;
       transform: translateY(-2px);
-      box-shadow: 0 0 32px rgba(0,212,255,0.28), 0 0 64px rgba(139,92,246,0.15);
+      box-shadow: 0 0 36px rgba(56,189,248,0.35), 0 0 70px rgba(139,92,246,0.2);
     }
 
     .btn-ghost {
@@ -236,13 +334,14 @@
       border: 1px solid var(--border);
     }
 
-    .btn-ghost:hover { border-color: rgba(0,212,255,0.4); background: rgba(0,212,255,0.05); }
+    .btn-ghost:hover { border-color: rgba(56,189,248,0.4); background: rgba(56,189,248,0.05); }
 
     .hero-stats {
       display: flex;
-      gap: 3rem;
+      gap: 2.5rem;
       margin-top: 3.5rem;
       animation: fadeUp 0.6s 0.4s ease both;
+      justify-content: flex-start;
     }
 
     .hero-stat { text-align: center; }
@@ -391,7 +490,7 @@
     }
 
     .contents-table tr:last-child td { border-bottom: none; }
-    .contents-table tr:hover td { background: rgba(0,212,255,0.02); }
+    .contents-table tr:hover td { background: rgba(56,189,248,0.02); }
 
     .contents-table .path {
       font-family: 'DM Mono', monospace;
@@ -408,7 +507,7 @@
       font-family: 'DM Mono', monospace;
     }
 
-    .badge-green { background: rgba(0,212,255,0.1); color: var(--accent); border: 1px solid rgba(0,212,255,0.2); }
+    .badge-green { background: rgba(56,189,248,0.1); color: var(--accent); border: 1px solid rgba(56,189,248,0.22); }
     .badge-yellow { background: rgba(251,191,36,0.12); color: #fbbf24; }
 
     /* ── PROMPT SHOWCASE ── */
@@ -434,9 +533,9 @@
     }
 
     .prompt-card:hover {
-      border-color: rgba(0,212,255,0.3);
+      border-color: rgba(56,189,248,0.3);
       transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(0,212,255,0.08), 0 0 0 1px rgba(0,212,255,0.05);
+      box-shadow: 0 8px 32px rgba(56,189,248,0.08), 0 0 0 1px rgba(56,189,248,0.05);
     }
 
     .prompt-subject {
@@ -484,9 +583,9 @@
     }
 
     .roadmap-item.active {
-      border-color: rgba(0,212,255,0.25);
-      background: rgba(0,212,255,0.03);
-      box-shadow: 0 0 24px rgba(0,212,255,0.05);
+      border-color: rgba(56,189,248,0.28);
+      background: rgba(56,189,248,0.03);
+      box-shadow: 0 0 24px rgba(56,189,248,0.06);
     }
     .roadmap-item.progress { border-color: rgba(251,191,36,0.2); background: rgba(251,191,36,0.03); }
 
@@ -588,11 +687,11 @@
       transform: translateY(10px);
       transition: opacity 0.3s, transform 0.3s;
       z-index: 99;
-      box-shadow: 0 4px 20px rgba(0,212,255,0.25);
+      box-shadow: 0 4px 20px rgba(56,189,248,0.28);
     }
 
     #top-btn.visible { opacity: 1; transform: translateY(0); }
-    #top-btn:hover { opacity: 0.85; box-shadow: 0 6px 28px rgba(0,212,255,0.35); }
+    #top-btn:hover { opacity: 0.85; box-shadow: 0 6px 28px rgba(56,189,248,0.4); }
 
     /* ── ANIMATIONS ── */
     @keyframes fadeUp {
@@ -601,6 +700,28 @@
     }
 
     /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 0 1.5rem;
+        text-align: center;
+        min-height: auto;
+        padding-bottom: 4rem;
+      }
+      .hero-left {
+        align-items: center;
+        text-align: center;
+        padding-top: 7rem;
+        order: 1;
+      }
+      h1 { font-size: clamp(2.4rem, 7vw, 3.5rem); max-width: 100%; }
+      .hero-sub { max-width: 100%; }
+      .hero-actions { justify-content: center; }
+      .hero-stats { justify-content: center; }
+      .hero-right { order: 2; padding-top: 1rem; padding-bottom: 2rem; }
+      .hero-logo-wrap { width: min(75vw, 340px); }
+    }
+
     @media (max-width: 640px) {
       nav { padding: 1rem; }
       .nav-links { display: none; }
@@ -625,19 +746,35 @@
 
 <!-- HERO -->
 <section class="hero">
+  <canvas id="hero-canvas"></canvas>
   <div class="hero-glow"></div>
-  <span class="hero-badge">🗺️ &nbsp;Free · Open-Source · India</span>
-  <h1>Learn <span class="accent">JEE &amp; NEET</span><br/>with <span class="accent2">AI</span></h1>
-  <p class="hero-sub">Not a coaching platform. A system that makes your existing study dramatically more effective through AI — built for Indian students, 100% free.</p>
-  <div class="hero-actions">
-    <a href="#quick-start" class="btn btn-primary">→ Start Learning</a>
-    <a href="https://github.com/scooterxd69/AI-Atlas" target="_blank" rel="noopener" class="btn btn-ghost">⭐ Star on GitHub</a>
+
+  <!-- LEFT: existing text content — untouched -->
+  <div class="hero-left">
+    <span class="hero-badge">🗺️ &nbsp;Free · Open-Source · India</span>
+    <h1>Learn <span class="accent">JEE &amp; NEET</span><br/>with <span class="accent2">AI</span></h1>
+    <p class="hero-sub">Not a coaching platform. A system that makes your existing study dramatically more effective through AI — built for Indian students, 100% free.</p>
+    <div class="hero-actions">
+      <a href="#quick-start" class="btn btn-primary">→ Start Learning</a>
+      <a href="https://github.com/scooterxd69/AI-Atlas" target="_blank" rel="noopener" class="btn btn-ghost">⭐ Star on GitHub</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num">9</div><div class="label">Study Systems</div></div>
+      <div class="hero-stat"><div class="num">125+</div><div class="label">AI Prompts</div></div>
+      <div class="hero-stat"><div class="num">100+</div><div class="label">AI Tools</div></div>
+      <div class="hero-stat"><div class="num">25</div><div class="label">Workflows</div></div>
+    </div>
   </div>
-  <div class="hero-stats">
-    <div class="hero-stat"><div class="num">9</div><div class="label">Study Systems</div></div>
-    <div class="hero-stat"><div class="num">125+</div><div class="label">AI Prompts</div></div>
-    <div class="hero-stat"><div class="num">100+</div><div class="label">AI Tools</div></div>
-    <div class="hero-stat"><div class="num">25</div><div class="label">Workflows</div></div>
+
+  <!-- RIGHT: cinematic logo visual -->
+  <div class="hero-right">
+    <div class="hero-rays"></div>
+    <div class="hero-earth-arc"></div>
+    <div class="hero-logo-wrap" id="hero-logo-wrap">
+      <div class="hero-logo-inner">
+        <img src="../assets/data/ai-atlas-logo.png" alt="AI Atlas Logo" id="hero-logo-img" />
+      </div>
+    </div>
   </div>
 </section>
 
@@ -846,14 +983,15 @@
 <!-- SCROLL TO TOP -->
 <button id="top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
-  // Show/hide scroll-to-top button
+  // ── SCROLL-TO-TOP ──
   const topBtn = document.getElementById('top-btn');
   window.addEventListener('scroll', () => {
     topBtn.classList.toggle('visible', window.scrollY > 400);
   });
 
-  // Fade-in on scroll for non-hero sections
+  // ── SCROLL FADE-IN ──
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
@@ -869,6 +1007,204 @@
     el.style.transition = `opacity 0.45s ${i * 0.05}s ease, transform 0.45s ${i * 0.05}s ease`;
     observer.observe(el);
   });
+
+  // ── THREE.JS HERO CANVAS ──
+  (function () {
+    const canvas = document.getElementById('hero-canvas');
+    const hero = document.querySelector('.hero');
+
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setClearColor(0x000000, 0);
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(60, 1, 0.1, 1000);
+    camera.position.z = 5;
+
+    function resize() {
+      const w = hero.offsetWidth;
+      const h = hero.offsetHeight;
+      renderer.setSize(w, h);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    // ── STARS ──
+    const starCount = 1800;
+    const starGeo = new THREE.BufferGeometry();
+    const starPos = new Float32Array(starCount * 3);
+    const starSizes = new Float32Array(starCount);
+    for (let i = 0; i < starCount; i++) {
+      starPos[i * 3]     = (Math.random() - 0.5) * 40;
+      starPos[i * 3 + 1] = (Math.random() - 0.5) * 30;
+      starPos[i * 3 + 2] = (Math.random() - 0.5) * 20 - 5;
+      starSizes[i] = Math.random() * 1.8 + 0.3;
+    }
+    starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
+    starGeo.setAttribute('size', new THREE.BufferAttribute(starSizes, 1));
+
+    const starMat = new THREE.ShaderMaterial({
+      uniforms: {
+        uTime: { value: 0 },
+        uPixelRatio: { value: renderer.getPixelRatio() }
+      },
+      vertexShader: `
+        attribute float size;
+        uniform float uTime;
+        uniform float uPixelRatio;
+        varying float vBrightness;
+        void main() {
+          vBrightness = 0.5 + 0.5 * sin(uTime * 1.2 + position.x * 3.7 + position.y * 2.1);
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+          gl_PointSize = size * uPixelRatio * vBrightness;
+        }
+      `,
+      fragmentShader: `
+        varying float vBrightness;
+        void main() {
+          float d = length(gl_PointCoord - vec2(0.5));
+          if (d > 0.5) discard;
+          float alpha = (1.0 - d * 2.0) * vBrightness;
+          gl_FragColor = vec4(0.85 + 0.15*vBrightness, 0.92, 1.0, alpha * 0.9);
+        }
+      `,
+      transparent: true,
+      depthWrite: false
+    });
+
+    const stars = new THREE.Points(starGeo, starMat);
+    scene.add(stars);
+
+    // ── NEBULA CLOUD ──
+    const nebulaCount = 120;
+    const nebulaGeo = new THREE.BufferGeometry();
+    const nebulaPos = new Float32Array(nebulaCount * 3);
+    const nebulaColors = new Float32Array(nebulaCount * 3);
+    for (let i = 0; i < nebulaCount; i++) {
+      const angle = Math.random() * Math.PI * 2;
+      const radius = 2 + Math.random() * 6;
+      nebulaPos[i * 3]     = Math.cos(angle) * radius + 3;
+      nebulaPos[i * 3 + 1] = (Math.random() - 0.5) * 6 - 0.5;
+      nebulaPos[i * 3 + 2] = -2 - Math.random() * 4;
+      // blue-purple palette
+      const t = Math.random();
+      nebulaColors[i * 3]     = 0.1 + t * 0.3;
+      nebulaColors[i * 3 + 1] = 0.3 + t * 0.4;
+      nebulaColors[i * 3 + 2] = 0.8 + t * 0.2;
+    }
+    nebulaGeo.setAttribute('position', new THREE.BufferAttribute(nebulaPos, 3));
+    nebulaGeo.setAttribute('color', new THREE.BufferAttribute(nebulaColors, 3));
+
+    const nebulaMat = new THREE.ShaderMaterial({
+      uniforms: { uTime: { value: 0 } },
+      vertexShader: `
+        attribute vec3 color;
+        uniform float uTime;
+        varying vec3 vColor;
+        varying float vAlpha;
+        void main() {
+          vColor = color;
+          vAlpha = 0.12 + 0.08 * sin(uTime * 0.4 + position.x + position.y);
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+          gl_PointSize = 120.0 + 60.0 * sin(uTime * 0.3 + position.z);
+        }
+      `,
+      fragmentShader: `
+        varying vec3 vColor;
+        varying float vAlpha;
+        void main() {
+          float d = length(gl_PointCoord - vec2(0.5));
+          float alpha = (1.0 - smoothstep(0.3, 0.5, d)) * vAlpha;
+          gl_FragColor = vec4(vColor, alpha);
+        }
+      `,
+      transparent: true,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending
+    });
+
+    const nebula = new THREE.Points(nebulaGeo, nebulaMat);
+    scene.add(nebula);
+
+    // ── FLOATING PARTICLES ──
+    const partCount = 300;
+    const partGeo = new THREE.BufferGeometry();
+    const partPos = new Float32Array(partCount * 3);
+    const partSpeeds = new Float32Array(partCount);
+    for (let i = 0; i < partCount; i++) {
+      partPos[i * 3]     = (Math.random() - 0.5) * 30;
+      partPos[i * 3 + 1] = (Math.random() - 0.5) * 20;
+      partPos[i * 3 + 2] = (Math.random() - 0.5) * 8 - 2;
+      partSpeeds[i] = 0.003 + Math.random() * 0.007;
+    }
+    partGeo.setAttribute('position', new THREE.BufferAttribute(partPos, 3));
+
+    const partMat = new THREE.PointsMaterial({
+      color: 0x38BDF8,
+      size: 0.04,
+      transparent: true,
+      opacity: 0.55,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending
+    });
+
+    const particles = new THREE.Points(partGeo, partMat);
+    scene.add(particles);
+
+    // ── MOUSE PARALLAX ──
+    const mouse = { x: 0, y: 0 };
+    const target = { x: 0, y: 0 };
+    document.addEventListener('mousemove', (e) => {
+      mouse.x = (e.clientX / window.innerWidth - 0.5) * 2;
+      mouse.y = -(e.clientY / window.innerHeight - 0.5) * 2;
+    });
+
+    // ── ANIMATE ──
+    let t = 0;
+    function animate() {
+      requestAnimationFrame(animate);
+      t += 0.008;
+
+      starMat.uniforms.uTime.value = t;
+      nebulaMat.uniforms.uTime.value = t;
+
+      // Gentle parallax on camera
+      target.x += (mouse.x * 0.25 - target.x) * 0.04;
+      target.y += (mouse.y * 0.15 - target.y) * 0.04;
+      camera.position.x = target.x;
+      camera.position.y = target.y;
+      camera.lookAt(0, 0, 0);
+
+      // Slowly drift stars
+      stars.rotation.y = t * 0.008;
+      stars.rotation.x = t * 0.003;
+
+      // Nebula slow swirl
+      nebula.rotation.y = t * 0.012;
+
+      // Float particles upward
+      const positions = partGeo.attributes.position.array;
+      for (let i = 0; i < partCount; i++) {
+        positions[i * 3 + 1] += partSpeeds[i];
+        if (positions[i * 3 + 1] > 12) positions[i * 3 + 1] = -12;
+      }
+      partGeo.attributes.position.needsUpdate = true;
+
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    // ── LOGO PARALLAX on mousemove ──
+    const logoWrap = document.getElementById('hero-logo-wrap');
+    document.addEventListener('mousemove', (e) => {
+      if (!logoWrap) return;
+      const dx = (e.clientX / window.innerWidth - 0.5) * 18;
+      const dy = (e.clientY / window.innerHeight - 0.5) * 10;
+      logoWrap.style.transform = `translate(${dx}px, ${dy}px)`;
+    });
+  })();
 </script>
 </body>
 </html>
