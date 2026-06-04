@@ -128,7 +128,7 @@
       grid-template-columns: 1fr 1fr;
       align-items: center;
       padding: 0 5vw;
-      overflow: hidden;
+      overflow: visible;
       background: #020617;
     }
 
@@ -153,29 +153,41 @@
 
     /* Right: logo visual */
     .hero-right {
-      position: relative;
-      z-index: 10;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding-top: 4rem;
-      background: transparent;
-      isolation: isolate;
+      position: static;
     }
 
     .hero-logo-wrap {
-      position: relative;
-      width: min(42vw, 500px);
-      transition: transform 0.12s ease-out;
-      filter:
-        drop-shadow(0 0 40px rgba(56,189,248,0.55))
-        drop-shadow(0 0 90px rgba(56,189,248,0.3))
-        drop-shadow(0 0 160px rgba(139,92,246,0.2));
+      position: absolute;
+      right: -4vw;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 55vw;
+      max-width: 860px;
+      min-width: 420px;
+      z-index: 10;
+      transition: none;
     }
 
     .hero-logo-inner {
       animation: logoFloat 7s ease-in-out infinite;
       background: transparent;
+      position: relative;
+      width: 100%;
+    }
+
+    /* Dark isolation halo — prevents logo bleeding into bg */
+    .hero-logo-inner::before {
+      content: '';
+      position: absolute;
+      inset: 8%;
+      border-radius: 50%;
+      background: radial-gradient(ellipse 70% 60% at 50% 55%,
+        rgba(2, 6, 23, 0.82) 0%,
+        rgba(2, 6, 23, 0.55) 45%,
+        transparent 75%
+      );
+      z-index: 0;
+      pointer-events: none;
     }
 
     .hero-logo-wrap img {
@@ -186,6 +198,13 @@
       width: 100%;
       height: auto;
       display: block;
+      position: relative;
+      z-index: 1;
+      filter:
+        drop-shadow(0 0 12px rgba(56,189,248,0.5))
+        drop-shadow(0 0 40px rgba(56,189,248,0.25))
+        drop-shadow(0 0 80px rgba(139,92,246,0.2))
+        drop-shadow(0 8px 24px rgba(0,0,0,0.85));
     }
     /* Earth horizon arc */
     .hero-earth-arc {
@@ -1244,7 +1263,7 @@
       if (!logoWrap) return;
       const dx = (e.clientX / window.innerWidth - 0.5) * 18;
       const dy = (e.clientY / window.innerHeight - 0.5) * 10;
-      logoWrap.style.transform = `translate(${dx}px, ${dy}px)`;
+      logoWrap.style.transform = `translateY(calc(-50% + ${dy}px)) translateX(${dx}px)`;
     });
   })();
 </script>
