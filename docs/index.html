@@ -220,6 +220,48 @@
         radial-gradient(ellipse 40% 40% at 75% 55%, rgba(139,92,246,0.06) 0%, transparent 60%);
     }
 
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.4rem, 5vw, 4.8rem);
+      line-height: 1.05;
+      color: var(--heading);
+      letter-spacing: -0.02em;
+      max-width: 760px;
+      text-align: center;
+      animation: fadeUp 0.6s 0.1s ease both;
+      text-shadow: 0 0 40px rgba(2,6,23,0.85), 0 0 16px rgba(2,6,23,0.7);
+    }
+
+    /* Gradient text can't use text-shadow — reset it and use filter for glow */
+    h1 .accent {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: none;
+      filter:
+        drop-shadow(0 0 12px rgba(2,6,23,0.95))
+        drop-shadow(0 0 6px rgba(56,189,248,0.5));
+    }
+
+    h1 .accent2 {
+      color: var(--accent2);
+      text-shadow: none;
+      filter: drop-shadow(0 0 10px rgba(2,6,23,0.95));
+    }
+
+    .hero-sub {
+      margin-top: 1.5rem;
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 560px;
+      line-height: 1.65;
+      text-align: center;
+      animation: fadeUp 0.6s 0.2s ease both;
+      text-shadow: 0 0 30px rgba(2,6,23,0.95), 0 0 12px rgba(2,6,23,0.8);
+    }
+
     .hero-badge {
       display: inline-flex;
       align-items: center;
@@ -235,36 +277,6 @@
       font-family: 'DM Mono', monospace;
       letter-spacing: 0.05em;
       animation: fadeUp 0.6s ease both;
-    }
-
-    h1 {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: clamp(2.4rem, 5vw, 4.8rem);
-      line-height: 1.05;
-      color: var(--heading);
-      letter-spacing: -0.02em;
-      max-width: 760px;
-      text-align: center;
-      animation: fadeUp 0.6s 0.1s ease both;
-    }
-
-    h1 .accent {
-      background: var(--gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    h1 .accent2 { color: var(--accent2); }
-
-    .hero-sub {
-      margin-top: 1.5rem;
-      font-size: 1.1rem;
-      color: var(--muted);
-      max-width: 560px;
-      line-height: 1.65;
-      text-align: center;
-      animation: fadeUp 0.6s 0.2s ease both;
     }
 
     .hero-actions {
@@ -329,7 +341,12 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
-    .hero-stat .label { font-size: 0.8rem; color: var(--muted); margin-top: 0.2rem; }
+    .hero-stat .label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 0.2rem;
+      text-shadow: 0 0 20px rgba(2,6,23,0.95);
+    }
 
     /* ── SECTION SHARED ── */
     section { position: relative; z-index: 1; }
