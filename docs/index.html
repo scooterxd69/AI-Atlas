@@ -49,6 +49,14 @@
       overflow-x: hidden;
     }
 
+    /* Full-page nebula canvas fixed behind all content */
+    #bg-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
     /* ── NOISE TEXTURE OVERLAY ── */
     body::before {
       content: '';
@@ -317,8 +325,13 @@
       text-shadow: 0 0 20px rgba(2,6,23,0.95);
     }
 
-    /* ── SECTION SHARED ── */
+    /* All sections sit above bg-canvas, backgrounds semi-transparent */
     section { position: relative; z-index: 1; }
+    nav { z-index: 100; }
+
+    .quick-start { background: rgba(5,8,22,0.75) !important; }
+    .prompts-bg  { background: rgba(5,8,22,0.75) !important; }
+    footer       { background: rgba(5,8,22,0.82) !important; }
 
     .section-inner {
       max-width: 1100px;
@@ -863,6 +876,7 @@
   </style>
 </head>
 <body>
+<canvas id="bg-canvas"></canvas>
 
 <!-- NAV -->
 <nav>
@@ -1322,6 +1336,110 @@
     }
     animate();
 
+  })();
+
+  // ── GLOBAL PAGE NEBULA ──
+  (function () {
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+
+    function resize() {
+      canvas.width  = window.innerWidth;
+      canvas.height = document.body.scrollHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+    // Update height when content changes
+    const ro = new ResizeObserver(resize);
+    ro.observe(document.body);
+
+    // Nebula blobs spread across full page
+    const blobs = [];
+    const colors = [
+      'rgba(56,189,248,',   // cyan
+      'rgba(37,99,235,',    // blue
+      'rgba(139,92,246,',   // purple
+      'rgba(168,85,247,',   // bright purple
+      'rgba(56,189,248,',   // cyan again for balance
+    ];
+
+    function initBlobs() {
+      blobs.length = 0;
+      const pageH = document.body.scrollHeight;
+      const count = Math.max(18, Math.floor(pageH / 120));
+      for (let i = 0; i < count; i++) {
+        blobs.push({
+          x:     Math.random() * canvas.width,
+          y:     Math.random() * pageH,
+          r:     120 + Math.random() * 200,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          alpha: 0.018 + Math.random() * 0.022,
+          drift: (Math.random() - 0.5) * 0.15,
+          phase: Math.random() * Math.PI * 2,
+          speed: 0.0004 + Math.random() * 0.0006,
+        });
+      }
+    }
+    initBlobs();
+    window.addEventListener('resize', initBlobs);
+
+    // Floating particles
+    const pts = [];
+    function initPts() {
+      pts.length = 0;
+      const pageH = document.body.scrollHeight;
+      const count = Math.max(60, Math.floor(pageH / 18));
+      for (let i = 0; i < count; i++) {
+        pts.push({
+          x:  Math.random() * canvas.width,
+          y:  Math.random() * pageH,
+          vy: 0.12 + Math.random() * 0.25,
+          r:  0.7 + Math.random() * 1.2,
+          a:  0.15 + Math.random() * 0.35,
+        });
+      }
+    }
+    initPts();
+    window.addEventListener('resize', initPts);
+
+    let t = 0;
+    function draw() {
+      const pageH = document.body.scrollHeight;
+      if (canvas.height !== pageH) canvas.height = pageH;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Draw nebula blobs
+      for (const b of blobs) {
+        b.x += b.drift;
+        if (b.x < -b.r) b.x = canvas.width + b.r;
+        if (b.x > canvas.width + b.r) b.x = -b.r;
+
+        const pulse = b.alpha + Math.sin(t * b.speed * 1000 + b.phase) * 0.006;
+        const grad = ctx.createRadialGradient(b.x, b.y, 0, b.x, b.y, b.r);
+        grad.addColorStop(0,   b.color + (pulse * 2.2).toFixed(3) + ')');
+        grad.addColorStop(0.4, b.color + (pulse * 0.9).toFixed(3) + ')');
+        grad.addColorStop(1,   b.color + '0)');
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      // Draw particles
+      for (const p of pts) {
+        p.y -= p.vy;
+        if (p.y < -4) p.y = pageH + 4;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(56,189,248,${p.a})`;
+        ctx.fill();
+      }
+
+      t += 0.016;
+      requestAnimationFrame(draw);
+    }
+    draw();
   })();
 </script>
 </body>
