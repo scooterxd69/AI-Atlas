@@ -61,6 +61,16 @@ const categoryLabels = {
   school: "School",
 };
 
+const sectionContext = {
+  prompts: "Prompts",
+  resources: "Resources",
+  "study-systems": "Study Systems",
+  tools: "Tools",
+  workflows: "Workflows",
+  chapters: "Chapters",
+  "career-guides": "Career Guides",
+};
+
 function walk(dir, files = []) {
   for (const item of fs.readdirSync(dir, { withFileTypes: true })) {
     const full = path.join(dir, item.name);
@@ -135,6 +145,23 @@ function outputForSource(source) {
   return slash(path.posix.join("docs", parsed.dir, fileName));
 }
 
+function titleFromPath(relSource) {
+  const parts = relSource.replace(/^docs\//, "").split("/");
+  const file = parts.pop().toLowerCase();
+  const parent = parts[parts.length - 1] || "";
+  const section = parts[0] || "";
+
+  if (file === "index.md" || file === "readme.md") {
+    if (!parent) return "AI Atlas";
+    const label = categoryLabels[parent] || titleCase(parent);
+    const context = sectionContext[section];
+    if (context && parent !== section) return `${label} ${context}`;
+    return label;
+  }
+
+  return titleCase(path.posix.basename(relSource));
+}
+
 function collectSources() {
   const files = [];
   for (const rel of rootSources) files.push(path.join(root, rel));
@@ -162,7 +189,9 @@ const pages = sources.map((source, index) => {
   const relSource = slash(path.relative(root, source));
   const outRel = outputForSource(source);
   const markdownTitle = raw.match(/^#\s+(.+)$/m);
-  const title = markdownTitle ? stripMarkdown(markdownTitle[1]) : titleCase(path.basename(relSource));
+  const fallbackTitle = titleFromPath(relSource);
+  const parsedTitle = markdownTitle ? stripMarkdown(markdownTitle[1]) : "";
+  const title = parsedTitle && !/^index$/i.test(parsedTitle) ? parsedTitle : fallbackTitle;
   const text = stripMarkdown(raw.replace(/^#\s+.+$/m, ""));
   const description = (text || `AI Atlas educational resource for ${title}.`).slice(0, 158);
   return { source, relSource, outRel, title, description, raw, index };
