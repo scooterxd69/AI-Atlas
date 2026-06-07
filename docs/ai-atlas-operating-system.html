@@ -14,35 +14,48 @@
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="AI Atlas Operating System | AI Atlas">
   <meta name="twitter:description" content="Document type: Meta / Internal Operations Path: meta/ai-atlas-operating-system.md Version: 1.0 Status: Active — authoritative reference for all contributors a">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/favicon.svg">
   <link rel="canonical" href="ai-atlas-operating-system.html">
-  <link rel="stylesheet" href="assets/site.css">
+  <link rel="stylesheet" href="assets/css/global.css">
 </head>
 <body>
   <canvas id="bg-canvas" aria-hidden="true"></canvas>
   <a class="skip-link" href="#content">Skip to content</a>
   <header class="site-header">
     <nav class="site-nav" aria-label="Primary navigation">
-      <a class="nav-logo" href="index.html">AI <span>Atlas</span></a>
+      <a class="nav-logo" href="index.html" aria-label="AI Atlas home"><span class="logo-mark" aria-hidden="true">AI</span><span>Atlas</span></a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
-      <div class="nav-links" id="nav-links"><a href="index.html">Start</a><a href="study-systems/jee/index.html">JEE</a><a href="study-systems/neet/index.html">NEET</a><a href="study-systems/school/index.html">School</a><a href="prompts/index.html">Prompts</a><a href="resources/index.html">Resources</a><a href="tools/index.html">Tools</a><a href="workflows/index.html">Workflows</a></div>
+      <div class="nav-links" id="nav-links"><a href="index.html" data-nav="home">Home</a><a href="study-systems/index.html" data-nav="study-systems">Study Systems</a><a href="prompts/index.html" data-nav="prompts">Prompts</a><a href="workflows/index.html" data-nav="workflows">Workflows</a><a href="tools/index.html" data-nav="tools">Tools</a><a href="resources/index.html" data-nav="resources">Resources</a><a href="career-guides/index.html" data-nav="career-guides">Career Guides</a><a href="https://github.com/scooterxd69/AI-Atlas" data-nav="external" target="_blank" rel="noopener">GitHub</a></div>
     </nav>
   </header>
   <main id="content" class="page-shell">
     <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span aria-hidden="true">/</span><span>AI Atlas Operating System</span></nav>
-    <article class="content-card">
+    <section class="page-hero">
       <p class="eyebrow">Core</p>
       <h1>AI Atlas Operating System</h1>
       <p class="page-summary">Document type: Meta / Internal Operations Path: meta/ai-atlas-operating-system.md Version: 1.0 Status: Active — authoritative reference for all contributors a</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="study-systems/index.html">Explore Systems</a>
+        <a class="btn btn-ghost" href="resources/index.html">Browse Resources</a>
+      </div>
+    </section>
+    <article class="content-card">
       <div class="markdown-body">
+<section class="content-section intro-section">
 <h1 id="ai-atlas-operating-system">AI Atlas Operating System</h1>
 <p><strong>Document type:</strong> Meta / Internal Operations <strong>Path:</strong> <code>meta/ai-atlas-operating-system.md</code> <strong>Version:</strong> 1.0 <strong>Status:</strong> Active — authoritative reference for all contributors and maintainers</p>
-<hr>
 <blockquote><strong>What this document is</strong></blockquote>
 <blockquote>This is the single source of truth for how AI Atlas is built, maintained, and grown. Every contributor, editor, and AI generation session references this document before doing any work. Nothing in the repository overrides what is written here.</blockquote>
-<hr>
+</section>
+<section class="content-section">
 <h2 id="table-of-contents">Table of Contents</h2>
 <div class="table-wrap"><table><thead><tr><th>Section</th><th>Description</th></tr></thead><tbody><tr><td><a href="#1-platform-state">1. Platform State</a></td><td>What exists, what's missing</td></tr><tr><td><a href="#2-asset-organisation-system">2. Asset Organisation System</a></td><td>Folder structure and file hierarchy</td></tr><tr><td><a href="#3-repository-navigation-system">3. Repository Navigation System</a></td><td>How readers and contributors find things</td></tr><tr><td><a href="#4-file-naming-standards">4. File Naming Standards</a></td><td>Exact rules for every file type</td></tr><tr><td><a href="#5-markdown-standards">5. Markdown Standards</a></td><td>Formatting rules for all content</td></tr><tr><td><a href="#6-internal-linking-standards">6. Internal Linking Standards</a></td><td>How pages link to each other</td></tr><tr><td><a href="#7-content-creation-workflow">7. Content Creation Workflow</a></td><td>How new content is built end-to-end</td></tr><tr><td><a href="#8-content-update-workflow">8. Content Update Workflow</a></td><td>How existing content is revised</td></tr><tr><td><a href="#9-quality-control-workflow">9. Quality Control Workflow</a></td><td>Standards checklist before publishing</td></tr><tr><td><a href="#10-contribution-workflow">10. Contribution Workflow</a></td><td>How external contributors submit work</td></tr><tr><td><a href="#11-ai-generation-workflow">11. AI Generation Workflow</a></td><td>How to use AI to produce content correctly</td></tr><tr><td><a href="#12-github-management-workflow">12. GitHub Management Workflow</a></td><td>Branch, commit, PR, and release process</td></tr><tr><td><a href="#13-publishing-workflow">13. Publishing Workflow</a></td><td>From draft to live page</td></tr><tr><td><a href="#14-missing-assets-register">14. Missing Assets Register</a></td><td>Identified gaps by priority</td></tr><tr><td><a href="#15-bottleneck-analysis">15. Bottleneck Analysis</a></td><td>Where the system slows down</td></tr><tr><td><a href="#16-automation-opportunities">16. Automation Opportunities</a></td><td>What can be automated and how</td></tr><tr><td><a href="#17-future-growth-roadmap">17. Future Growth Roadmap</a></td><td>Expansion strategy and milestones</td></tr></tbody></table></div>
-<hr>
+</section>
+<section class="content-section">
 <h2 id="1-platform-state">1. Platform State</h2>
 <h3 id="11-assets-currently-in-repository">1.1 Assets Currently in Repository</h3>
 <div class="table-wrap"><table><thead><tr><th>Asset</th><th>File</th><th>Lines</th><th>Status</th><th>Category</th></tr></thead><tbody><tr><td>Complete Sitemap</td><td><code>sitemap/ai-atlas-sitemap.md</code></td><td>~200</td><td>✅ Complete</td><td>Architecture</td></tr><tr><td>JEE Physics Study System</td><td>embedded in workflows</td><td>~400</td><td>✅ Complete</td><td>Study Systems</td></tr><tr><td>JEE Chemistry Study System</td><td>embedded in workflows</td><td>~400</td><td>✅ Complete</td><td>Study Systems</td></tr><tr><td>JEE Mathematics Study System</td><td>embedded in workflows</td><td>~400</td><td>✅ Complete</td><td>Study Systems</td></tr><tr><td>NEET Biology Study System</td><td>embedded in workflows</td><td>~400</td><td>✅ Complete</td><td>Study Systems</td></tr><tr><td>Class 10 Science Study System</td><td>embedded in workflows</td><td>~400</td><td>✅ Complete</td><td>Study Systems</td></tr><tr><td>50 JEE Prompts</td><td><code>prompts/JEE-AI-Prompt-Library.md</code></td><td>1,902</td><td>✅ Complete</td><td>Prompt Library</td></tr><tr><td>Universal Chapter Template</td><td><code>templates/Universal-Chapter-Template.md</code></td><td>2,159</td><td>✅ Complete</td><td>Templates</td></tr><tr><td>100 AI Tools Database</td><td><code>tools/AI-Tools-Database.md</code></td><td>402</td><td>✅ Complete</td><td>Tools</td></tr><tr><td>25 Educational Workflows</td><td><code>workflows/AI-Educational-Workflows.md</code></td><td>3,163</td><td>✅ Complete</td><td>Workflows</td></tr><tr><td>Operating System (this document)</td><td><code>meta/ai-atlas-operating-system.md</code></td><td>—</td><td>🔄 In Progress</td><td>Meta</td></tr></tbody></table></div>
@@ -53,7 +66,8 @@ Content breadth:   ██████░░░░  60%  (core subjects covered, 
 Infrastructure:    ████░░░░░░  40%  (templates exist, no automation yet)
 Discoverability:   ███░░░░░░░  30%  (no navigation system built yet)
 Contribution:      ██░░░░░░░░  20%  (no contribution framework yet)</code></pre>
-<hr>
+</section>
+<section class="content-section">
 <h2 id="2-asset-organisation-system">2. Asset Organisation System</h2>
 <h3 id="21-master-folder-structure">2.1 Master Folder Structure</h3>
 <p>Every file in the AI Atlas repository lives in exactly one of the following directories. No exceptions.</p>
@@ -158,7 +172,8 @@ Contribution:      ██░░░░░░░░  20%  (no contribution framewo
 <p><strong>Rule 3 — Meta never mixes with content.</strong> The <code>meta/</code> directory is internal infrastructure. Nothing inside <code>meta/</code> is linked from student-facing pages.</p>
 <p><strong>Rule 4 — Templates stay in <code>templates/</code>.</strong> No template file lives inside content directories. Content files reference templates; they do not contain them.</p>
 <p><strong>Rule 5 — Assets travel with content.</strong> Any image or diagram created for a specific chapter goes in <code>assets/images/[chapter-slug]/</code>.</p>
-<hr>
+</section>
+<section class="content-section">
 <h2 id="3-repository-navigation-system">3. Repository Navigation System</h2>
 <h3 id="31-navigation-architecture">3.1 Navigation Architecture</h3>
 <p>AI Atlas uses a three-layer navigation system:</p>
@@ -218,7 +233,8 @@ Start here if you are:
 <p>A permanent file at <code>meta/cross-reference.md</code> maps every concept to every file that covers it:</p>
 <div class="table-wrap"><table><thead><tr><th>Concept</th><th>Files that cover this</th></tr></thead><tbody><tr><td>Anki flashcards</td><td>workflows/AI-Educational-Workflows.md (WF10), tools/AI-Tools-Database.md (#31)</td></tr><tr><td>Mock test analysis</td><td>workflows/AI-Educational-Workflows.md (WF06), prompts/JEE-AI-Prompt-Library.md (M-01 to M-10)</td></tr><tr><td>Formula revision</td><td>workflows/AI-Educational-Workflows.md (WF07), prompts/JEE-AI-Prompt-Library.md (R-10)</td></tr></tbody></table></div>
 <p>This table is updated every time new content is added.</p>
-<hr>
+</section>
+<section class="content-section">
 <h2 id="4-file-naming-standards">4. File Naming Standards</h2>
 <h3 id="41-universal-rules">4.1 Universal Rules</h3>
 <ol><li><strong>All lowercase.</strong> No uppercase letters anywhere in filenames.</li><li><strong>Hyphens only.</strong> Use <code>-</code> between words. Never use spaces, underscores, or dots (except the file extension).</li><li><strong>Descriptive, not clever.</strong> The filename must tell you what the file contains without opening it.</li><li><strong>Date prefix for versioned files only.</strong> Never date-prefix content files. Only dated files: changelogs, release notes.</li><li><strong>No version numbers in filenames.</strong> Use Git for versioning. <code>jee-prompts-v2.md</code> is wrong. <code>jee-prompts.md</code> is correct.</li></ol>
@@ -283,7 +299,8 @@ cross-reference.md</code></pre>
 <h3 id="43-subject-code-reference">4.3 Subject Code Reference</h3>
 <p>Use these exact codes in all filenames:</p>
 <div class="table-wrap"><table><thead><tr><th>Subject</th><th>Code</th></tr></thead><tbody><tr><td>JEE Physics</td><td><code>jee-physics</code></td></tr><tr><td>JEE Chemistry</td><td><code>jee-chemistry</code></td></tr><tr><td>JEE Mathematics</td><td><code>jee-maths</code></td></tr><tr><td>NEET Biology</td><td><code>neet-biology</code></td></tr><tr><td>NEET Physics</td><td><code>neet-physics</code></td></tr><tr><td>NEET Chemistry</td><td><code>neet-chemistry</code></td></tr><tr><td>CBSE Class 10 Science</td><td><code>class10-science</code></td></tr><tr><td>CBSE Class 10 Maths</td><td><code>class10-maths</code></td></tr><tr><td>CBSE Class 12 Physics</td><td><code>class12-physics</code></td></tr><tr><td>CBSE Class 12 Chemistry</td><td><code>class12-chemistry</code></td></tr><tr><td>CBSE Class 12 Biology</td><td><code>class12-biology</code></td></tr><tr><td>CBSE Class 12 Maths</td><td><code>class12-maths</code></td></tr><tr><td>Foundation (Class 6–8)</td><td><code>foundation</code></td></tr></tbody></table></div>
-<hr>
+</section>
+<section class="content-section">
 <h2 id="5-markdown-standards">5. Markdown Standards</h2>
 <h3 id="51-document-structure-rules">5.1 Document Structure Rules</h3>
 <p>Every content file must begin with this exact header block:</p>
@@ -346,7 +363,8 @@ cross-reference.md</code></pre>
 <p>Do not use bold for decoration or to highlight anything you personally think is important.</p>
 <h3 id="58-horizontal-rule-standards">5.8 Horizontal Rule Standards</h3>
 <p>Use <code>---</code> (three hyphens) for section breaks only when the visual separation genuinely aids reading. Between H2 sections in long documents: permitted. Within a subsection: not permitted.</p>
-<hr>
+</section>
+<section class="content-section">
 <h2 id="6-internal-linking-standards">6. Internal Linking Standards</h2>
 <h3 id="61-link-format-rules">6.1 Link Format Rules</h3>
 <p><strong>All internal links use relative paths:</strong></p>
@@ -374,7 +392,8 @@ cross-reference.md</code></pre>
 <h3 id="64-broken-link-prevention">6.4 Broken Link Prevention</h3>
 <p>Before every merge to <code>main</code>:</p>
 <ul><li>Run a link checker (see Automation section — this will be automated)</li><li>Manually verify any links in newly added files</li><li>Check that renamed files have not broken links in other files</li></ul>
-<hr>
+</section>
+<section class="content-section">
 <h2 id="7-content-creation-workflow">7. Content Creation Workflow</h2>
 <h3 id="71-workflow-overview">7.1 Workflow Overview</h3>
 <pre><code class="language-">IDEA → BRIEF → AI GENERATION → HUMAN REVIEW → QC CHECK → STAGING → PUBLISH
@@ -417,7 +436,8 @@ cross-reference.md</code></pre>
 <ul><li>Be in its correct directory</li><li>Have all required links added</li><li>Be registered in the directory <code>INDEX.md</code></li><li>Be added to <code>README.md</code></li><li>Be added to <code>meta/cross-reference.md</code></li><li>Have its backlog entry updated to &quot;In Review&quot;</li></ul>
 <h3 id="78-stage-7-publishing">7.8 Stage 7 — Publishing</h3>
 <p>Follow the Publishing Workflow (Section 13). After publishing, update backlog entry to &quot;Complete&quot; and add the publish date.</p>
-<hr>
+</section>
+<section class="content-section">
 <h2 id="8-content-update-workflow">8. Content Update Workflow</h2>
 <h3 id="81-types-of-updates">8.1 Types of Updates</h3>
 <div class="table-wrap"><table><thead><tr><th>Type</th><th>Trigger</th><th>Urgency</th><th>Process</th></tr></thead><tbody><tr><td><strong>Factual correction</strong></td><td>Error identified in content</td><td>Immediate</td><td>Hotfix branch → direct merge</td></tr><tr><td><strong>Tool update</strong></td><td>AI tool changes pricing/features</td><td>Within 1 week</td><td>Standard update branch</td></tr><tr><td><strong>Curriculum update</strong></td><td>JEE/NEET syllabus change</td><td>Within 2 weeks</td><td>Standard update branch</td></tr><tr><td><strong>Content enhancement</strong></td><td>Adding sections, improving quality</td><td>Scheduled</td><td>Sprint batch</td></tr><tr><td><strong>Link repair</strong></td><td>Broken links detected</td><td>Within 48 hours</td><td>Hotfix branch</td></tr></tbody></table></div>
@@ -438,7 +458,8 @@ cross-reference.md</code></pre>
 <p>After updating a file, check <code>meta/cross-reference.md</code> to find all files that link to or reference the updated content. Update those files if needed.</p>
 <h3 id="83-scheduled-review-calendar">8.3 Scheduled Review Calendar</h3>
 <div class="table-wrap"><table><thead><tr><th>Content type</th><th>Review frequency</th><th>Trigger</th></tr></thead><tbody><tr><td>AI Tools Database</td><td>Every 3 months</td><td>Tools change frequently</td></tr><tr><td>JEE/NEET Prompts</td><td>After each JEE/NEET exam cycle</td><td>Exam patterns may shift</td></tr><tr><td>Study Systems</td><td>Every 6 months</td><td>Curriculum updates</td></tr><tr><td>Chapter pages</td><td>After NCERT revision</td><td>NCERT editions change</td></tr><tr><td>Workflows</td><td>Every 6 months</td><td>AI tools evolve</td></tr><tr><td>Operating System (this document)</td><td>Every 6 months</td><td>Platform grows</td></tr></tbody></table></div>
-<hr>
+</section>
+<section class="content-section">
 <h2 id="9-quality-control-workflow">9. Quality Control Workflow</h2>
 <h3 id="91-the-qc-checklist">9.1 The QC Checklist</h3>
 <p>Every file must pass this checklist before publishing. A single ❌ blocks the publish.</p>
@@ -462,7 +483,8 @@ cross-reference.md</code></pre>
 <pre><code class="language-markdown">| Date | File | Failed item | Root cause | Prevented by |
 |------|------|-------------|------------|-------------|</code></pre>
 <p>After 3 failures of the same type, update the AI Generation Workflow to prevent that class of failure automatically.</p>
-<hr>
+</section>
+<section class="content-section">
 <h2 id="10-contribution-workflow">10. Contribution Workflow</h2>
 <h3 id="101-contribution-types">10.1 Contribution Types</h3>
 <p>AI Atlas accepts three types of external contributions:</p>
@@ -494,7 +516,8 @@ cross-reference.md</code></pre>
 <ul><li><code>meta/contributors.md</code> — permanent list of all contributors</li><li>The <code>CHANGELOG.md</code> entry for the release that includes the contribution</li></ul>
 <h3 id="105-what-will-not-be-accepted">10.5 What Will Not Be Accepted</h3>
 <div class="table-wrap"><table><thead><tr><th>Category</th><th>Reason</th></tr></thead><tbody><tr><td>Content from specific coaching institutes</td><td>Potential IP issues, institutional bias</td></tr><tr><td>Paid tool recommendations as primary recommendation</td><td>Against free-first ethos</td></tr><tr><td>Content that requires premium AI access</td><td>Excludes students who can't pay</td></tr><tr><td>Chapters that duplicate existing content</td><td>Fragmenting the repository</td></tr><tr><td>Non-educational content</td><td>Outside platform scope</td></tr></tbody></table></div>
-<hr>
+</section>
+<section class="content-section">
 <h2 id="11-ai-generation-workflow">11. AI Generation Workflow</h2>
 <h3 id="111-principles">11.1 Principles</h3>
 <p>Using AI to generate AI Atlas content is expected and encouraged. However, AI-generated content must follow rules that prevent the common failure modes: vagueness, inaccuracy, and inconsistency with existing content.</p>
@@ -557,7 +580,8 @@ prompts to paste into Claude, and a readiness assessment table at the end.</code
 <ol><li><strong>Formula check:</strong> Every formula against NCERT or standard reference</li><li><strong>Tool check:</strong> Every AI tool named must be listed in <code>tools/AI-Tools-Database.md</code> or be a well-known free tool</li><li><strong>Prompt check:</strong> Every prompt must be copy-paste ready with no unfilled placeholders</li><li><strong>Consistency check:</strong> Ask Claude: &quot;Does this content contradict anything in [related file]?&quot; Paste related file content for comparison</li><li><strong>Readability check:</strong> Paste into <a href="https://hemingwayapp.com">Hemingway Editor</a> — target Grade 8 reading level or below</li></ol>
 <h3 id="115-ai-tool-selection-for-generation">11.5 AI Tool Selection for Generation</h3>
 <div class="table-wrap"><table><thead><tr><th>Content type</th><th>Recommended tool</th><th>Why</th></tr></thead><tbody><tr><td>Chapter pages</td><td>Claude</td><td>Long context, structured output, nuanced explanations</td></tr><tr><td>Prompt libraries</td><td>Claude</td><td>Understands its own prompting patterns</td></tr><tr><td>Workflow documentation</td><td>Claude</td><td>Process-oriented reasoning</td></tr><tr><td>Tool descriptions</td><td>Claude + web search</td><td>Needs current information</td></tr><tr><td>Formula sheets</td><td>Claude + Wolfram Alpha</td><td>Formula verification</td></tr><tr><td>Database entries (tables)</td><td>Claude</td><td>Consistent formatting</td></tr></tbody></table></div>
-<hr>
+</section>
+<section class="content-section">
 <h2 id="12-github-management-workflow">12. GitHub Management Workflow</h2>
 <h3 id="121-branch-strategy">12.1 Branch Strategy</h3>
 <pre><code class="language-">main                    ← always production-ready, never commits directly
@@ -637,7 +661,8 @@ Closes #[issue number]
 <ul><li>One of these labels: <code>bug</code>, <code>content-request</code>, <code>enhancement</code>, <code>question</code>, <code>duplicate</code>, <code>wontfix</code></li><li>An assignee (if in progress)</li><li>A milestone (which release it targets)</li></ul>
 <p><strong>Issue templates</strong> (stored in <code>.github/ISSUE_TEMPLATE/</code>):</p>
 <ul><li><code>bug-report.md</code></li><li><code>content-request.md</code></li><li><code>question.md</code></li></ul>
-<hr>
+</section>
+<section class="content-section">
 <h2 id="13-publishing-workflow">13. Publishing Workflow</h2>
 <h3 id="131-from-draft-to-live">13.1 From Draft to Live</h3>
 <pre><code class="language-">Draft file on local machine
@@ -675,7 +700,8 @@ Content is live</code></pre>
 <h3 id="133-post-publish-actions">13.3 Post-Publish Actions</h3>
 <p>After publishing:</p>
 <ol><li>Close the related GitHub Issue</li><li>Update <code>meta/update-log.md</code></li><li>Update the <code>meta/backlog.md</code> entry to &quot;Published&quot;</li><li>If the content is high-value, consider announcing via the project's communication channel</li></ol>
-<hr>
+</section>
+<section class="content-section">
 <h2 id="14-missing-assets-register">14. Missing Assets Register</h2>
 <p><em>This register is maintained as the authoritative list of known gaps. Priority is assigned by: audience size × content impact.</em></p>
 <h3 id="141-critical-missing-assets-p1-block-student-progress">14.1 Critical Missing Assets (P1 — Block student progress)</h3>
@@ -689,39 +715,35 @@ Content is live</code></pre>
 <p><strong>MVR Checklist:</strong></p>
 <ul><li>[ ] M-007 — Root README.md</li><li>[ ] M-008 — Directory INDEX.md files</li><li>[ ] M-001 — NEET AI Prompt Library</li><li>[ ] M-003, M-004, M-005 — Subject-specific study system files (extract from existing workflows)</li><li>[ ] M-006 — Class 10 CBSE Study System</li><li>[ ] M-020 — Contribution guide</li></ul>
 <p><strong>Estimated time to MVR:</strong> 20–25 hours of focused work</p>
-<hr>
+</section>
+<section class="content-section">
 <h2 id="15-bottleneck-analysis">15. Bottleneck Analysis</h2>
 <h3 id="151-current-bottlenecks">15.1 Current Bottlenecks</h3>
 <p><strong>Bottleneck 1 — Single-person content generation</strong> <em>Severity: High</em></p>
 <p>All content is currently generated in one-off sessions without a structured pipeline. There is no queue, no parallel generation, and no batch processing.</p>
 <p><em>Impact:</em> Content creation rate is limited by one person's available hours. <em>Fix:</em> Formalise the backlog and brief system (Section 7.2). Enable contributors to pick up backlog items independently.</p>
-<hr>
 <p><strong>Bottleneck 2 — No navigation infrastructure</strong> <em>Severity: High</em></p>
 <p>The repository currently has no README, no INDEX files, and no cross-reference map. Content exists but is not discoverable.</p>
 <p><em>Impact:</em> A visitor to the repository cannot find what they need. <em>Fix:</em> M-007 and M-008 are P1 — these must be built before any new content is added.</p>
-<hr>
 <p><strong>Bottleneck 3 — Embedded content not extractable</strong> <em>Severity: Medium</em></p>
 <p>The 5 study systems (JEE Physics, JEE Chemistry, JEE Maths, NEET Biology, Class 10 Science) are embedded inside <code>AI-Educational-Workflows.md</code> as interactive widget code rather than standalone markdown files.</p>
 <p><em>Impact:</em> These systems cannot be linked to, searched, or contributed to independently. <em>Fix:</em> Extract each study system into its own file under <code>study-systems/</code>. Keep the interactive widget as a reference or embed it in the new file.</p>
-<hr>
 <p><strong>Bottleneck 4 — No quality control process in place</strong> <em>Severity: Medium</em></p>
 <p>Content has been generated without a formal QC checklist. Factual errors could exist in published content.</p>
 <p><em>Impact:</em> Student trust is damaged when errors are found. <em>Fix:</em> Retroactively run the QC checklist (Section 9) on all existing files and log results.</p>
-<hr>
 <p><strong>Bottleneck 5 — AI generation produces inconsistent formatting</strong> <em>Severity: Medium</em></p>
 <p>Different generation sessions produce different heading styles, table formats, and prompt formats — because each session starts without the same context.</p>
 <p><em>Impact:</em> The repository feels fragmented. Cross-file linking is harder. <em>Fix:</em> The context-setting prompt in Section 11.3 must be used at the start of every session. A formatting linter (see Automation section) will catch residual inconsistencies.</p>
-<hr>
 <p><strong>Bottleneck 6 — No contributor onboarding</strong> <em>Severity: Low (until external contributions begin)</em></p>
 <p>There is no public contribution guide, no issue templates, and no PR templates.</p>
 <p><em>Impact:</em> External contributors cannot help without significant guidance overhead. <em>Fix:</em> Build M-020 (contribution guide) before soliciting external contributions.</p>
-<hr>
 <h3 id="152-bottleneck-priority-matrix">15.2 Bottleneck Priority Matrix</h3>
 <pre><code class="language-">High severity + Easy to fix   → Fix immediately (B2, B1)
 High severity + Hard to fix   → Plan sprint (B3)
 Medium severity + Easy to fix → Fix in next release (B4, B5)
 Low severity + Easy to fix    → Fix when convenient (B6)</code></pre>
-<hr>
+</section>
+<section class="content-section">
 <h2 id="16-automation-opportunities">16. Automation Opportunities</h2>
 <h3 id="161-immediate-automation-implement-within-30-days">16.1 Immediate Automation (implement within 30 days)</h3>
 <p><strong>Auto-1 — Broken link checker</strong> <em>Tool:</em> <code>markdown-link-check</code> (npm package, free) <em>How:</em> GitHub Action that runs on every PR to <code>develop</code> <em>Prevents:</em> Merging content with broken links</p>
@@ -738,7 +760,6 @@ jobs:
         with:
           use-quiet-mode: 'yes'
           use-verbose-mode: 'yes'</code></pre>
-<hr>
 <p><strong>Auto-2 — Markdown linter</strong> <em>Tool:</em> <code>markdownlint</code> (free) <em>How:</em> GitHub Action that runs on every PR <em>Prevents:</em> Heading hierarchy violations, inconsistent list formatting, missing blank lines</p>
 <pre><code class="language-yaml"># .github/workflows/markdown-lint.yml
 name: Markdown Lint
@@ -751,7 +772,6 @@ jobs:
       - uses: DavidAnson/markdownlint-cli2-action@v13
         with:
           globs: '**/*.md'</code></pre>
-<hr>
 <p><strong>Auto-3 — File naming validator</strong> <em>Tool:</em> Custom shell script <em>How:</em> GitHub Action that checks all changed filenames against naming rules <em>Prevents:</em> Uppercase letters, underscores, and version numbers in filenames</p>
 <pre><code class="language-bash">#!/bin/bash
 # scripts/validate-filenames.sh
@@ -766,27 +786,21 @@ for file in $(git diff --name-only HEAD); do
     exit 1
   fi
 done</code></pre>
-<hr>
 <h3 id="162-near-term-automation-implement-within-90-days">16.2 Near-Term Automation (implement within 90 days)</h3>
 <p><strong>Auto-4 — Automatic INDEX.md generation</strong> <em>Tool:</em> Custom Python script <em>How:</em> Runs weekly via GitHub Action. Scans each directory and auto-updates INDEX.md with new files. <em>Value:</em> Eliminates manual INDEX.md maintenance.</p>
 <pre><code class="language-python"># scripts/update-index.py
 # Scans directory, reads each .md file's header block,
 # extracts Title, Type, Audience, Status, Last updated
 # Regenerates INDEX.md table automatically</code></pre>
-<hr>
 <p><strong>Auto-5 — Cross-reference map auto-update</strong> <em>Tool:</em> Custom Python script <em>How:</em> On merge to <code>develop</code>, scans all files for internal links and updates <code>meta/cross-reference.md</code> <em>Value:</em> Cross-reference never goes stale.</p>
-<hr>
 <p><strong>Auto-6 — QC checklist auto-checker</strong> <em>Tool:</em> Custom Python script <em>How:</em> Checks 80% of the QC checklist automatically (file structure, heading hierarchy, header block, code blocks for prompts). The 20% requiring human judgment (factual accuracy, &quot;no buzzwords&quot;) remains manual. <em>Value:</em> Reduces QC review time from 20 minutes to 5 minutes.</p>
-<hr>
 <p><strong>Auto-7 — Stale content detector</strong> <em>Tool:</em> GitHub Action (scheduled) <em>How:</em> Monthly job that identifies files where <code>Last updated:</code> is older than the review frequency threshold (Section 8.3). Opens an Issue automatically. <em>Value:</em> No content goes stale silently.</p>
-<hr>
 <h3 id="163-long-term-automation-implement-within-12-months">16.3 Long-Term Automation (implement within 12 months)</h3>
 <p><strong>Auto-8 — AI content generation pipeline</strong> <em>Tool:</em> Claude API + custom scripts <em>How:</em> Maintainer adds an item to <code>meta/backlog.md</code> with a complete brief. A script picks it up, runs the AI Generation Workflow automatically, and creates a draft PR for human review. <em>Value:</em> Multiplies content production rate 5–10×. <em>Caution:</em> Human review remains mandatory. Automation creates drafts; humans approve and publish.</p>
-<hr>
 <p><strong>Auto-9 — Tool database auto-verifier</strong> <em>Tool:</em> Python + web scraping <em>How:</em> Monthly check of all URLs in <code>AI-Tools-Database.md</code>. Flags tool pricing changes and broken tool links. <em>Value:</em> Tool database stays accurate without manual quarterly checks.</p>
-<hr>
 <p><strong>Auto-10 — Contribution pipeline assistant</strong> <em>Tool:</em> GitHub Issue templates + Claude integration <em>How:</em> When a contributor opens a content-request Issue, an automated response provides the exact template, file path, and naming convention they need. Reduces maintainer time per contributor from 30 minutes to 5 minutes.</p>
-<hr>
+</section>
+<section class="content-section">
 <h2 id="17-future-growth-roadmap">17. Future Growth Roadmap</h2>
 <h3 id="171-growth-phases">17.1 Growth Phases</h3>
 <pre><code class="language-">Phase 1 — Foundation (Months 1–3)
@@ -831,7 +845,8 @@ Add career guides. Add college student content. Build community features.</code>
 <p>To reach Wikipedia-scale, AI Atlas needs:</p>
 <ul><li>500+ content pages (currently: 6)</li><li>50+ active contributors</li><li>Automation handling 80% of maintenance</li><li>A community that self-corrects errors</li></ul>
 <p>The operating system in this document is the infrastructure that makes that scale possible.</p>
-<hr>
+</section>
+<section class="content-section">
 <h2 id="appendix-a-file-header-block-reference">Appendix A — File Header Block Reference</h2>
 <p>Every content file must begin with this block. Copy and fill before writing any content.</p>
 <pre><code class="language-markdown"># [Page Title]
@@ -846,12 +861,14 @@ Add career guides. Add college student content. Build community features.</code>
 - [descriptive link text](relative/path/to/file.md)
 
 ---</code></pre>
-<hr>
+</section>
+<section class="content-section">
 <h2 id="appendix-b-quick-reference-card-for-contributors">Appendix B — Quick Reference Card for Contributors</h2>
 <p><em>Print this or keep it open during any contribution session.</em></p>
 <p><strong>Before starting:</strong> Is this in the backlog? Is the brief complete? <strong>File location:</strong> <code>[directory per Section 2.1]/[name per Section 4.2]</code> <strong>File header:</strong> Copy Appendix A. Fill every field. <strong>Template:</strong> <code>templates/Universal-Chapter-Template.md</code> <strong>Generation:</strong> One section at a time. Verify before next section. <strong>QC:</strong> Every checkbox in Section 9.1 must be ✅ <strong>Commit message:</strong> <code>[type]: [brief description]</code> — see Section 12.2 <strong>PR:</strong> Use the PR template. Complete description. Link the Issue. <strong>After merge:</strong> Close Issue. Update cross-reference. Update README.</p>
 <p><strong>Emergency contact for QC questions:</strong> Open a GitHub Issue with label <code>question</code>.</p>
-<hr>
+</section>
+<section class="content-section">
 <h2 id="appendix-c-changelog-template">Appendix C — Changelog Template</h2>
 <p><code>meta/changelog.md</code> uses this format for every entry:</p>
 <pre><code class="language-markdown">## v1.2025.06 — June 2025
@@ -872,15 +889,16 @@ Add career guides. Add college student content. Build community features.</code>
 
 ### Contributors
 - [handle] contributed `chapters/neet-biology/cell-division.md`</code></pre>
-<hr>
+</section>
+<section class="content-section">
 <h2 id="appendix-d-subject-code-and-audience-tag-reference">Appendix D — Subject Code and Audience Tag Reference</h2>
 <p>Use these exact strings everywhere: filenames, file headers, INDEX tables, cross-reference map.</p>
 <p><strong>Exam codes:</strong> <code>JEE-MAIN</code> | <code>JEE-ADVANCED</code> | <code>NEET-UG</code> | <code>CBSE-10</code> | <code>CBSE-12</code> | <code>OLYMPIAD</code> | <code>ALL</code></p>
 <p><strong>Subject codes (for filenames):</strong> <code>jee-physics</code> | <code>jee-chemistry</code> | <code>jee-maths</code> | <code>neet-biology</code> | <code>neet-physics</code> | <code>neet-chemistry</code> | <code>class10-science</code> | <code>class10-maths</code> | <code>class12-physics</code> | <code>class12-chemistry</code> | <code>class12-biology</code> | <code>class12-maths</code> | <code>foundation</code></p>
 <p><strong>Audience tags (for file headers):</strong> <code>JEE</code> | <code>NEET</code> | <code>School</code> | <code>JEE + NEET</code> | <code>All Students</code> | <code>Contributors</code></p>
 <p><strong>Content type tags (for file headers):</strong> <code>Chapter Page</code> | <code>Prompt Library</code> | <code>Workflow</code> | <code>Study System</code> | <code>Tool Profile</code> | <code>Template</code> | <code>Meta</code> | <code>Index</code> | <code>Resource List</code> | <code>Career Guide</code></p>
-<hr>
 <p><em>AI Atlas Operating System — Version 1.0</em> <em>Maintained by the AI Atlas core team</em> <em>This document is the authoritative reference for all platform operations.</em> <em>All contributors must read and follow this document before making any contribution.</em></p>
+</section>
       </div>
     </article>
     <nav class="prev-next" aria-label="Previous and next resources">
@@ -896,8 +914,26 @@ Add career guides. Add college student content. Build community features.</code>
     </section>
   </main>
   <footer class="site-footer">
-    <p><strong>AI Atlas</strong> is a free open-source learning atlas for JEE, NEET and school students.</p>
-    <p><a href="index.html">Home</a> <span>/</span> <a href="resources/index.html">Resources</a> <span>/</span> <a href="study-systems/jee/index.html">JEE</a> <span>/</span> <a href="study-systems/neet/index.html">NEET</a></p>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a class="nav-logo" href="index.html" aria-label="AI Atlas home"><span class="logo-mark" aria-hidden="true">AI</span><span>Atlas</span></a>
+        <p>Free open-source AI learning systems for JEE, NEET, CBSE and self learners.</p>
+        <p>Built by Naitik Singh.</p>
+      </div>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="https://github.com/scooterxd69/AI-Atlas" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://github.com/scooterxd69/AI-Atlas/blob/main/README.md" target="_blank" rel="noopener">README</a>
+        <a href="https://github.com/scooterxd69/AI-Atlas/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Contributing</a>
+        <a href="https://github.com/scooterxd69/AI-Atlas/blob/main/LICENSE" target="_blank" rel="noopener">License</a>
+        <a href="https://github.com/scooterxd69/AI-Atlas/blob/main/SECURITY.md" target="_blank" rel="noopener">Security</a>
+        <a href="resources/index.html">Resources</a>
+      </nav>
+      <div class="footer-cta">
+        <p>Open source, student focused, and built for sharper AI-assisted learning.</p>
+        <a class="footer-button" href="https://github.com/scooterxd69/AI-Atlas" target="_blank" rel="noopener">Star on GitHub</a>
+        <p class="copyright">Copyright &copy; 2026 AI Atlas.</p>
+      </div>
+    </div>
   </footer>
   <script src="assets/site.js" defer></script>
 </body>

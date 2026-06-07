@@ -37,14 +37,14 @@ const docsSources = [
 ];
 
 const navItems = [
-  ["Start", "index.html"],
-  ["JEE", "study-systems/jee/index.html"],
-  ["NEET", "study-systems/neet/index.html"],
-  ["School", "study-systems/school/index.html"],
-  ["Prompts", "prompts/index.html"],
-  ["Resources", "resources/index.html"],
-  ["Tools", "tools/index.html"],
-  ["Workflows", "workflows/index.html"],
+  ["Home", "index.html", "home"],
+  ["Study Systems", "study-systems/index.html", "study-systems"],
+  ["Prompts", "prompts/index.html", "prompts"],
+  ["Workflows", "workflows/index.html", "workflows"],
+  ["Tools", "tools/index.html", "tools"],
+  ["Resources", "resources/index.html", "resources"],
+  ["Career Guides", "career-guides/index.html", "career-guides"],
+  ["GitHub", "https://github.com/scooterxd69/AI-Atlas", "external"],
 ];
 
 const categoryLabels = {
@@ -392,6 +392,7 @@ function pageDepth(page) {
 }
 
 function relativeFromPage(page, target) {
+  if (/^https?:/i.test(target)) return target;
   const fromDir = slash(path.posix.dirname(page.outRel));
   let rel = slash(path.posix.relative(fromDir, slash(path.posix.join("docs", target))));
   return rel || path.posix.basename(target);
@@ -400,6 +401,19 @@ function relativeFromPage(page, target) {
 function sectionFor(page) {
   const parts = page.outRel.replace(/^docs\//, "").split("/");
   return parts.length > 1 ? parts[0] : "Core";
+}
+
+function navKeyFor(page) {
+  const rel = page.outRel.replace(/^docs\//, "");
+  const first = rel.split("/")[0];
+  if (rel === "index.html") return "home";
+  if (first === "study-systems") return "study-systems";
+  if (first === "prompts") return "prompts";
+  if (first === "workflows") return "workflows";
+  if (first === "tools" || rel === "AI-Tools-Database.html") return "tools";
+  if (first === "resources") return "resources";
+  if (first === "career-guides") return "career-guides";
+  return "";
 }
 
 function renderBreadcrumbs(page) {
@@ -423,22 +437,111 @@ function relatedPages(page) {
   return sameSection.slice(0, 4);
 }
 
+function fontLinks() {
+  return `  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">`;
+}
+
+function faviconLinks(page) {
+  const href = relativeFromPage(page, "assets/favicon.svg");
+  return `  <link rel="icon" href="${href}" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="${href}">`;
+}
+
+function buildNav(page) {
+  const current = navKeyFor(page);
+  const links = navItems
+    .map(([label, target, key]) => {
+      const external = /^https?:/i.test(target);
+      const active = key === current ? ' class="active" aria-current="page"' : "";
+      const ext = external ? ' target="_blank" rel="noopener"' : "";
+      return `<a href="${relativeFromPage(page, target)}" data-nav="${key}"${active}${ext}>${label}</a>`;
+    })
+    .join("");
+
+  return `<header class="site-header">
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a class="nav-logo" href="${relativeFromPage(page, "index.html")}" aria-label="AI Atlas home"><span class="logo-mark" aria-hidden="true">AI</span><span>Atlas</span></a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+      <div class="nav-links" id="nav-links">${links}</div>
+    </nav>
+  </header>`;
+}
+
+function buildFooter(page) {
+  return `<footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a class="nav-logo" href="${relativeFromPage(page, "index.html")}" aria-label="AI Atlas home"><span class="logo-mark" aria-hidden="true">AI</span><span>Atlas</span></a>
+        <p>Free open-source AI learning systems for JEE, NEET, CBSE and self learners.</p>
+        <p>Built by Naitik Singh.</p>
+      </div>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="https://github.com/scooterxd69/AI-Atlas" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://github.com/scooterxd69/AI-Atlas/blob/main/README.md" target="_blank" rel="noopener">README</a>
+        <a href="https://github.com/scooterxd69/AI-Atlas/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Contributing</a>
+        <a href="https://github.com/scooterxd69/AI-Atlas/blob/main/LICENSE" target="_blank" rel="noopener">License</a>
+        <a href="https://github.com/scooterxd69/AI-Atlas/blob/main/SECURITY.md" target="_blank" rel="noopener">Security</a>
+        <a href="${relativeFromPage(page, "resources/index.html")}">Resources</a>
+      </nav>
+      <div class="footer-cta">
+        <p>Open source, student focused, and built for sharper AI-assisted learning.</p>
+        <a class="footer-button" href="https://github.com/scooterxd69/AI-Atlas" target="_blank" rel="noopener">Star on GitHub</a>
+        <p class="copyright">Copyright &copy; ${new Date().getFullYear()} AI Atlas.</p>
+      </div>
+    </div>
+  </footer>`;
+}
+
+function renderPageHero(page) {
+  return `<section class="page-hero">
+      <p class="eyebrow">${htmlEscape(sectionFor(page))}</p>
+      <h1>${htmlEscape(page.title)}</h1>
+      <p class="page-summary">${htmlEscape(page.description)}</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="${relativeFromPage(page, "study-systems/index.html")}">Explore Systems</a>
+        <a class="btn btn-ghost" href="${relativeFromPage(page, "resources/index.html")}">Browse Resources</a>
+      </div>
+    </section>`;
+}
+
+function sectionizeContent(content) {
+  const cleaned = content.replace(/\n<hr>\n/g, "\n");
+  const firstH2 = cleaned.search(/<h2\b/);
+  if (firstH2 === -1) return `<section class="content-section intro-section">\n${cleaned}\n</section>`;
+
+  const intro = cleaned.slice(0, firstH2).trim();
+  const rest = cleaned.slice(firstH2);
+  const sections = rest
+    .split(/(?=<h2\b)/)
+    .filter(Boolean)
+    .map((chunk) => `<section class="content-section">\n${chunk.trim()}\n</section>`)
+    .join("\n");
+  return `${intro ? `<section class="content-section intro-section">\n${intro}\n</section>\n` : ""}${sections}`;
+}
+
+function fixKnownDeadLinks(html, page) {
+  const workflow = relativeFromPage(page, "workflows/index.html");
+  const prompts = relativeFromPage(page, "prompts/jee/jee-ai-prompt-library.html");
+  return html
+    .replace(/href="workflows\/ai-educational-workflows"/g, `href="${workflow}"`)
+    .replace(/href="https:\/\/github\.com\/scooterxd69\/AI-Atlas\/blob\/main\/prompts\/jee\/jee-ai-prompt-library\.md"/g, `href="${prompts}"`);
+}
+
 function renderLayout(page) {
-  const content = renderMarkdown(page.raw, page);
+  const content = sectionizeContent(renderMarkdown(page.raw, page));
   const previous = pages[page.index - 1];
   const next = pages[page.index + 1];
-  const styleHref = relativeFromPage(page, "assets/site.css");
+  const styleHref = relativeFromPage(page, "assets/css/global.css");
   const scriptHref = relativeFromPage(page, "assets/site.js");
   const canonical = page.outRel.replace(/^docs\//, "");
   const canonicalHref = relativeFromPage(page, canonical);
-  const nav = navItems
-    .map(([label, target]) => `<a href="${relativeFromPage(page, target)}">${label}</a>`)
-    .join("");
   const related = relatedPages(page)
     .map((item) => `<a class="resource-card" href="${relativeFromPage(page, item.outRel.replace(/^docs\//, ""))}"><span>${htmlEscape(sectionFor(item))}</span><strong>${htmlEscape(item.title)}</strong><small>${htmlEscape(item.description)}</small></a>`)
     .join("");
 
-  return `<!DOCTYPE html>
+  const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -454,25 +557,19 @@ function renderLayout(page) {
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="${attrEscape(page.title)} | AI Atlas">
   <meta name="twitter:description" content="${attrEscape(page.description)}">
+${fontLinks()}
+${faviconLinks(page)}
   <link rel="canonical" href="${attrEscape(canonicalHref)}">
   <link rel="stylesheet" href="${attrEscape(styleHref)}">
 </head>
 <body>
   <canvas id="bg-canvas" aria-hidden="true"></canvas>
   <a class="skip-link" href="#content">Skip to content</a>
-  <header class="site-header">
-    <nav class="site-nav" aria-label="Primary navigation">
-      <a class="nav-logo" href="${relativeFromPage(page, "index.html")}">AI <span>Atlas</span></a>
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
-      <div class="nav-links" id="nav-links">${nav}</div>
-    </nav>
-  </header>
+  ${buildNav(page)}
   <main id="content" class="page-shell">
     ${renderBreadcrumbs(page)}
+    ${renderPageHero(page)}
     <article class="content-card">
-      <p class="eyebrow">${htmlEscape(sectionFor(page))}</p>
-      <h1>${htmlEscape(page.title)}</h1>
-      <p class="page-summary">${htmlEscape(page.description)}</p>
       <div class="markdown-body">
 ${content}
       </div>
@@ -489,14 +586,13 @@ ${content}
       <div class="resource-grid">${related}</div>
     </section>
   </main>
-  <footer class="site-footer">
-    <p><strong>AI Atlas</strong> is a free open-source learning atlas for JEE, NEET and school students.</p>
-    <p><a href="${relativeFromPage(page, "index.html")}">Home</a> <span>/</span> <a href="${relativeFromPage(page, "resources/index.html")}">Resources</a> <span>/</span> <a href="${relativeFromPage(page, "study-systems/jee/index.html")}">JEE</a> <span>/</span> <a href="${relativeFromPage(page, "study-systems/neet/index.html")}">NEET</a></p>
-  </footer>
+  ${buildFooter(page)}
   <script src="${attrEscape(scriptHref)}" defer></script>
 </body>
 </html>
 `;
+
+  return fixKnownDeadLinks(html, page);
 }
 
 function writeFile(rel, content) {

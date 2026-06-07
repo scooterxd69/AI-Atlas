@@ -14,33 +14,47 @@
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Notion Study System | AI Atlas">
   <meta name="twitter:description" content="AI Atlas → AI Tools → Notion Study System Set up a complete AI-assisted study system in Notion. Free for students. --- Why Notion for Studying? - Free for per">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../../assets/favicon.svg">
   <link rel="canonical" href="notion-study-system.html">
-  <link rel="stylesheet" href="../../assets/site.css">
+  <link rel="stylesheet" href="../../assets/css/global.css">
 </head>
 <body>
   <canvas id="bg-canvas" aria-hidden="true"></canvas>
   <a class="skip-link" href="#content">Skip to content</a>
   <header class="site-header">
     <nav class="site-nav" aria-label="Primary navigation">
-      <a class="nav-logo" href="../../index.html">AI <span>Atlas</span></a>
+      <a class="nav-logo" href="../../index.html" aria-label="AI Atlas home"><span class="logo-mark" aria-hidden="true">AI</span><span>Atlas</span></a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
-      <div class="nav-links" id="nav-links"><a href="../../index.html">Start</a><a href="../../study-systems/jee/index.html">JEE</a><a href="../../study-systems/neet/index.html">NEET</a><a href="../../study-systems/school/index.html">School</a><a href="../../prompts/index.html">Prompts</a><a href="../../resources/index.html">Resources</a><a href="../index.html">Tools</a><a href="../../workflows/index.html">Workflows</a></div>
+      <div class="nav-links" id="nav-links"><a href="../../index.html" data-nav="home">Home</a><a href="../../study-systems/index.html" data-nav="study-systems">Study Systems</a><a href="../../prompts/index.html" data-nav="prompts">Prompts</a><a href="../../workflows/index.html" data-nav="workflows">Workflows</a><a href="../index.html" data-nav="tools" class="active" aria-current="page">Tools</a><a href="../../resources/index.html" data-nav="resources">Resources</a><a href="../../career-guides/index.html" data-nav="career-guides">Career Guides</a><a href="https://github.com/scooterxd69/AI-Atlas" data-nav="external" target="_blank" rel="noopener">GitHub</a></div>
     </nav>
   </header>
   <main id="content" class="page-shell">
     <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="../../index.html">Home</a><span aria-hidden="true">/</span><a href="../index.html">AI Tools</a><span aria-hidden="true">/</span><a href="index.html">Tool Profiles</a><span aria-hidden="true">/</span><span>Notion Study System</span></nav>
-    <article class="content-card">
+    <section class="page-hero">
       <p class="eyebrow">tools</p>
       <h1>Notion Study System</h1>
       <p class="page-summary">AI Atlas → AI Tools → Notion Study System Set up a complete AI-assisted study system in Notion. Free for students. --- Why Notion for Studying? - Free for per</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="../../study-systems/index.html">Explore Systems</a>
+        <a class="btn btn-ghost" href="../../resources/index.html">Browse Resources</a>
+      </div>
+    </section>
+    <article class="content-card">
       <div class="markdown-body">
+<section class="content-section intro-section">
 <h1 id="notion-study-system">Notion Study System</h1>
 <p><strong>AI Atlas</strong> → <a href="../readme.html">AI Tools</a> → Notion Study System</p>
 <blockquote>Set up a complete AI-assisted study system in Notion. Free for students.</blockquote>
-<hr>
+</section>
+<section class="content-section">
 <h2 id="why-notion-for-studying">Why Notion for Studying?</h2>
 <ul><li><strong>Free</strong> for personal use (Notion Education plan)</li><li>Combines notes, task tracking, error log, mock tracker in one place</li><li>Works on phone and desktop</li><li>AI features built in (Notion AI — paid add-on, but templates work without it)</li></ul>
-<hr>
+</section>
+<section class="content-section">
 <h2 id="student-setup-4-core-templates">Student Setup: 4 Core Templates</h2>
 <h3 id="1-chapter-notes-database">1. Chapter Notes Database</h3>
 <p>Create a database with fields:</p>
@@ -57,15 +71,18 @@ Target chapters:
 Completed:
 Doubts to resolve:
 Anki cards added:</code></pre>
-<hr>
+</section>
+<section class="content-section">
 <h2 id="ai-notion-workflow">AI + Notion Workflow</h2>
 <ol><li>Study a chapter using <a href="../../prompts/jee/jee-ai-prompt-library.html">Claude prompts</a></li><li>Paste the AI-generated notes into your Notion chapter database</li><li>Use Notion to tag, link, and organise</li><li>Review via the chapter database sorted by &quot;Last Revised&quot; (oldest first)</li></ol>
-<hr>
+</section>
+<section class="content-section">
 <h2 id="notion-ai-prompts-paid-add-on">Notion AI Prompts (Paid Add-on)</h2>
 <p>If you have Notion AI, use these inside Notion:</p>
 <pre><code class="language-">/ai &quot;Summarise this chapter page in 5 bullet points&quot;
 /ai &quot;Create 10 quiz questions from this content&quot;  
 /ai &quot;Find gaps — what's missing from these notes?&quot;</code></pre>
+</section>
       </div>
     </article>
     <nav class="prev-next" aria-label="Previous and next resources">
@@ -81,8 +98,26 @@ Anki cards added:</code></pre>
     </section>
   </main>
   <footer class="site-footer">
-    <p><strong>AI Atlas</strong> is a free open-source learning atlas for JEE, NEET and school students.</p>
-    <p><a href="../../index.html">Home</a> <span>/</span> <a href="../../resources/index.html">Resources</a> <span>/</span> <a href="../../study-systems/jee/index.html">JEE</a> <span>/</span> <a href="../../study-systems/neet/index.html">NEET</a></p>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a class="nav-logo" href="../../index.html" aria-label="AI Atlas home"><span class="logo-mark" aria-hidden="true">AI</span><span>Atlas</span></a>
+        <p>Free open-source AI learning systems for JEE, NEET, CBSE and self learners.</p>
+        <p>Built by Naitik Singh.</p>
+      </div>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="https://github.com/scooterxd69/AI-Atlas" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://github.com/scooterxd69/AI-Atlas/blob/main/README.md" target="_blank" rel="noopener">README</a>
+        <a href="https://github.com/scooterxd69/AI-Atlas/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Contributing</a>
+        <a href="https://github.com/scooterxd69/AI-Atlas/blob/main/LICENSE" target="_blank" rel="noopener">License</a>
+        <a href="https://github.com/scooterxd69/AI-Atlas/blob/main/SECURITY.md" target="_blank" rel="noopener">Security</a>
+        <a href="../../resources/index.html">Resources</a>
+      </nav>
+      <div class="footer-cta">
+        <p>Open source, student focused, and built for sharper AI-assisted learning.</p>
+        <a class="footer-button" href="https://github.com/scooterxd69/AI-Atlas" target="_blank" rel="noopener">Star on GitHub</a>
+        <p class="copyright">Copyright &copy; 2026 AI Atlas.</p>
+      </div>
+    </div>
   </footer>
   <script src="../../assets/site.js" defer></script>
 </body>
