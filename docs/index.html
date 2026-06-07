@@ -18,6 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/global.css" />
 
   <style>
     :root {
@@ -91,6 +92,16 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
+    }
+
+    .nav-logo img {
+      width: 2.35rem;
+      height: 2.35rem;
+      border: 1px solid rgba(56,189,248,0.34);
+      border-radius: 8px;
+      object-fit: cover;
+      object-position: center;
+      box-shadow: 0 0 30px rgba(56,189,248,0.18);
     }
 
     .nav-logo span {
@@ -880,7 +891,7 @@
 
 <!-- NAV -->
 <nav>
-  <a class="nav-logo" href="#"><span>AI</span> Atlas</a>
+  <a class="nav-logo" href="#" aria-label="AI Atlas home"><img src="assets/logo.png" alt="" aria-hidden="true"><span>AI Atlas</span></a>
   <ul class="nav-links">
     <li><a href="#quick-start">Start Here</a></li>
     <li><a href="#contents">Contents</a></li>

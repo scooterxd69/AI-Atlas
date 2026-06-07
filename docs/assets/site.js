@@ -6,6 +6,53 @@
       const open = links.classList.toggle("is-open");
       toggle.setAttribute("aria-expanded", String(open));
     });
+
+    links.addEventListener("click", (event) => {
+      if (event.target instanceof HTMLAnchorElement) {
+        links.classList.remove("is-open");
+        toggle.setAttribute("aria-expanded", "false");
+      }
+    });
+  }
+
+  const path = window.location.pathname.replace(/\/$/, "/index.html");
+  const section = path.includes("/study-systems/")
+    ? "study-systems"
+    : path.includes("/prompts/")
+      ? "prompts"
+      : path.includes("/workflows/")
+        ? "workflows"
+        : path.includes("/tools/") || path.endsWith("/AI-Tools-Database.html")
+          ? "tools"
+          : path.includes("/resources/")
+            ? "resources"
+            : path.includes("/career-guides/")
+              ? "career-guides"
+              : path.endsWith("/index.html")
+                ? "home"
+                : "";
+
+  if (section) {
+    document.querySelectorAll(`[data-nav="${section}"]`).forEach((link) => {
+      link.classList.add("active");
+      link.setAttribute("aria-current", "page");
+    });
+  }
+
+  const sections = document.querySelectorAll(".content-section, .resource-card, .prev-next a");
+  if ("IntersectionObserver" in window && sections.length) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        }
+      },
+      { threshold: 0.08 }
+    );
+    sections.forEach((sectionEl) => observer.observe(sectionEl));
   }
 
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
