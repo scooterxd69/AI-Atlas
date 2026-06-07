@@ -451,6 +451,7 @@ function faviconLinks(page) {
 
 function buildNav(page) {
   const current = navKeyFor(page);
+  const logoHref = relativeFromPage(page, "assets/logo.png");
   const links = navItems
     .map(([label, target, key]) => {
       const external = /^https?:/i.test(target);
@@ -462,7 +463,7 @@ function buildNav(page) {
 
   return `<header class="site-header">
     <nav class="site-nav" aria-label="Primary navigation">
-      <a class="nav-logo" href="${relativeFromPage(page, "index.html")}" aria-label="AI Atlas home"><span class="logo-mark" aria-hidden="true">AI</span><span>Atlas</span></a>
+      <a class="nav-logo" href="${relativeFromPage(page, "index.html")}" aria-label="AI Atlas home"><img class="logo-mark" src="${logoHref}" alt="" aria-hidden="true"><span>AI Atlas</span></a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
       <div class="nav-links" id="nav-links">${links}</div>
     </nav>
@@ -470,10 +471,11 @@ function buildNav(page) {
 }
 
 function buildFooter(page) {
+  const logoHref = relativeFromPage(page, "assets/logo.png");
   return `<footer class="site-footer">
     <div class="footer-inner">
       <div class="footer-brand">
-        <a class="nav-logo" href="${relativeFromPage(page, "index.html")}" aria-label="AI Atlas home"><span class="logo-mark" aria-hidden="true">AI</span><span>Atlas</span></a>
+        <a class="nav-logo" href="${relativeFromPage(page, "index.html")}" aria-label="AI Atlas home"><img class="logo-mark" src="${logoHref}" alt="" aria-hidden="true"><span>AI Atlas</span></a>
         <p>Free open-source AI learning systems for JEE, NEET, CBSE and self learners.</p>
         <p>Built by Naitik Singh.</p>
       </div>

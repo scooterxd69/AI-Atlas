@@ -541,19 +541,15 @@ body::after {
 }
 
 .logo-mark {
-  display: inline-grid;
-  place-items: center;
-  width: 2.15rem;
-  height: 2.15rem;
-  border: 1px solid rgba(56,189,248,0.38);
+  display: block;
+  width: 2.35rem;
+  height: 2.35rem;
+  object-fit: cover;
+  object-position: center;
+  border: 1px solid rgba(56,189,248,0.34);
   border-radius: 8px;
-  background:
-    radial-gradient(circle at 30% 25%, rgba(56,189,248,0.34), transparent 46%),
-    rgba(10,18,40,0.92);
-  color: var(--text);
-  font-size: 0.78rem;
-  box-shadow: 0 0 30px rgba(56,189,248,0.16);
-  -webkit-text-fill-color: var(--text);
+  background: rgba(10,18,40,0.92);
+  box-shadow: 0 0 30px rgba(56,189,248,0.18);
 }
 
 .nav-links {
