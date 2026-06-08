@@ -7,11 +7,15 @@ const docsDir = path.join(root, "docs");
 const navItems = [
   ["Home", "index.html", "home"],
   ["Study Systems", "study-systems/index.html", "study-systems"],
-  ["Prompts", "prompts/index.html", "prompts"],
+  ["Prompt Library", "prompts/index.html", "prompts"],
   ["Workflows", "workflows/index.html", "workflows"],
-  ["Tools", "tools/index.html", "tools"],
+  ["Tools Database", "tools/ai-tools-database.html", "tools"],
   ["Resources", "resources/index.html", "resources"],
   ["Career Guides", "career-guides/index.html", "career-guides"],
+  ["About", "about.html", "about"],
+  ["Search", "search.html", "search"],
+  ["Contributing", "https://github.com/scooterxd69/AI-Atlas/blob/main/CONTRIBUTING.md", "external"],
+  ["Roadmap", "https://github.com/scooterxd69/AI-Atlas/blob/main/meta/roadmap.md", "external"],
   ["GitHub", "https://github.com/scooterxd69/AI-Atlas", "external"],
 ];
 
@@ -44,12 +48,13 @@ function sectionFor(file) {
   if (first === "tools" || first === "AI-Tools-Database.html") return "tools";
   if (first === "resources") return "resources";
   if (first === "career-guides") return "career-guides";
+  if (rel === "search.html") return "search";
+  if (rel === "about.html") return "about";
   return first.replace(/\.html$/, "");
 }
 
 function buildNav(file) {
   const current = sectionFor(file);
-  const logoHref = relativeFromPage(file, "assets/logo.png");
   const links = navItems
     .map(([label, target, key]) => {
       const external = /^https?:/i.test(target);
@@ -62,7 +67,7 @@ function buildNav(file) {
 
   return `<header class="site-header">
     <nav class="site-nav" aria-label="Primary navigation">
-      <a class="nav-logo" href="${relativeFromPage(file, "index.html")}" aria-label="AI Atlas home"><img class="logo-mark" src="${logoHref}" alt="" aria-hidden="true"><span>AI Atlas</span></a>
+      <a class="nav-logo" href="${relativeFromPage(file, "index.html")}" aria-label="AI Atlas home"><span class="logo-mark" aria-hidden="true">AI</span><span>Atlas</span></a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
       <div class="nav-links" id="nav-links">${links}</div>
     </nav>
@@ -70,26 +75,23 @@ function buildNav(file) {
 }
 
 function buildFooter(file) {
-  const logoHref = relativeFromPage(file, "assets/logo.png");
   return `<footer class="site-footer">
     <div class="footer-inner">
       <div class="footer-brand">
-        <a class="nav-logo" href="${relativeFromPage(file, "index.html")}" aria-label="AI Atlas home"><img class="logo-mark" src="${logoHref}" alt="" aria-hidden="true"><span>AI Atlas</span></a>
-        <p>Free open-source AI learning systems for JEE, NEET, CBSE and self learners.</p>
-        <p>Built by Naitik Singh.</p>
+        <a class="nav-logo" href="${relativeFromPage(file, "index.html")}" aria-label="AI Atlas home"><span class="logo-mark" aria-hidden="true">AI</span><span>Atlas</span></a>
+        <p>Free open-source AI learning systems for JEE, NEET and school students.</p>
       </div>
       <nav class="footer-links" aria-label="Footer navigation">
-        <a href="https://github.com/scooterxd69/AI-Atlas" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://github.com/scooterxd69/AI-Atlas/blob/main/README.md" target="_blank" rel="noopener">README</a>
-        <a href="https://github.com/scooterxd69/AI-Atlas/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Contributing</a>
-        <a href="https://github.com/scooterxd69/AI-Atlas/blob/main/LICENSE" target="_blank" rel="noopener">License</a>
-        <a href="https://github.com/scooterxd69/AI-Atlas/blob/main/SECURITY.md" target="_blank" rel="noopener">Security</a>
+        <a href="${relativeFromPage(file, "study-systems/index.html")}">Study Systems</a>
+        <a href="${relativeFromPage(file, "prompts/index.html")}">Prompt Library</a>
+        <a href="${relativeFromPage(file, "workflows/index.html")}">Workflows</a>
+        <a href="${relativeFromPage(file, "tools/ai-tools-database.html")}">Tools Database</a>
         <a href="${relativeFromPage(file, "resources/index.html")}">Resources</a>
+        <a href="${relativeFromPage(file, "career-guides/index.html")}">Career Guides</a>
       </nav>
       <div class="footer-cta">
-        <p>Open source, student focused, and built for sharper AI-assisted learning.</p>
+        <p>Built for students who want a sharper study system, not more noise.</p>
         <a class="footer-button" href="https://github.com/scooterxd69/AI-Atlas" target="_blank" rel="noopener">Star on GitHub</a>
-        <p class="copyright">Copyright &copy; ${new Date().getFullYear()} AI Atlas.</p>
       </div>
     </div>
   </footer>`;
@@ -111,7 +113,7 @@ function addHeadAssets(html, file) {
   html = html.replace(/  <link rel="preconnect" href="https:\/\/fonts\.googleapis\.com">\n  <link rel="preconnect" href="https:\/\/fonts\.gstatic\.com" crossorigin>\n  <link href="https:\/\/fonts\.googleapis\.com\/css2\?family=Syne[^"]+" rel="stylesheet">\n/g, "");
   html = html.replace(/  <link rel="icon" href="[^"]+" type="image\/svg\+xml">\n  <link rel="apple-touch-icon" href="[^"]+">\n/g, "");
   html = html.replace(/(<link rel="canonical" href="[^"]+">\n)/, `${fontLinks()}\n${faviconLinks(file)}\n$1`);
-  html = html.replace(/href="([^"]*?)assets\/site\.css"/g, 'href="$1assets/css/global.css"');
+  html = html.replace(/href="([^"]*?)assets\/css\/global\.css"/g, 'href="$1assets/site.css"');
   return html;
 }
 

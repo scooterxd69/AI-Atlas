@@ -1,5 +1,6 @@
 AI-Tools-Database.html
 JEE-AI-Prompt-Library.html
+about.html
 ai-atlas-operating-system.html
 ai-tools/claude-guide.html
 ai-tools/index.html
@@ -31,6 +32,7 @@ chapters/school-science/class10/readme.html
 chapters/school-science/class9/readme.html
 chapters/school-science/readme.html
 getting-started.html
+index.html
 jee.html
 jee/index.html
 neet.html
@@ -61,6 +63,7 @@ resources/youtube-channels-neet.html
 school.html
 school/class-10/index.html
 school/index.html
+search.html
 study-systems/index.html
 study-systems/jee-chemistry-study-system.html
 study-systems/jee-mathematics-study-system.html
