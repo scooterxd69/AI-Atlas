@@ -884,6 +884,14 @@
       .prompt-card:hover { transform: none; }
       .btn-primary:hover { transform: none; }
     }
+    .home-breadcrumbs {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+    }
   </style>
 </head>
 <body>
@@ -891,13 +899,19 @@
 
 <!-- NAV -->
 <nav>
-  <a class="nav-logo" href="#" aria-label="AI Atlas home"><img src="assets/logo.png" alt="" aria-hidden="true"><span>AI Atlas</span></a>
+  <a class="nav-logo" href="index.html" aria-label="AI Atlas home"><span>AI Atlas</span></a>
   <ul class="nav-links">
-    <li><a href="#quick-start">Start Here</a></li>
-    <li><a href="#contents">Contents</a></li>
-    <li><a href="#prompts">Prompts</a></li>
+    <li><a href="#quick-start">Home</a></li>
+    <li><a href="study-systems/index.html">Study Systems</a></li>
+    <li><a href="prompts/index.html">Prompt Library</a></li>
+    <li><a href="workflows/index.html">Workflows</a></li>
+    <li><a href="tools/ai-tools-database.html">Tools Database</a></li>
+    <li><a href="resources/index.html">Resources</a></li>
+    <li><a href="career-guides/index.html">Career Guides</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="search.html">Search</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="https://github.com/scooterxd69/AI-Atlas" target="_blank" rel="noopener" class="nav-cta">GitHub ↗</a></li>
+    <li><a href="https://github.com/scooterxd69/AI-Atlas" target="_blank" rel="noopener" class="nav-cta">GitHub</a></li>
   </ul>
 </nav>
 
@@ -962,7 +976,7 @@
 </section>
 
 <!-- CONTENTS -->
-<section id="contents">
+<section id="contents" class="related-resources">
   <div class="section-inner">
     <div class="section-tag">// Repository</div>
     <h2>What's Inside</h2>
@@ -1113,7 +1127,7 @@
 </section>
 
 <!-- FOOTER -->
-<footer>
+<footer class="site-footer">
   <div class="footer-inner">
     <div class="footer-logo"><span>AI</span> Atlas</div>
     <div class="footer-links">

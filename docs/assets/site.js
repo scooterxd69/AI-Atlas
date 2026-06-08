@@ -1,4 +1,20 @@
 (function () {
+  const progress = document.createElement("div");
+  progress.className = "reading-progress";
+  progress.setAttribute("aria-hidden", "true");
+  progress.innerHTML = "<span></span>";
+  document.body.prepend(progress);
+  const progressBar = progress.querySelector("span");
+
+  function updateProgress() {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = max > 0 ? Math.min(100, Math.max(0, (window.scrollY / max) * 100)) : 0;
+    progressBar.style.width = `${pct}%`;
+  }
+
+  updateProgress();
+  window.addEventListener("scroll", updateProgress, { passive: true });
+
   const toggle = document.querySelector(".nav-toggle");
   const links = document.querySelector(".nav-links");
   if (toggle && links) {
@@ -38,6 +54,51 @@
       link.setAttribute("aria-current", "page");
     });
   }
+
+  const main = document.querySelector(".page-shell");
+  const headings = Array.from(document.querySelectorAll(".markdown-body h2[id]"));
+  if (main && headings.length >= 3) {
+    const toc = document.createElement("details");
+    toc.className = "page-toc";
+    toc.open = true;
+    toc.innerHTML = `<summary>On this page</summary><nav>${headings
+      .map((heading) => `<a href="#${heading.id}">${heading.textContent.replace("#", "").trim()}</a>`)
+      .join("")}</nav>`;
+    const article = document.querySelector(".content-card");
+    if (article) main.insertBefore(toc, article);
+  }
+
+  document.querySelectorAll(".markdown-body h2[id], .markdown-body h3[id]").forEach((heading) => {
+    if (heading.querySelector(".heading-anchor")) return;
+    const anchor = document.createElement("a");
+    anchor.className = "heading-anchor";
+    anchor.href = `#${heading.id}`;
+    anchor.setAttribute("aria-label", `Link to ${heading.textContent}`);
+    anchor.textContent = "#";
+    heading.append(anchor);
+  });
+
+  document.querySelectorAll(".markdown-body pre").forEach((pre) => {
+    if (pre.querySelector(".copy-code-button")) return;
+    const code = pre.querySelector("code");
+    if (!code) return;
+    const button = document.createElement("button");
+    button.className = "copy-code-button";
+    button.type = "button";
+    button.textContent = "Copy";
+    button.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(code.innerText);
+        button.textContent = "Copied";
+        setTimeout(() => {
+          button.textContent = "Copy";
+        }, 1600);
+      } catch (_error) {
+        button.textContent = "Select";
+      }
+    });
+    pre.append(button);
+  });
 
   const sections = document.querySelectorAll(".content-section, .resource-card, .prev-next a");
   if ("IntersectionObserver" in window && sections.length) {

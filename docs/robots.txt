@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://scooterxd69.github.io/AI-Atlas/sitemap.txt
